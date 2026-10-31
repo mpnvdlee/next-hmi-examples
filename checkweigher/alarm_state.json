@@ -1,4 +1,171 @@
 {
-  "active": [],
-  "history": []
+  "active": [
+    {
+      "id": "zero",
+      "alarm_id": "zero",
+      "code": "I-301",
+      "level": "info",
+      "title": "Zeroing required",
+      "description": "Auto-zero interval elapsed · zero the scale at the next stop",
+      "image": "",
+      "resolutions": [
+        {
+          "$loc": "Press ZERO SCALE in Setup › Calibration at the next stop."
+        }
+      ],
+      "group_title": "Checkweigher",
+      "auto_popup": false,
+      "ack_required": true,
+      "ack_groups": [],
+      "value_refs": [
+        {
+          "$var": {
+            "path": "CW:Alarms/ZeroValue"
+          }
+        }
+      ],
+      "values": [
+        "64 min"
+      ],
+      "triggered_at": "2026-10-30T16:07:48.490659+00:00",
+      "acked": false,
+      "acked_by": "",
+      "acked_at": ""
+    },
+    {
+      "id": "drift",
+      "alarm_id": "drift",
+      "code": "W-202",
+      "level": "warning",
+      "title": "Load cell drift",
+      "description": "Zero offset exceeded ±3 g · zero the scale",
+      "image": "",
+      "resolutions": [
+        {
+          "$loc": "Stop the line with the belt empty."
+        },
+        {
+          "$loc": "Press ZERO SCALE in Setup › Calibration."
+        }
+      ],
+      "group_title": "Checkweigher",
+      "auto_popup": false,
+      "ack_required": true,
+      "ack_groups": [],
+      "value_refs": [
+        {
+          "$var": {
+            "path": "CW:Alarms/DriftValue"
+          }
+        }
+      ],
+      "values": [
+        "+3.4 g"
+      ],
+      "triggered_at": "2026-10-30T16:07:48.494018+00:00",
+      "acked": false,
+      "acked_by": "",
+      "acked_at": ""
+    }
+  ],
+  "history": [
+    {
+      "id": "drift-2",
+      "alarm_id": "drift",
+      "code": "W-202",
+      "level": "warning",
+      "title": "Load cell drift",
+      "description": "Zero offset exceeded ±3 g · zero the scale",
+      "image": "",
+      "resolutions": [
+        {
+          "$loc": "Stop the line with the belt empty."
+        },
+        {
+          "$loc": "Press ZERO SCALE in Setup › Calibration."
+        }
+      ],
+      "group_title": "Checkweigher",
+      "values": [
+        "+3.4 g"
+      ],
+      "triggered_at": "2026-10-30T15:56:17.268947+00:00",
+      "cleared_at": "2026-10-30T15:59:02.863182+00:00",
+      "acked": false,
+      "acked_by": "",
+      "acked_at": ""
+    },
+    {
+      "id": "zero-2",
+      "alarm_id": "zero",
+      "code": "I-301",
+      "level": "info",
+      "title": "Zeroing required",
+      "description": "Auto-zero interval elapsed · zero the scale at the next stop",
+      "image": "",
+      "resolutions": [
+        {
+          "$loc": "Press ZERO SCALE in Setup › Calibration at the next stop."
+        }
+      ],
+      "group_title": "Checkweigher",
+      "values": [
+        "64 min"
+      ],
+      "triggered_at": "2026-10-30T15:56:17.265281+00:00",
+      "cleared_at": "2026-10-30T15:59:02.862835+00:00",
+      "acked": false,
+      "acked_by": "",
+      "acked_at": ""
+    },
+    {
+      "id": "drift-1",
+      "alarm_id": "drift",
+      "code": "W-202",
+      "level": "warning",
+      "title": "Load cell drift",
+      "description": "Zero offset exceeded ±3 g · zero the scale",
+      "image": "",
+      "resolutions": [
+        {
+          "$loc": "Stop the line with the belt empty."
+        },
+        {
+          "$loc": "Press ZERO SCALE in Setup › Calibration."
+        }
+      ],
+      "group_title": "Checkweigher",
+      "values": [
+        "+3.4 g"
+      ],
+      "triggered_at": "2026-10-30T15:39:14.355099+00:00",
+      "cleared_at": "2026-10-30T15:42:22.817108+00:00",
+      "acked": false,
+      "acked_by": "",
+      "acked_at": ""
+    },
+    {
+      "id": "zero-1",
+      "alarm_id": "zero",
+      "code": "I-301",
+      "level": "info",
+      "title": "Zeroing required",
+      "description": "Auto-zero interval elapsed · zero the scale at the next stop",
+      "image": "",
+      "resolutions": [
+        {
+          "$loc": "Press ZERO SCALE in Setup › Calibration at the next stop."
+        }
+      ],
+      "group_title": "Checkweigher",
+      "values": [
+        "64 min"
+      ],
+      "triggered_at": "2026-10-30T15:39:14.353799+00:00",
+      "cleared_at": "2026-10-30T15:42:22.816847+00:00",
+      "acked": false,
+      "acked_by": "",
+      "acked_at": ""
+    }
+  ]
 }

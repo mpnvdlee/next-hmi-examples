@@ -1,3 +1,12 @@
 {
-  "loaded": {}
+  "loaded": {
+    "product": {
+      "datasetId": "4303604",
+      "loadedAt": "2026-10-30T16:07:48Z"
+    },
+    "machine": {
+      "datasetId": "saved",
+      "loadedAt": "2026-10-30T16:07:48Z"
+    }
+  }
 }
