@@ -1399,7 +1399,12 @@
       "fullHeight": false,
       "background": "#17181A"
     },
-    "lockedFeedback": "toast"
+    "lockedFeedback": "toast",
+    "editorViewport": {
+      "preset": "custom",
+      "width": 800,
+      "height": 550
+    }
   },
   "dialogs": [
     {
