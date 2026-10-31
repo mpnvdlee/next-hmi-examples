@@ -1,0 +1,239 @@
+{
+  "id": "pin",
+  "title": {
+    "$loc": "Admin PIN"
+  },
+  "showModalHeader": false,
+  "closeOnBackgroundPress": true,
+  "componentProperties": {
+    "next": {
+      "type": "string",
+      "format": "page",
+      "label": "Page after login",
+      "description": "Where an ADMIN login goes next; empty stays put.",
+      "defaultValue": ""
+    }
+  },
+  "sections": {
+    "content": [
+      {
+        "id": "pn",
+        "type": "Container",
+        "name": "pn",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "column",
+          "gap": "14px",
+          "align": "stretch",
+          "justify": "flex-start",
+          "widthMode": "fixed",
+          "heightMode": "hug",
+          "width": "380px"
+        },
+        "children": [
+          {
+            "id": "pn-head",
+            "type": "Container",
+            "name": "pn-head",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "12px",
+              "align": "flex-start",
+              "justify": "flex-start",
+              "widthMode": "fill",
+              "heightMode": "hug"
+            },
+            "children": [
+              {
+                "id": "pn-titles",
+                "type": "Container",
+                "name": "pn-titles",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "2px",
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "pn-kind",
+                    "type": "Label",
+                    "name": "pn-kind",
+                    "properties": {
+                      "typography": "caption",
+                      "text": {
+                        "$loc": "LOGIN"
+                      },
+                      "color": "var(--hmi-text-muted)"
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "pn-title",
+                    "type": "Label",
+                    "name": "pn-title",
+                    "properties": {
+                      "typography": "subheading",
+                      "text": {
+                        "$loc": "Admin PIN"
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pn-close",
+                "type": "Button",
+                "name": "Close",
+                "properties": {
+                  "label": "",
+                  "iconName": {
+                    "$static": {
+                      "type": "builtin",
+                      "name": "x"
+                    }
+                  },
+                  "variant": "outline",
+                  "borderWidth": 0,
+                  "fill": "transparent",
+                  "color": "var(--hmi-text)",
+                  "iconSize": 22,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "closePageOverlay",
+                        "pageId": "pin"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fixed",
+                  "heightMode": "fixed",
+                  "width": "44px",
+                  "height": "44px"
+                }
+              }
+            ]
+          },
+          {
+            "id": "pin-field",
+            "type": "StringInput",
+            "name": "pin-field",
+            "properties": {
+              "label": "",
+              "placeholder": {
+                "$loc": "Enter PIN"
+              },
+              "isPassword": true,
+              "keyboard": "keypad",
+              "autoFocus": true,
+              "onSubmit": {
+                "onSubmit": [
+                  {
+                    "type": "loginUser",
+                    "username": "admin",
+                    "password": {
+                      "$widgetProp": {
+                        "componentId": "pin-field",
+                        "property": "value"
+                      }
+                    },
+                    "onSuccess": [
+                      {
+                        "type": "closePageOverlay",
+                        "pageId": "pin"
+                      },
+                      {
+                        "type": "showToast",
+                        "message": {
+                          "$loc": "Logged in as ADMIN"
+                        },
+                        "severity": "success",
+                        "discard": "auto",
+                        "duration": 2600
+                      },
+                      {
+                        "type": "if",
+                        "condition": {
+                          "$compare": {
+                            "left": {
+                              "$componentProp": "next"
+                            },
+                            "operator": "!==",
+                            "right": ""
+                          }
+                        },
+                        "then": [
+                          {
+                            "type": "navigateToPage",
+                            "pageId": {
+                              "$componentProp": "next"
+                            }
+                          }
+                        ],
+                        "else": []
+                      }
+                    ],
+                    "onFailed": [
+                      {
+                        "type": "showToast",
+                        "message": {
+                          "$loc": "Wrong PIN · try again"
+                        },
+                        "severity": "error",
+                        "discard": "auto",
+                        "duration": 2600
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "widthMode": "fill",
+              "heightMode": "hug"
+            }
+          },
+          {
+            "id": "pn-hint",
+            "type": "Label",
+            "name": "pn-hint",
+            "properties": {
+              "typography": "caption",
+              "text": {
+                "$loc": "4-digit access code · prototype PIN: 1234"
+              },
+              "color": "var(--hmi-text-muted)"
+            },
+            "layout": {
+              "widthMode": "fill",
+              "heightMode": "hug"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

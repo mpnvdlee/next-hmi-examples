@@ -1,0 +1,79 @@
+{
+  "name": "Section header",
+  "description": "A setup section's title with a muted note on the right.",
+  "category": "Checkweigher",
+  "icon": {
+    "type": "builtin",
+    "name": "text-t"
+  },
+  "componentProperties": {
+    "title": {
+      "type": "string",
+      "label": "Title"
+    },
+    "subtitle": {
+      "type": "string",
+      "label": "Note"
+    }
+  },
+  "children": [
+    {
+      "id": "sh",
+      "type": "Container",
+      "name": "Section header",
+      "properties": {
+        "showWhenEmpty": true,
+        "background": "transparent"
+      },
+      "layout": {
+        "direction": "row",
+        "gap": "0px",
+        "wrap": false,
+        "align": "center",
+        "justify": "flex-start",
+        "radius": "0",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "4px",
+        "paddingLeft": "0px",
+        "widthMode": "fill",
+        "heightMode": "fill"
+      },
+      "children": [
+        {
+          "id": "sh-t",
+          "type": "Label",
+          "name": "Title",
+          "properties": {
+            "typography": "subheading",
+            "text": {
+              "$componentProp": "title"
+            },
+            "wrap": "truncate"
+          },
+          "layout": {
+            "widthMode": "fill",
+            "heightMode": "hug"
+          }
+        },
+        {
+          "id": "sh-s",
+          "type": "Label",
+          "name": "Subtitle",
+          "properties": {
+            "typography": "caption",
+            "text": {
+              "$componentProp": "subtitle"
+            },
+            "color": "var(--hmi-text-muted)",
+            "wrap": "truncate"
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        }
+      ]
+    }
+  ]
+}

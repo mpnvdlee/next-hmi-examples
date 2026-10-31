@@ -1,0 +1,507 @@
+{
+  "id": "setup-product",
+  "title": {
+    "$loc": "Product / Tolerances"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "supro",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "row",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "supro-nav",
+            "type": "$component:setup-nav",
+            "name": "Sections",
+            "properties": {
+              "calSub": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": {
+                    "$loc": "Zero needed"
+                  },
+                  "false": {
+                    "$loc": "OK"
+                  }
+                }
+              },
+              "rejectSub": {
+                "$loc": {
+                  "key": "Bin {1}/{2}",
+                  "wildcards": {
+                    "1": {
+                      "$var": {
+                        "path": "CW:IO/BinLevel"
+                      }
+                    },
+                    "2": {
+                      "$var": {
+                        "path": "CW:Params/BinCap"
+                      }
+                    }
+                  }
+                }
+              },
+              "calSubColor": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              },
+              "rejectSubColor": {
+                "$if": {
+                  "condition": {
+                    "$var": {
+                      "path": "CW:Alarms/BinFull"
+                    }
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              }
+            },
+            "layout": {
+              "widthMode": "fixed",
+              "heightMode": "hug",
+              "width": "156px"
+            }
+          },
+          {
+            "id": "supro-body",
+            "type": "Container",
+            "name": "Section",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent",
+              "overflow": "scroll"
+            },
+            "layout": {
+              "direction": "column",
+              "gap": "8px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fill",
+              "minWidth": "0"
+            },
+            "children": [
+              {
+                "id": "supro-bh",
+                "type": "$component:section-header",
+                "name": "Section header",
+                "properties": {
+                  "title": {
+                    "$loc": "PRODUCT / TOLERANCES"
+                  },
+                  "subtitle": {
+                    "$loc": {
+                      "key": "Recipe {1}",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:Product/RecipeId"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "32px"
+                }
+              },
+              {
+                "id": "sup-recipe",
+                "type": "$component:param-info",
+                "name": "Recipe",
+                "properties": {
+                  "label": {
+                    "$loc": "Recipe"
+                  },
+                  "hint": {
+                    "$loc": {
+                      "key": "Set by recipe {1}",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:Product/RecipeId"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "valueText": {
+                    "$var": {
+                      "path": "CW:Product/RecipeId"
+                    }
+                  },
+                  "unit": "",
+                  "locked": true
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "sup-target",
+                "type": "$component:param-row",
+                "name": "Target weight",
+                "properties": {
+                  "label": {
+                    "$loc": "Target weight"
+                  },
+                  "hint": {
+                    "$loc": "Nominal case weight"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Product/Target"
+                    }
+                  },
+                  "unit": "g",
+                  "decimals": 0,
+                  "min": 100,
+                  "max": 20000,
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "product",
+                          "field": "parameterChanged",
+                          "parameter": "target"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "sup-lower",
+                "type": "$component:param-row",
+                "name": "Lower limit",
+                "properties": {
+                  "label": {
+                    "$loc": "Lower limit"
+                  },
+                  "hint": {
+                    "$loc": "Reject below target minus"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/Lower"
+                    }
+                  },
+                  "unit": "g",
+                  "decimals": 0,
+                  "min": -500,
+                  "max": {
+                    "$formula": {
+                      "expression": "0 - {1} - 1",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:Params/Band"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rangeMessage": {
+                    "$loc": {
+                      "key": "Must lie outside the {1} g band",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:Params/Band"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "lower"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "sup-upper",
+                "type": "$component:param-row",
+                "name": "Upper limit",
+                "properties": {
+                  "label": {
+                    "$loc": "Upper limit"
+                  },
+                  "hint": {
+                    "$loc": "Reject above target plus"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/Upper"
+                    }
+                  },
+                  "unit": "g",
+                  "decimals": 0,
+                  "min": {
+                    "$formula": {
+                      "expression": "{1} + 1",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:Params/Band"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "max": 500,
+                  "rangeMessage": {
+                    "$loc": {
+                      "key": "Must lie outside the {1} g band",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:Params/Band"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "upper"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "sup-band",
+                "type": "$component:param-row",
+                "name": "Near-limit band",
+                "properties": {
+                  "label": {
+                    "$loc": "Near-limit band"
+                  },
+                  "hint": {
+                    "$loc": "Warning zone inside each limit"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/Band"
+                    }
+                  },
+                  "unit": "g",
+                  "decimals": 0,
+                  "min": 0,
+                  "max": {
+                    "$if": {
+                      "condition": {
+                        "$compare": {
+                          "left": {
+                            "$formula": {
+                              "expression": "0 - {1}",
+                              "wildcards": {
+                                "1": {
+                                  "$var": {
+                                    "path": "CW:Params/Lower"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "operator": "<",
+                          "right": {
+                            "$var": {
+                              "path": "CW:Params/Upper"
+                            }
+                          }
+                        }
+                      },
+                      "true": {
+                        "$formula": {
+                          "expression": "0 - {1} - 1",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/Lower"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "false": {
+                        "$formula": {
+                          "expression": "{1} - 1",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/Upper"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rangeMessage": {
+                    "$loc": "Must be smaller than both limits"
+                  },
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "band"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "sup-tare",
+                "type": "$component:param-row",
+                "name": "Tare",
+                "properties": {
+                  "label": {
+                    "$loc": "Tare"
+                  },
+                  "hint": {
+                    "$loc": "Box and film"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/Tare"
+                    }
+                  },
+                  "unit": "g",
+                  "decimals": 0,
+                  "min": 0,
+                  "max": 5000,
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "tare"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

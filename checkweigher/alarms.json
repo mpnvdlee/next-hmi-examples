@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "checkweigher",
+      "title": "Checkweigher",
+      "alarms": [
+        {
+          "id": "halt",
+          "code": "C-101",
+          "level": "error",
+          "title": {
+            "$loc": "Three underweight cases in a row"
+          },
+          "description": {
+            "$loc": "Infeed stopped automatically"
+          },
+          "image": "",
+          "auto_popup": false,
+          "resolutions": [
+            {
+              "$loc": "Check the filler upstream for an underfill."
+            },
+            {
+              "$loc": "Acknowledge the alarm, then press RESUME."
+            }
+          ],
+          "trigger": {
+            "type": "bool",
+            "source_value": {
+              "$var": {
+                "path": "CW:Alarms/Halt"
+              }
+            },
+            "min": null,
+            "max": null,
+            "on_true": true
+          },
+          "ack_groups": [],
+          "values": [
+            {
+              "$var": {
+                "path": "CW:Alarms/HaltValue"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bin",
+          "code": "W-201",
+          "level": "warning",
+          "title": {
+            "$loc": "Reject bin full"
+          },
+          "description": {
+            "$loc": "Empty the bin, then confirm in Setup › Reject Unit"
+          },
+          "image": "",
+          "auto_popup": false,
+          "resolutions": [
+            {
+              "$loc": "Empty the reject bin."
+            },
+            {
+              "$loc": "Confirm with BIN EMPTIED in Setup › Reject Unit."
+            }
+          ],
+          "trigger": {
+            "type": "bool",
+            "source_value": {
+              "$var": {
+                "path": "CW:Alarms/BinFull"
+              }
+            },
+            "min": null,
+            "max": null,
+            "on_true": true
+          },
+          "ack_groups": [],
+          "values": [
+            {
+              "$var": {
+                "path": "CW:Alarms/BinValue"
+              }
+            }
+          ]
+        },
+        {
+          "id": "drift",
+          "code": "W-202",
+          "level": "warning",
+          "title": {
+            "$loc": "Load cell drift"
+          },
+          "description": {
+            "$loc": "Zero offset exceeded ±3 g · zero the scale"
+          },
+          "image": "",
+          "auto_popup": false,
+          "resolutions": [
+            {
+              "$loc": "Stop the line with the belt empty."
+            },
+            {
+              "$loc": "Press ZERO SCALE in Setup › Calibration."
+            }
+          ],
+          "trigger": {
+            "type": "bool",
+            "source_value": {
+              "$var": {
+                "path": "CW:Alarms/Drift"
+              }
+            },
+            "min": null,
+            "max": null,
+            "on_true": true
+          },
+          "ack_groups": [],
+          "values": [
+            {
+              "$var": {
+                "path": "CW:Alarms/DriftValue"
+              }
+            }
+          ]
+        },
+        {
+          "id": "zero",
+          "code": "I-301",
+          "level": "info",
+          "title": {
+            "$loc": "Zeroing required"
+          },
+          "description": {
+            "$loc": "Auto-zero interval elapsed · zero the scale at the next stop"
+          },
+          "image": "",
+          "auto_popup": false,
+          "resolutions": [
+            {
+              "$loc": "Press ZERO SCALE in Setup › Calibration at the next stop."
+            }
+          ],
+          "trigger": {
+            "type": "bool",
+            "source_value": {
+              "$var": {
+                "path": "CW:Alarms/ZeroDue"
+              }
+            },
+            "min": null,
+            "max": null,
+            "on_true": true
+          },
+          "ack_groups": [],
+          "values": [
+            {
+              "$var": {
+                "path": "CW:Alarms/ZeroValue"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

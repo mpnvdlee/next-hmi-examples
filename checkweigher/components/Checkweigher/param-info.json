@@ -1,0 +1,207 @@
+{
+  "name": "Parameter info",
+  "description": "A setup row that shows a value without editing it; a locked row says why when tapped.",
+  "category": "Checkweigher",
+  "icon": {
+    "type": "builtin",
+    "name": "lock"
+  },
+  "componentProperties": {
+    "label": {
+      "type": "string",
+      "label": "Label"
+    },
+    "hint": {
+      "type": "string",
+      "label": "Hint"
+    },
+    "valueText": {
+      "type": "string",
+      "label": "Value text"
+    },
+    "unit": {
+      "type": "string",
+      "label": "Unit"
+    },
+    "locked": {
+      "type": "boolean",
+      "label": "Show lock",
+      "defaultValue": false
+    }
+  },
+  "children": [
+    {
+      "id": "pi",
+      "type": "ButtonContainer",
+      "name": "Parameter info",
+      "properties": {
+        "showWhenEmpty": true,
+        "background": "var(--hmi-surface)",
+        "actions": {
+          "onPress": [
+            {
+              "type": "if",
+              "condition": {
+                "$componentProp": "locked"
+              },
+              "then": [
+                {
+                  "type": "showToast",
+                  "message": {
+                    "$loc": {
+                      "key": "{1} is locked · {2}",
+                      "wildcards": {
+                        "1": {
+                          "$componentProp": "label"
+                        },
+                        "2": {
+                          "$componentProp": "hint"
+                        }
+                      }
+                    }
+                  },
+                  "severity": "info",
+                  "discard": "auto",
+                  "duration": 2600
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "layout": {
+        "direction": "row",
+        "gap": "12px",
+        "wrap": false,
+        "align": "center",
+        "justify": "flex-start",
+        "radius": "10px",
+        "paddingTop": "0px",
+        "paddingRight": "16px",
+        "paddingBottom": "0px",
+        "paddingLeft": "14px",
+        "widthMode": "fill",
+        "heightMode": "fill"
+      },
+      "children": [
+        {
+          "id": "pi-t",
+          "type": "Container",
+          "name": "Text",
+          "properties": {
+            "showWhenEmpty": true,
+            "background": "transparent"
+          },
+          "layout": {
+            "direction": "column",
+            "gap": "0px",
+            "wrap": false,
+            "align": "stretch",
+            "justify": "flex-start",
+            "radius": "0",
+            "paddingTop": "0px",
+            "paddingRight": "0px",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "widthMode": "fill",
+            "heightMode": "hug"
+          },
+          "children": [
+            {
+              "id": "pi-l",
+              "type": "Label",
+              "name": "Label",
+              "properties": {
+                "typography": "body",
+                "text": {
+                  "$componentProp": "label"
+                },
+                "wrap": "truncate",
+                "weight": 600
+              },
+              "layout": {
+                "widthMode": "fill",
+                "heightMode": "hug"
+              }
+            },
+            {
+              "id": "pi-h",
+              "type": "Label",
+              "name": "Hint",
+              "properties": {
+                "typography": "caption",
+                "text": {
+                  "$componentProp": "hint"
+                },
+                "wrap": "truncate",
+                "color": "var(--hmi-text-muted)"
+              },
+              "layout": {
+                "widthMode": "fill",
+                "heightMode": "hug"
+              }
+            }
+          ]
+        },
+        {
+          "id": "pi-k",
+          "type": "Icon",
+          "name": "Lock",
+          "properties": {
+            "iconName": {
+              "$static": {
+                "type": "custom",
+                "path": "icons/cw-lock.svg"
+              }
+            },
+            "size": 18,
+            "color": "var(--hmi-text-muted)",
+            "chrome": false,
+            "visible": {
+              "$componentProp": "locked"
+            }
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        },
+        {
+          "id": "pi-v",
+          "type": "Label",
+          "name": "Value",
+          "properties": {
+            "typography": "body",
+            "text": {
+              "$componentProp": "valueText"
+            },
+            "weight": 600,
+            "align": "right",
+            "wrap": "truncate"
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        },
+        {
+          "id": "pi-u",
+          "type": "Label",
+          "name": "Unit",
+          "properties": {
+            "typography": "body",
+            "text": {
+              "$componentProp": "unit"
+            },
+            "color": "var(--hmi-text-muted)",
+            "wrap": "truncate"
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        }
+      ]
+    }
+  ]
+}

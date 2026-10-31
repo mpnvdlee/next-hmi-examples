@@ -1,0 +1,884 @@
+{
+  "id": "io",
+  "title": {
+    "$loc": "I/O Diagnostics"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "io",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "column",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "io-head",
+            "type": "Container",
+            "name": "Header",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "14px",
+              "wrap": false,
+              "align": "center",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "48px"
+            },
+            "children": [
+              {
+                "id": "io-home",
+                "type": "Button",
+                "name": "Home",
+                "properties": {
+                  "label": "",
+                  "variant": "outline",
+                  "fill": "var(--hmi-surface)",
+                  "color": "var(--hmi-text)",
+                  "radius": "10px",
+                  "iconName": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-home.svg"
+                    }
+                  },
+                  "iconSize": 24,
+                  "borderWidth": 0,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "home"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fixed",
+                  "heightMode": "fixed",
+                  "width": "48px",
+                  "height": "48px"
+                }
+              },
+              {
+                "id": "io-t",
+                "type": "Label",
+                "name": "io-t",
+                "properties": {
+                  "typography": "subheading",
+                  "text": {
+                    "$loc": "I/O DIAGNOSTICS"
+                  },
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "io-sp",
+                "type": "StretchSpacer",
+                "name": "Spacer",
+                "properties": {
+                  "mode": "ratio",
+                  "ratio": 1
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "grow": 1,
+                  "minWidth": "auto"
+                }
+              },
+              {
+                "id": "io-live",
+                "type": "Container",
+                "name": "Live",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "row",
+                  "gap": "8px",
+                  "wrap": false,
+                  "align": "center",
+                  "justify": "flex-start",
+                  "radius": "0",
+                  "paddingTop": "0px",
+                  "paddingRight": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                },
+                "children": [
+                  {
+                    "id": "io-live-d",
+                    "type": "Container",
+                    "name": "Dot",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "var(--hmi-accent)"
+                    },
+                    "layout": {
+                      "direction": "column",
+                      "gap": "0px",
+                      "wrap": false,
+                      "align": "stretch",
+                      "justify": "flex-start",
+                      "radius": "50%",
+                      "paddingTop": "0px",
+                      "paddingRight": "0px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "0px",
+                      "widthMode": "fixed",
+                      "heightMode": "fixed",
+                      "width": "10px",
+                      "height": "10px"
+                    },
+                    "children": []
+                  },
+                  {
+                    "id": "io-live-l",
+                    "type": "Label",
+                    "name": "io-live-l",
+                    "properties": {
+                      "typography": "caption",
+                      "text": {
+                        "$loc": "LIVE"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "io-cols",
+            "type": "Container",
+            "name": "Columns",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "16px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "hug"
+            },
+            "children": [
+              {
+                "id": "io-a",
+                "type": "Container",
+                "name": "Conveyor & reject",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "8px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "radius": "0",
+                  "paddingTop": "0px",
+                  "paddingRight": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "io-a-t",
+                    "type": "Label",
+                    "name": "io-a-t",
+                    "properties": {
+                      "typography": "label",
+                      "text": {
+                        "$loc": "CONVEYOR & REJECT"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "io-infeed",
+                    "type": "$component:io-row",
+                    "name": "Infeed request",
+                    "properties": {
+                      "label": {
+                        "$loc": "Infeed request"
+                      },
+                      "value": {
+                        "$switch": {
+                          "value": {
+                            "$var": {
+                              "path": "CW:Line/State"
+                            }
+                          },
+                          "cases": [
+                            {
+                              "when": 1,
+                              "then": {
+                                "$loc": "REQUEST"
+                              }
+                            }
+                          ],
+                          "default": {
+                            "$loc": "BLOCKED"
+                          }
+                        }
+                      },
+                      "dot": {
+                        "$switch": {
+                          "value": {
+                            "$var": {
+                              "path": "CW:Line/State"
+                            }
+                          },
+                          "cases": [
+                            {
+                              "when": 1,
+                              "then": "var(--hmi-ok)"
+                            },
+                            {
+                              "when": 2,
+                              "then": "var(--hmi-fault)"
+                            }
+                          ],
+                          "default": "var(--hmi-text-muted)"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  },
+                  {
+                    "id": "io-m1",
+                    "type": "$component:io-row",
+                    "name": "Weigh conveyor M1",
+                    "properties": {
+                      "label": {
+                        "$loc": "Weigh conveyor M1"
+                      },
+                      "value": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/Conveyor"
+                            }
+                          },
+                          "true": {
+                            "$loc": "RUNNING"
+                          },
+                          "false": {
+                            "$loc": "STOPPED"
+                          }
+                        }
+                      },
+                      "dot": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/Conveyor"
+                            }
+                          },
+                          "true": "var(--hmi-ok)",
+                          "false": "var(--hmi-text-muted)"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  },
+                  {
+                    "id": "io-outfeed",
+                    "type": "$component:io-row",
+                    "name": "Outfeed ready",
+                    "properties": {
+                      "label": {
+                        "$loc": "Outfeed ready"
+                      },
+                      "value": {
+                        "$loc": "READY"
+                      },
+                      "dot": "var(--hmi-ok)"
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  },
+                  {
+                    "id": "io-y1",
+                    "type": "$component:io-row",
+                    "name": "Reject pusher Y1",
+                    "properties": {
+                      "label": {
+                        "$loc": "Reject pusher Y1"
+                      },
+                      "value": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/Pusher"
+                            }
+                          },
+                          "true": {
+                            "$loc": "EXTENDED"
+                          },
+                          "false": {
+                            "$loc": "RETRACTED"
+                          }
+                        }
+                      },
+                      "dot": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/Pusher"
+                            }
+                          },
+                          "true": "var(--hmi-warn)",
+                          "false": "var(--hmi-text-muted)"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  },
+                  {
+                    "id": "io-bin",
+                    "type": "$component:io-row",
+                    "name": "Reject bin level",
+                    "properties": {
+                      "label": {
+                        "$loc": "Reject bin level"
+                      },
+                      "value": {
+                        "$stringExpr": {
+                          "template": "{1} / {2}",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:IO/BinLevel"
+                              }
+                            },
+                            "2": {
+                              "$var": {
+                                "path": "CW:Params/BinCap"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "dot": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$var": {
+                                  "path": "CW:IO/BinLevel"
+                                }
+                              },
+                              "operator": ">=",
+                              "right": {
+                                "$var": {
+                                  "path": "CW:Params/BinCap"
+                                }
+                              }
+                            }
+                          },
+                          "true": "var(--hmi-fault)",
+                          "false": {
+                            "$if": {
+                              "condition": {
+                                "$compare": {
+                                  "left": {
+                                    "$var": {
+                                      "path": "CW:IO/BinLevel"
+                                    }
+                                  },
+                                  "operator": ">=",
+                                  "right": {
+                                    "$formula": {
+                                      "expression": "{1} * 0.8",
+                                      "wildcards": {
+                                        "1": {
+                                          "$var": {
+                                            "path": "CW:Params/BinCap"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "true": "var(--hmi-warn)",
+                              "false": "var(--hmi-ok)"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  },
+                  {
+                    "id": "io-speed",
+                    "type": "$component:io-row",
+                    "name": "Belt speed",
+                    "properties": {
+                      "label": {
+                        "$loc": "Belt speed"
+                      },
+                      "value": {
+                        "$stringExpr": {
+                          "template": "{Round2(1)} m/s",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:IO/BeltSpeed"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "dot": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$var": {
+                                  "path": "CW:Line/State"
+                                }
+                              },
+                              "operator": "===",
+                              "right": 1
+                            }
+                          },
+                          "true": "var(--hmi-ok)",
+                          "false": "var(--hmi-text-muted)"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "io-b",
+                "type": "Container",
+                "name": "Sensors & load cell",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "8px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "radius": "0",
+                  "paddingTop": "0px",
+                  "paddingRight": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "io-b-t",
+                    "type": "Label",
+                    "name": "io-b-t",
+                    "properties": {
+                      "typography": "label",
+                      "text": {
+                        "$loc": "SENSORS & LOAD CELL"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "io-pe1",
+                    "type": "$component:io-row",
+                    "name": "PE1 infeed photocell",
+                    "properties": {
+                      "label": {
+                        "$loc": "PE1 infeed photocell"
+                      },
+                      "value": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/PE1"
+                            }
+                          },
+                          "true": {
+                            "$loc": "BLOCKED"
+                          },
+                          "false": {
+                            "$loc": "FREE"
+                          }
+                        }
+                      },
+                      "dot": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/PE1"
+                            }
+                          },
+                          "true": "var(--hmi-accent)",
+                          "false": "var(--hmi-text-muted)"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  },
+                  {
+                    "id": "io-pe2",
+                    "type": "$component:io-row",
+                    "name": "PE2 weigh entry",
+                    "properties": {
+                      "label": {
+                        "$loc": "PE2 weigh entry"
+                      },
+                      "value": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/PE2"
+                            }
+                          },
+                          "true": {
+                            "$loc": "BLOCKED"
+                          },
+                          "false": {
+                            "$loc": "FREE"
+                          }
+                        }
+                      },
+                      "dot": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/PE2"
+                            }
+                          },
+                          "true": "var(--hmi-accent)",
+                          "false": "var(--hmi-text-muted)"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  },
+                  {
+                    "id": "io-pe3",
+                    "type": "$component:io-row",
+                    "name": "PE3 reject confirm",
+                    "properties": {
+                      "label": {
+                        "$loc": "PE3 reject confirm"
+                      },
+                      "value": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/PE3"
+                            }
+                          },
+                          "true": {
+                            "$loc": "BLOCKED"
+                          },
+                          "false": {
+                            "$loc": "FREE"
+                          }
+                        }
+                      },
+                      "dot": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:IO/PE3"
+                            }
+                          },
+                          "true": "var(--hmi-accent)",
+                          "false": "var(--hmi-text-muted)"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  },
+                  {
+                    "id": "io-raw",
+                    "type": "$component:io-row",
+                    "name": "Load cell raw",
+                    "properties": {
+                      "label": {
+                        "$loc": "Load cell raw"
+                      },
+                      "value": {
+                        "$stringExpr": {
+                          "template": "{Thousands(Round(1))} cnt",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:IO/LoadRaw"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "dot": "var(--hmi-ok)"
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  },
+                  {
+                    "id": "io-sig",
+                    "type": "Container",
+                    "name": "Load cell signal",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "var(--hmi-surface)"
+                    },
+                    "layout": {
+                      "direction": "row",
+                      "gap": "12px",
+                      "wrap": false,
+                      "align": "center",
+                      "justify": "flex-start",
+                      "radius": "10px",
+                      "paddingTop": "0px",
+                      "paddingRight": "14px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "14px",
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    },
+                    "children": [
+                      {
+                        "id": "io-sig-d",
+                        "type": "Container",
+                        "name": "Dot",
+                        "properties": {
+                          "showWhenEmpty": true,
+                          "background": "var(--hmi-ok)"
+                        },
+                        "layout": {
+                          "direction": "column",
+                          "gap": "0px",
+                          "wrap": false,
+                          "align": "stretch",
+                          "justify": "flex-start",
+                          "radius": "50%",
+                          "paddingTop": "0px",
+                          "paddingRight": "0px",
+                          "paddingBottom": "0px",
+                          "paddingLeft": "0px",
+                          "widthMode": "fixed",
+                          "heightMode": "fixed",
+                          "width": "12px",
+                          "height": "12px"
+                        },
+                        "children": []
+                      },
+                      {
+                        "id": "io-sig-l",
+                        "type": "Label",
+                        "name": "io-sig-l",
+                        "properties": {
+                          "typography": "body",
+                          "text": {
+                            "$loc": "Load cell signal"
+                          },
+                          "wrap": "truncate"
+                        },
+                        "layout": {
+                          "widthMode": "fill",
+                          "heightMode": "hug"
+                        }
+                      },
+                      {
+                        "id": "io-sig-v",
+                        "type": "Label",
+                        "name": "io-sig-v",
+                        "properties": {
+                          "typography": "body",
+                          "wrap": "truncate",
+                          "size": "15px",
+                          "weight": 600,
+                          "text": {
+                            "$stringExpr": {
+                              "template": "{Round4(1)} mV/V",
+                              "wildcards": {
+                                "1": {
+                                  "$var": {
+                                    "path": "CW:IO/LoadSignal"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "layout": {
+                          "widthMode": "hug",
+                          "heightMode": "hug"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "io-zero",
+                    "type": "$component:io-row",
+                    "name": "Zero offset",
+                    "properties": {
+                      "label": {
+                        "$loc": "Zero offset"
+                      },
+                      "value": {
+                        "$stringExpr": {
+                          "template": "{Signed(Round1(1))} g",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:IO/ZeroOffset"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "dot": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:Alarms/Drift"
+                            }
+                          },
+                          "true": "var(--hmi-warn)",
+                          "false": "var(--hmi-ok)"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "50px",
+                      "minWidth": "0"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "icon": "cpu"
+}

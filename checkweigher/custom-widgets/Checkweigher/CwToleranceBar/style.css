@@ -1,0 +1,104 @@
+.hmi-component.cw-tol {
+  box-sizing: border-box;
+  padding: 12px 14px 14px;
+  background: var(--hmi-surface);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  font-family: var(--hmi-type-body-font);
+  font-variant-numeric: tabular-nums;
+  color: var(--hmi-text);
+}
+
+.cw-tol__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.cw-tol__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.cw-tol__range {
+  font-size: 13px;
+  color: var(--hmi-text-muted);
+  white-space: nowrap;
+}
+
+.cw-tol__bar {
+  position: relative;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.cw-tol__zones {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  bottom: 6px;
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.cw-tol__zone {
+  width: var(--cw-w, 0);
+  flex-shrink: 0;
+}
+
+.cw-tol__zone--fault {
+  background: var(--cw-halt, #c62828);
+}
+
+.cw-tol__zone--warn {
+  background: var(--hmi-warn);
+}
+
+.cw-tol__zone--ok {
+  background: var(--hmi-ok);
+}
+
+.cw-tol__marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--cw-left, 50%);
+  width: 6px;
+  margin-left: -3px;
+  background: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px var(--hmi-bg);
+  transition: left 0.25s ease-out;
+}
+
+.cw-tol__labels {
+  position: relative;
+  height: 16px;
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--hmi-text-muted);
+}
+
+.cw-tol__label {
+  position: absolute;
+  top: 0;
+  left: var(--cw-left, 0);
+  white-space: nowrap;
+}
+
+.cw-tol__label--mid {
+  transform: translateX(-50%);
+}
+
+.cw-tol__label--end {
+  transform: translateX(-100%);
+}

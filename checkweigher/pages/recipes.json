@@ -1,0 +1,707 @@
+{
+  "id": "recipes",
+  "title": {
+    "$loc": "Recipes"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "rc",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "column",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "rc-head",
+            "type": "Container",
+            "name": "Header",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "14px",
+              "wrap": false,
+              "align": "center",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "48px"
+            },
+            "children": [
+              {
+                "id": "rc-home",
+                "type": "Button",
+                "name": "Home",
+                "properties": {
+                  "label": "",
+                  "variant": "outline",
+                  "fill": "var(--hmi-surface)",
+                  "color": "var(--hmi-text)",
+                  "radius": "10px",
+                  "iconName": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-home.svg"
+                    }
+                  },
+                  "iconSize": 24,
+                  "borderWidth": 0,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "home"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fixed",
+                  "heightMode": "fixed",
+                  "width": "48px",
+                  "height": "48px"
+                }
+              },
+              {
+                "id": "rc-t",
+                "type": "Label",
+                "name": "rc-t",
+                "properties": {
+                  "typography": "subheading",
+                  "text": {
+                    "$loc": "RECIPES"
+                  },
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "rc-sp",
+                "type": "StretchSpacer",
+                "name": "Spacer",
+                "properties": {
+                  "mode": "ratio",
+                  "ratio": 1
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "grow": 1,
+                  "minWidth": "auto"
+                }
+              },
+              {
+                "id": "rc-hint",
+                "type": "Label",
+                "name": "rc-hint",
+                "properties": {
+                  "typography": "caption",
+                  "text": {
+                    "$loc": "Stop the line to load another recipe"
+                  },
+                  "color": "var(--hmi-text-muted)",
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              }
+            ]
+          },
+          {
+            "id": "rc-list",
+            "type": "Repeater",
+            "name": "Recipe list",
+            "properties": {
+              "items": {
+                "$recipeList": {
+                  "type": "product"
+                }
+              },
+              "emptyText": {
+                "$loc": "No recipes of type “product”"
+              }
+            },
+            "layout": {
+              "widthMode": "fill",
+              "heightMode": "fill",
+              "direction": "column",
+              "gap": "8px"
+            },
+            "children": [
+              {
+                "id": "rc-row",
+                "type": "ButtonContainer",
+                "name": "Recipe row",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)",
+                  "border": {
+                    "$if": {
+                      "condition": {
+                        "$compare": {
+                          "left": {
+                            "$repeatItem": {
+                              "member": "name"
+                            }
+                          },
+                          "operator": "===",
+                          "right": {
+                            "$recipe": {
+                              "type": "product",
+                              "field": "activeName"
+                            }
+                          }
+                        }
+                      },
+                      "true": "2px solid var(--hmi-accent)",
+                      "false": "2px solid transparent"
+                    }
+                  },
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "if",
+                        "condition": {
+                          "$compare": {
+                            "left": {
+                              "$repeatItem": {
+                                "member": "name"
+                              }
+                            },
+                            "operator": "===",
+                            "right": {
+                              "$recipe": {
+                                "type": "product",
+                                "field": "activeName"
+                              }
+                            }
+                          }
+                        },
+                        "then": [
+                          {
+                            "type": "showToast",
+                            "message": {
+                              "$loc": {
+                                "key": "Recipe {1} is already active",
+                                "wildcards": {
+                                  "1": {
+                                    "$repeatItem": {
+                                      "member": "name"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "severity": "info",
+                            "discard": "auto",
+                            "duration": 2600
+                          }
+                        ],
+                        "else": [
+                          {
+                            "type": "if",
+                            "condition": {
+                              "$compare": {
+                                "left": {
+                                  "$var": {
+                                    "path": "CW:Line/State"
+                                  }
+                                },
+                                "operator": "===",
+                                "right": 1
+                              }
+                            },
+                            "then": [
+                              {
+                                "type": "showToast",
+                                "message": {
+                                  "$loc": "Stop the line to change the recipe"
+                                },
+                                "severity": "warning",
+                                "discard": "auto",
+                                "duration": 2600
+                              }
+                            ],
+                            "else": [
+                              {
+                                "type": "recipeLoad",
+                                "datasetId": {
+                                  "$repeatItem": {
+                                    "member": "id"
+                                  }
+                                },
+                                "verify": false,
+                                "onSuccess": [
+                                  {
+                                    "type": "showToast",
+                                    "message": {
+                                      "$loc": {
+                                        "key": "Recipe {1} loaded",
+                                        "wildcards": {
+                                          "1": {
+                                            "$repeatItem": {
+                                              "member": "name"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "severity": "success",
+                                    "discard": "auto",
+                                    "duration": 2600
+                                  }
+                                ],
+                                "onFailed": [
+                                  {
+                                    "type": "showToast",
+                                    "message": {
+                                      "$loc": {
+                                        "key": "Recipe {1} could not be loaded",
+                                        "wildcards": {
+                                          "1": {
+                                            "$repeatItem": {
+                                              "member": "name"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "severity": "error",
+                                    "discard": "auto",
+                                    "duration": 2600
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "direction": "row",
+                  "gap": "18px",
+                  "wrap": false,
+                  "align": "center",
+                  "justify": "flex-start",
+                  "radius": "12px",
+                  "paddingTop": "0px",
+                  "paddingRight": "18px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "18px",
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "76px"
+                },
+                "children": [
+                  {
+                    "id": "rc-id",
+                    "type": "Container",
+                    "name": "Recipe",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "transparent"
+                    },
+                    "layout": {
+                      "direction": "column",
+                      "gap": "0px",
+                      "wrap": false,
+                      "align": "stretch",
+                      "justify": "flex-start",
+                      "radius": "0",
+                      "paddingTop": "0px",
+                      "paddingRight": "0px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "0px",
+                      "widthMode": "fixed",
+                      "heightMode": "hug",
+                      "width": "96px"
+                    },
+                    "children": [
+                      {
+                        "id": "rc-id-c",
+                        "type": "Label",
+                        "name": "Recipe",
+                        "properties": {
+                          "typography": "body",
+                          "text": {
+                            "$loc": "RECIPE"
+                          },
+                          "wrap": "truncate",
+                          "color": "var(--hmi-text-muted)",
+                          "size": "13px"
+                        },
+                        "layout": {
+                          "widthMode": "hug",
+                          "heightMode": "hug"
+                        }
+                      },
+                      {
+                        "id": "rc-id-v",
+                        "type": "Label",
+                        "name": "Id",
+                        "properties": {
+                          "typography": "body",
+                          "text": {
+                            "$repeatItem": {
+                              "member": "name"
+                            }
+                          },
+                          "wrap": "truncate",
+                          "size": "20px",
+                          "weight": 600
+                        },
+                        "layout": {
+                          "widthMode": "hug",
+                          "heightMode": "hug"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rc-body",
+                    "type": "Container",
+                    "name": "Product",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "transparent"
+                    },
+                    "layout": {
+                      "direction": "column",
+                      "gap": "6px",
+                      "wrap": false,
+                      "align": "stretch",
+                      "justify": "flex-start",
+                      "radius": "0",
+                      "paddingTop": "0px",
+                      "paddingRight": "0px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "0px",
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    },
+                    "children": [
+                      {
+                        "id": "rc-prod",
+                        "type": "Label",
+                        "name": "Product",
+                        "properties": {
+                          "typography": "body",
+                          "text": {
+                            "$repeatItem": {
+                              "member": "values/product"
+                            }
+                          },
+                          "wrap": "truncate",
+                          "size": "17px",
+                          "weight": 600
+                        },
+                        "layout": {
+                          "widthMode": "fill",
+                          "heightMode": "hug"
+                        }
+                      },
+                      {
+                        "id": "rc-prog",
+                        "type": "Container",
+                        "name": "Progress",
+                        "properties": {
+                          "showWhenEmpty": true,
+                          "background": "transparent"
+                        },
+                        "layout": {
+                          "direction": "row",
+                          "gap": "10px",
+                          "wrap": false,
+                          "align": "center",
+                          "justify": "flex-start",
+                          "radius": "0",
+                          "paddingTop": "0px",
+                          "paddingRight": "0px",
+                          "paddingBottom": "0px",
+                          "paddingLeft": "0px",
+                          "widthMode": "fill",
+                          "heightMode": "hug"
+                        },
+                        "children": [
+                          {
+                            "id": "rc-bar",
+                            "type": "ProgressBar",
+                            "name": "Progress",
+                            "properties": {
+                              "variable": {
+                                "$if": {
+                                  "condition": {
+                                    "$compare": {
+                                      "left": {
+                                        "$repeatItem": {
+                                          "member": "name"
+                                        }
+                                      },
+                                      "operator": "===",
+                                      "right": {
+                                        "$recipe": {
+                                          "type": "product",
+                                          "field": "activeName"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "true": {
+                                    "$var": {
+                                      "path": "CW:Stats/Total"
+                                    }
+                                  },
+                                  "false": 0
+                                }
+                              },
+                              "min": 0,
+                              "max": {
+                                "$repeatItem": {
+                                  "member": "values/qty"
+                                }
+                              },
+                              "showValue": false,
+                              "showPercent": false,
+                              "color": "var(--hmi-accent)",
+                              "barHeight": 8,
+                              "dense": true
+                            },
+                            "layout": {
+                              "widthMode": "fill",
+                              "heightMode": "hug"
+                            }
+                          },
+                          {
+                            "id": "rc-count",
+                            "type": "Label",
+                            "name": "Count",
+                            "properties": {
+                              "typography": "body",
+                              "text": {
+                                "$stringExpr": {
+                                  "template": "{Thousands(Round(1))} / {Thousands(Round(2))}",
+                                  "wildcards": {
+                                    "1": {
+                                      "$if": {
+                                        "condition": {
+                                          "$compare": {
+                                            "left": {
+                                              "$repeatItem": {
+                                                "member": "name"
+                                              }
+                                            },
+                                            "operator": "===",
+                                            "right": {
+                                              "$recipe": {
+                                                "type": "product",
+                                                "field": "activeName"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "true": {
+                                          "$var": {
+                                            "path": "CW:Stats/Total"
+                                          }
+                                        },
+                                        "false": 0
+                                      }
+                                    },
+                                    "2": {
+                                      "$repeatItem": {
+                                        "member": "values/qty"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "wrap": "truncate",
+                              "color": "var(--hmi-text-muted)",
+                              "size": "13px"
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rc-tgt",
+                    "type": "Container",
+                    "name": "Target",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "transparent"
+                    },
+                    "layout": {
+                      "direction": "column",
+                      "gap": "0px",
+                      "wrap": false,
+                      "align": "flex-end",
+                      "justify": "flex-start",
+                      "radius": "0",
+                      "paddingTop": "0px",
+                      "paddingRight": "0px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "0px",
+                      "widthMode": "fixed",
+                      "heightMode": "hug",
+                      "width": "92px"
+                    },
+                    "children": [
+                      {
+                        "id": "rc-tgt-c",
+                        "type": "Label",
+                        "name": "Target",
+                        "properties": {
+                          "typography": "body",
+                          "text": {
+                            "$loc": "TARGET"
+                          },
+                          "wrap": "truncate",
+                          "color": "var(--hmi-text-muted)",
+                          "size": "13px"
+                        },
+                        "layout": {
+                          "widthMode": "hug",
+                          "heightMode": "hug"
+                        }
+                      },
+                      {
+                        "id": "rc-tgt-v",
+                        "type": "Label",
+                        "name": "Target",
+                        "properties": {
+                          "typography": "body",
+                          "text": {
+                            "$stringExpr": {
+                              "template": "{Thousands(Round(1))} g",
+                              "wildcards": {
+                                "1": {
+                                  "$repeatItem": {
+                                    "member": "values/target"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "wrap": "truncate",
+                          "size": "17px",
+                          "weight": 600
+                        },
+                        "layout": {
+                          "widthMode": "hug",
+                          "heightMode": "hug"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rc-status",
+                    "type": "Label",
+                    "name": "Status",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$repeatItem": {
+                                  "member": "name"
+                                }
+                              },
+                              "operator": "===",
+                              "right": {
+                                "$recipe": {
+                                  "type": "product",
+                                  "field": "activeName"
+                                }
+                              }
+                            }
+                          },
+                          "true": {
+                            "$loc": "ACTIVE"
+                          },
+                          "false": {
+                            "$loc": "QUEUED"
+                          }
+                        }
+                      },
+                      "wrap": "truncate",
+                      "color": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$repeatItem": {
+                                  "member": "name"
+                                }
+                              },
+                              "operator": "===",
+                              "right": {
+                                "$recipe": {
+                                  "type": "product",
+                                  "field": "activeName"
+                                }
+                              }
+                            }
+                          },
+                          "true": "var(--hmi-accent)",
+                          "false": "var(--hmi-text-muted)"
+                        }
+                      },
+                      "size": "13px",
+                      "weight": 700
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "icon": "clipboard-text"
+}

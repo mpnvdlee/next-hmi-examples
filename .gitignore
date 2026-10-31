@@ -1,0 +1,12 @@
+# Editor and migration leftovers, plus the historian's SQLite sidecars. All of
+# it is regenerated on disk; none of it belongs in a project a demo is cloned
+# from.
+*.bak
+*.pre-migration-backup-*
+*.db-shm
+*.db-wal
+.backups/
+
+# The OPC-UA client key pair. The app generates one when none is there, and a
+# key committed here would be shared by every download.
+certs/

@@ -1,0 +1,236 @@
+en-EN;nl-NL
+{1} is locked · {2};{1} is vergrendeld · {2}
+{1} set to {2} {3} · not saved yet;{1} staat op {2} {3} · nog niet opgeslagen
+SETUP;INSTELLINGEN
+Product / Tolerances;Product / Toleranties
+Calibration / Zero;Kalibratie / Nul
+Reject Unit;Uitwerpunit
+Conveyor;Transportband
+Save & Reset;Opslaan & Herstellen
+Unsaved changes;Niet-opgeslagen wijzigingen
+All saved;Alles opgeslagen
+ACCESS LEVEL;TOEGANGSNIVEAU
+Logged in as ADMIN;Ingelogd als ADMIN
+Setup is protected · log in as ADMIN;Instellingen zijn beveiligd · log in als ADMIN
+Logged in as OPERATOR;Ingelogd als OPERATOR
+Logged out · OPERATOR level;Uitgelogd · niveau OPERATOR
+OPERATOR level active;Niveau OPERATOR actief
+OPERATOR;OPERATOR
+Run, monitor, acknowledge;Bedienen, bewaken, bevestigen
+ADMIN;ADMIN
+Setup & parameters · PIN;Instellingen & parameters · pincode
+Prototype PIN for ADMIN: 1234;Prototype-pincode voor ADMIN: 1234
+Access level;Toegangsniveau
+LOGIN;INLOGGEN
+Admin PIN;Admin-pincode
+Wrong PIN · try again;Verkeerde pincode · probeer opnieuw
+Enter PIN;Voer pincode in
+4-digit access code · prototype PIN: 1234;Toegangscode van 4 cijfers · prototype-pincode: 1234
+ALARMS & EVENTS;ALARMEN & GEBEURTENISSEN
+ACKNOWLEDGE;BEVESTIGEN
+Alarms & Events;Alarmen & Gebeurtenissen
+Three underweight cases in a row · infeed stopped;Drie dozen op rij te licht · invoer gestopt
+Alarm acknowledged · press RESUME;Alarm bevestigd · druk op HERVATTEN
+HALTED · {1};GESTOPT · {1}
+VIEW ALARM ›;BEKIJK ALARM ›
+LAST WEIGHT CASE;LAATST GEWOGEN DOOS
+Case #{Thousands(1)} · {2};Doos #{Thousands(1)} · {2}
+No cases yet;Nog geen dozen
+Recipe {1} · {2};Recept {1} · {2}
+TOO LOW;TE LAAG
+TOO HIGH;TE HOOG
+OK;OK
+ACTUAL;GEMETEN
+TARGET;DOEL
+TOLERANCE;TOLERANTIE
+INFEED;INVOER
+REQUEST;AANVRAAG
+BLOCKED;GEBLOKKEERD
+OUTFEED;UITVOER
+READY;GEREED
+CHECK RESULT;CONTROLERESULTAAT
+{1} rejected;{1} afgekeurd
+· {1} correct;· {1} goed
+Correct;Goed
+Near lower limit;Dicht bij ondergrens
+Near upper limit;Dicht bij bovengrens
+Weight is too low;Gewicht is te laag
+Weight is too high;Gewicht is te hoog
+Home;Home
+I/O DIAGNOSTICS;I/O-DIAGNOSE
+LIVE;LIVE
+CONVEYOR & REJECT;TRANSPORTBAND & UITWERPER
+Infeed request;Aanvraag invoer
+Weigh conveyor M1;Weegband M1
+RUNNING;DRAAIT
+STOPPED;GESTOPT
+Outfeed ready;Uitvoer gereed
+Reject pusher Y1;Uitwerper Y1
+EXTENDED;UIT
+RETRACTED;IN
+Reject bin level;Vulgraad afkeurbak
+Belt speed;Bandsnelheid
+SENSORS & LOAD CELL;SENSOREN & WEEGCEL
+PE1 infeed photocell;PE1 fotocel invoer
+FREE;VRIJ
+PE2 weigh entry;PE2 ingang weegband
+PE3 reject confirm;PE3 bevestiging uitwerpen
+Load cell raw;Weegcel ruw
+Load cell signal;Weegcelsignaal
+Zero offset;Nulpuntafwijking
+I/O Diagnostics;I/O-diagnose
+MENU;MENU
+Logged in as {1};Ingelogd als {1}
+HOME;HOME
+Run screen;Bedieningsscherm
+RECIPES;RECEPTEN
+Active {1};Actief: {1}
+Parameters;Parameters
+Login required;Inloggen vereist
+I/O;I/O
+Diagnostics;Diagnose
+STATISTICS & TRENDS;STATISTIEK & TRENDS
+{Thousands(1)} cases;{Thousands(1)} dozen
+ALARMS;ALARMEN
+{1} active;{1} actief
+Menu;Menu
+Stop the line to load another recipe;Stop de lijn om een ander recept te laden
+Recipe {1} is already active;Recept {1} is al actief
+Stop the line to change the recipe;Stop de lijn om het recept te wisselen
+Recipe {1} loaded;Recept {1} geladen
+Recipe {1} could not be loaded;Recept {1} kon niet worden geladen
+RECIPE;RECEPT
+ACTIVE;ACTIEF
+QUEUED;IN WACHTRIJ
+No recipes of type “product”;Geen recepten van het type “product”
+Recipes;Recepten
+Zero needed;Nulstellen nodig
+Bin {1}/{2};Bak {1}/{2}
+CALIBRATION / ZERO;KALIBRATIE / NUL
+Load cell LC-1 · 30 kg;Weegcel LC-1 · 30 kg
+Live · last zero {1};Live · laatst genuld {1}
+Weighing filter;Weegfilter
+Signal settling time;Insteltijd van het signaal
+Auto-zero interval;Interval automatisch nulstellen
+0 switches auto-zero off;0 zet automatisch nulstellen uit
+Span factor;Spanfactor
+Factory calibration;Fabriekskalibratie
+Scale zeroed;Weegschaal genuld
+ZERO SCALE;WEEGSCHAAL NULLEN
+Zeroing requires the line to be stopped and the belt empty.;Nullen kan alleen als de lijn stilstaat en de band leeg is.
+CONVEYOR;TRANSPORTBAND
+Weigh belt M1;Weegband M1
+Weigh conveyor;Weegband
+Minimum case gap;Minimale afstand tussen dozen
+Required spacing at infeed;Benodigde afstand bij de invoer
+Direction;Draairichting
+Set at commissioning;Ingesteld bij inbedrijfstelling
+Motor current;Motorstroom
+Live;Live
+PRODUCT / TOLERANCES;PRODUCT / TOLERANTIES
+Recipe {1};Recept {1}
+Recipe;Recept
+Set by recipe {1};Ingesteld door recept {1}
+Target weight;Streefgewicht
+Nominal case weight;Nominaal doosgewicht
+Lower limit;Ondergrens
+Reject below target minus;Afkeuren onder streefgewicht min
+Must lie outside the {1} g band;Moet buiten de band van {1} g liggen
+Upper limit;Bovengrens
+Reject above target plus;Afkeuren boven streefgewicht plus
+Near-limit band;Grenswaarschuwingsband
+Warning zone inside each limit;Waarschuwingszone binnen elke grens
+Must be smaller than both limits;Moet kleiner zijn dan beide grenzen
+Tare;Tarra
+Box and film;Doos en folie
+REJECT UNIT;UITWERPUNIT
+Pusher Y1;Uitwerper Y1
+Reject delay;Uitwerpvertraging
+Load cell to pusher;Van weegcel tot uitwerper
+Pusher pulse;Uitwerppuls
+Cylinder on-time;Inschakelduur cilinder
+Reject bin capacity;Capaciteit afkeurbak
+cases;dozen
+Cases until bin-full alarm;Dozen tot het alarm ‘bak vol’
+Bin level;Vulgraad bak
+Rejected cases since emptied;Afgekeurde dozen sinds legen
+Reject bin confirmed empty;Afkeurbak leeg bevestigd
+BIN EMPTIED;BAK GELEEGD
+Pusher test requested;Test uitwerper aangevraagd
+TEST PUSHER;TEST UITWERPER
+SAVE & RESET;OPSLAAN & HERSTELLEN
+1 unsaved change;1 niet-opgeslagen wijziging
+{1} unsaved changes;{1} niet-opgeslagen wijzigingen
+All parameters saved;Alle parameters opgeslagen
+Not saved yet · changes apply immediately, SAVE stores them permanently;Nog niet opgeslagen · wijzigingen werken direct, OPSLAAN bewaart ze blijvend
+Last saved {1} · changes apply immediately, SAVE stores them permanently;Laatst opgeslagen {1} · wijzigingen werken direct, OPSLAAN bewaart ze blijvend
+{Round(1)} cases;{Round(1)} dozen
+Parameters saved;Parameters opgeslagen
+Save failed: {1};Opslaan mislukt: {1}
+No changes to save;Geen wijzigingen om op te slaan
+SAVE;OPSLAAN
+Changes discarded;Wijzigingen verworpen
+DISCARD;VERWERPEN
+Factory defaults loaded · save to apply permanently;Fabrieksinstellingen geladen · sla op om ze blijvend te maken
+RESET TO FACTORY DEFAULTS;FABRIEKSINSTELLINGEN HERSTELLEN
+STATISTICS;STATISTIEK
+TRENDS;TRENDS
+TOTAL CASES;TOTAAL DOZEN
+of {Thousands(1)} planned;van {Thousands(1)} gepland
+ACCEPTED;GOEDGEKEURD
+{Thousands(Round2(1))} % of total;{Thousands(Round2(1))} % van totaal
+REJECTED;AFGEKEURD
+{Thousands(Round2(1))} % reject rate;{Thousands(Round2(1))} % afkeur
+MEAN WEIGHT;GEMIDDELD GEWICHT
+{Signed(Round1(1))} g vs target;{Signed(Round1(1))} g t.o.v. doel
+STD DEVIATION;STANDAARDAFWIJKING
+Min {Thousands(1)} · Max {Thousands(2)};Min {Thousands(1)} · Max {Thousands(2)}
+THROUGHPUT;DOORVOER
+{Thousands(Round1(1))} cases/min;{Thousands(Round1(1))} dozen/min
+Last 20 cases;Laatste 20 dozen
+Line not running;Lijn draait niet
+DEVIATION TREND · LAST 20;AFWIJKINGSTREND · LAATSTE 20
+DISTRIBUTION;VERDELING
+Statistics;Statistiek
+LAST 20;LAATSTE 20
+1 H;1 U
+SHIFT;PLOEG
+Mean;Gemiddelde
+· Reject;· Afkeur
+DEVIATION · MEAN PER MINUTE;AFWIJKING · GEMIDDELDE PER MINUUT
+DEVIATION · MEAN PER 10 MIN;AFWIJKING · GEMIDDELDE PER 10 MIN
+DEVIATION · PER CASE;AFWIJKING · PER DOOS
+−20 cases;−20 dozen
+Now;Nu
+Latest;Laatste
+REJECT RATE;AFKEURPERCENTAGE
+Trends;Trends
+Three underweight cases in a row;Drie dozen op rij te licht
+Infeed stopped automatically;Invoer automatisch gestopt
+Check the filler upstream for an underfill.;Controleer de vuller ervoor op onderdosering.
+Acknowledge the alarm, then press RESUME.;Bevestig het alarm en druk dan op HERVATTEN.
+Reject bin full;Afkeurbak vol
+Empty the bin, then confirm in Setup › Reject Unit;Leeg de bak en bevestig in Instellingen › Uitwerpunit
+Empty the reject bin.;Leeg de afkeurbak.
+Confirm with BIN EMPTIED in Setup › Reject Unit.;Bevestig met BAK GELEEGD in Instellingen › Uitwerpunit.
+Load cell drift;Drift van de weegcel
+Zero offset exceeded ±3 g · zero the scale;Nulpuntafwijking boven ±3 g · nul de weegschaal
+Stop the line with the belt empty.;Stop de lijn met een lege band.
+Press ZERO SCALE in Setup › Calibration.;Druk op WEEGSCHAAL NULLEN in Instellingen › Kalibratie.
+Zeroing required;Nullen vereist
+Auto-zero interval elapsed · zero the scale at the next stop;Interval automatisch nulstellen verlopen · nul de weegschaal bij de volgende stop
+Press ZERO SCALE in Setup › Calibration at the next stop.;Druk bij de volgende stop op WEEGSCHAAL NULLEN in Instellingen › Kalibratie.
+SIMULATE;SIMULEREN
+Line halted · three underweight cases in a row;Lijn gestopt · drie dozen op rij te licht
+3 × underweight;3 × te licht
+Warning: reject bin full;Waarschuwing: afkeurbak vol
+Warning: load cell drift;Waarschuwing: drift van de weegcel
+Demo values · each button raises its fault;Demowaarden · elke knop geeft zijn storing
+HALTED;GESTOPT
+Line stopped;Lijn gestopt
+Line started;Lijn gestart
+Acknowledge the alarm before resuming;Bevestig eerst het alarm voordat je hervat
+Production resumed;Productie hervat
+STOP;STOP
+START;START
+RESUME;HERVATTEN

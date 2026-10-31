@@ -1,0 +1,430 @@
+{
+  "id": "setup-cal",
+  "title": {
+    "$loc": "Calibration / Zero"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "sucal",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "row",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "sucal-nav",
+            "type": "$component:setup-nav",
+            "name": "Sections",
+            "properties": {
+              "calSub": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": {
+                    "$loc": "Zero needed"
+                  },
+                  "false": {
+                    "$loc": "OK"
+                  }
+                }
+              },
+              "rejectSub": {
+                "$loc": {
+                  "key": "Bin {1}/{2}",
+                  "wildcards": {
+                    "1": {
+                      "$var": {
+                        "path": "CW:IO/BinLevel"
+                      }
+                    },
+                    "2": {
+                      "$var": {
+                        "path": "CW:Params/BinCap"
+                      }
+                    }
+                  }
+                }
+              },
+              "calSubColor": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              },
+              "rejectSubColor": {
+                "$if": {
+                  "condition": {
+                    "$var": {
+                      "path": "CW:Alarms/BinFull"
+                    }
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              }
+            },
+            "layout": {
+              "widthMode": "fixed",
+              "heightMode": "hug",
+              "width": "156px"
+            }
+          },
+          {
+            "id": "sucal-body",
+            "type": "Container",
+            "name": "Section",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent",
+              "overflow": "scroll"
+            },
+            "layout": {
+              "direction": "column",
+              "gap": "8px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fill",
+              "minWidth": "0"
+            },
+            "children": [
+              {
+                "id": "sucal-bh",
+                "type": "$component:section-header",
+                "name": "Section header",
+                "properties": {
+                  "title": {
+                    "$loc": "CALIBRATION / ZERO"
+                  },
+                  "subtitle": {
+                    "$loc": "Load cell LC-1 · 30 kg"
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "32px"
+                }
+              },
+              {
+                "id": "suc-zero",
+                "type": "$component:param-info",
+                "name": "Zero offset",
+                "properties": {
+                  "label": {
+                    "$loc": "Zero offset"
+                  },
+                  "hint": {
+                    "$loc": {
+                      "key": "Live · last zero {1}",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:IO/LastZero"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "valueText": {
+                    "$stringExpr": {
+                      "template": "{Round1(1)}",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:IO/ZeroOffset"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "unit": "g",
+                  "locked": false
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "suc-filter",
+                "type": "$component:param-row",
+                "name": "Weighing filter",
+                "properties": {
+                  "label": {
+                    "$loc": "Weighing filter"
+                  },
+                  "hint": {
+                    "$loc": "Signal settling time"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/Filter"
+                    }
+                  },
+                  "unit": "ms",
+                  "decimals": 0,
+                  "min": 50,
+                  "max": 1000,
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "filter"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "suc-zint",
+                "type": "$component:param-row",
+                "name": "Auto-zero interval",
+                "properties": {
+                  "label": {
+                    "$loc": "Auto-zero interval"
+                  },
+                  "hint": {
+                    "$loc": "0 switches auto-zero off"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/ZeroInt"
+                    }
+                  },
+                  "unit": "min",
+                  "decimals": 0,
+                  "min": 0,
+                  "max": 240,
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "zeroInt"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "suc-span",
+                "type": "$component:param-info",
+                "name": "Span factor",
+                "properties": {
+                  "label": {
+                    "$loc": "Span factor"
+                  },
+                  "hint": {
+                    "$loc": "Factory calibration"
+                  },
+                  "valueText": "1.00241",
+                  "unit": "",
+                  "locked": true
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "suc-act",
+                "type": "Container",
+                "name": "Actions",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "row",
+                  "gap": "12px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "radius": "0",
+                  "paddingTop": "4px",
+                  "paddingRight": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "widthMode": "fill",
+                  "heightMode": "hug"
+                },
+                "children": [
+                  {
+                    "id": "suc-zero-b",
+                    "type": "Button",
+                    "name": "Zero Scale",
+                    "properties": {
+                      "label": {
+                        "$loc": "ZERO SCALE"
+                      },
+                      "variant": "outline",
+                      "fill": "var(--hmi-accent)",
+                      "color": "#111316",
+                      "radius": "10px",
+                      "borderWidth": 0,
+                      "actions": {
+                        "onPress": [
+                          {
+                            "type": "writeDataVariable",
+                            "target": {
+                              "$var": {
+                                "path": "CW:IO/ZeroOffset"
+                              }
+                            },
+                            "value": 0
+                          },
+                          {
+                            "type": "writeDataVariable",
+                            "target": {
+                              "$var": {
+                                "path": "CW:IO/LastZero"
+                              }
+                            },
+                            "value": "just now"
+                          },
+                          {
+                            "type": "writeDataVariable",
+                            "target": {
+                              "$var": {
+                                "path": "CW:Alarms/Drift"
+                              }
+                            },
+                            "value": false
+                          },
+                          {
+                            "type": "writeDataVariable",
+                            "target": {
+                              "$var": {
+                                "path": "CW:Alarms/ZeroDue"
+                              }
+                            },
+                            "value": false
+                          },
+                          {
+                            "type": "showToast",
+                            "message": {
+                              "$loc": "Scale zeroed"
+                            },
+                            "severity": "success",
+                            "discard": "auto",
+                            "duration": 2600
+                          }
+                        ]
+                      },
+                      "interactable": {
+                        "$compare": {
+                          "left": {
+                            "$var": {
+                              "path": "CW:Line/State"
+                            }
+                          },
+                          "operator": "!==",
+                          "right": 1
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "56px"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "suc-note",
+                "type": "Label",
+                "name": "suc-note",
+                "properties": {
+                  "typography": "caption",
+                  "text": {
+                    "$loc": "Zeroing requires the line to be stopped and the belt empty."
+                  },
+                  "color": "var(--hmi-text-muted)",
+                  "wrap": "wrap"
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

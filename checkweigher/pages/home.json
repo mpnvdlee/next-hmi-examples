@@ -1,0 +1,1595 @@
+{
+  "id": "home",
+  "title": {
+    "$loc": "Home"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "hm",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "column",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "hm-banner",
+            "type": "ButtonContainer",
+            "name": "Halt banner",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "#C62828",
+              "actions": {
+                "onPress": [
+                  {
+                    "type": "navigateToPage",
+                    "pageId": "alarms"
+                  }
+                ]
+              },
+              "visible": {
+                "$compare": {
+                  "left": {
+                    "$var": {
+                      "path": "CW:Line/State"
+                    }
+                  },
+                  "operator": "===",
+                  "right": 2
+                }
+              }
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "12px",
+              "wrap": false,
+              "align": "center",
+              "justify": "flex-start",
+              "radius": "12px",
+              "paddingTop": "0px",
+              "paddingRight": "16px",
+              "paddingBottom": "0px",
+              "paddingLeft": "16px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "48px"
+            },
+            "children": [
+              {
+                "id": "hm-banner-i",
+                "type": "Icon",
+                "name": "hm-banner-i",
+                "properties": {
+                  "iconName": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-warn.svg"
+                    }
+                  },
+                  "size": 24,
+                  "color": "var(--hmi-white)",
+                  "chrome": false
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "hm-banner-l",
+                "type": "Label",
+                "name": "hm-banner-l",
+                "properties": {
+                  "typography": "body",
+                  "text": {
+                    "$loc": {
+                      "key": "HALTED · {1}",
+                      "wildcards": {
+                        "1": {
+                          "$if": {
+                            "condition": {
+                              "$compare": {
+                                "left": {
+                                  "$alarmCount": {
+                                    "filter": "unacked"
+                                  }
+                                },
+                                "operator": ">",
+                                "right": 0
+                              }
+                            },
+                            "true": {
+                              "$loc": "Three underweight cases in a row · infeed stopped"
+                            },
+                            "false": {
+                              "$loc": "Alarm acknowledged · press RESUME"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "wrap": "truncate",
+                  "size": "16px",
+                  "weight": 600,
+                  "color": "var(--hmi-white)"
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "hm-banner-t",
+                "type": "Label",
+                "name": "hm-banner-t",
+                "properties": {
+                  "typography": "body",
+                  "text": {
+                    "$loc": "VIEW ALARM ›"
+                  },
+                  "wrap": "truncate",
+                  "size": "14px",
+                  "weight": 700,
+                  "color": "var(--hmi-white)"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              }
+            ]
+          },
+          {
+            "id": "hm-hero",
+            "type": "Container",
+            "name": "Last case",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "var(--hmi-surface)"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "16px",
+              "wrap": false,
+              "align": "center",
+              "justify": "space-between",
+              "radius": "12px",
+              "paddingTop": {
+                "$if": {
+                  "condition": {
+                    "$compare": {
+                      "left": {
+                        "$var": {
+                          "path": "CW:Line/State"
+                        }
+                      },
+                      "operator": "===",
+                      "right": 2
+                    }
+                  },
+                  "true": "12px",
+                  "false": "16px"
+                }
+              },
+              "paddingRight": "22px",
+              "paddingBottom": {
+                "$if": {
+                  "condition": {
+                    "$compare": {
+                      "left": {
+                        "$var": {
+                          "path": "CW:Line/State"
+                        }
+                      },
+                      "operator": "===",
+                      "right": 2
+                    }
+                  },
+                  "true": "12px",
+                  "false": "16px"
+                }
+              },
+              "paddingLeft": "22px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": {
+                "$if": {
+                  "condition": {
+                    "$compare": {
+                      "left": {
+                        "$var": {
+                          "path": "CW:Line/State"
+                        }
+                      },
+                      "operator": "===",
+                      "right": 2
+                    }
+                  },
+                  "true": "108px",
+                  "false": "172px"
+                }
+              }
+            },
+            "children": [
+              {
+                "id": "hm-hero-l",
+                "type": "Container",
+                "name": "Case",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "6px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "radius": "0",
+                  "paddingTop": "0px",
+                  "paddingRight": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "hm-hero-t",
+                    "type": "Label",
+                    "name": "hm-hero-t",
+                    "properties": {
+                      "typography": "subheading",
+                      "text": {
+                        "$loc": "LAST WEIGHT CASE"
+                      },
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "hm-hero-p",
+                    "type": "Label",
+                    "name": "hm-hero-p",
+                    "properties": {
+                      "typography": "heading",
+                      "text": {
+                        "$var": {
+                          "path": "CW:Product/Name"
+                        }
+                      },
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "hm-hero-i",
+                    "type": "Label",
+                    "name": "hm-hero-i",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$loc": {
+                          "key": "Recipe {1} · {2}",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Product/RecipeId"
+                              }
+                            },
+                            "2": {
+                              "$if": {
+                                "condition": {
+                                  "$var": {
+                                    "path": "CW:Last/Has"
+                                  }
+                                },
+                                "true": {
+                                  "$loc": {
+                                    "key": "Case #{Thousands(1)} · {2}",
+                                    "wildcards": {
+                                      "1": {
+                                        "$var": {
+                                          "path": "CW:Last/N"
+                                        }
+                                      },
+                                      "2": {
+                                        "$var": {
+                                          "path": "CW:Last/Time"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "false": {
+                                  "$loc": "No cases yet"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate",
+                      "visible": {
+                        "$not": {
+                          "value": {
+                            "$compare": {
+                              "left": {
+                                "$var": {
+                                  "path": "CW:Line/State"
+                                }
+                              },
+                              "operator": "===",
+                              "right": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "hm-chip-wrap",
+                    "type": "Container",
+                    "name": "Chip row",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "transparent",
+                      "visible": {
+                        "$not": {
+                          "value": {
+                            "$compare": {
+                              "left": {
+                                "$var": {
+                                  "path": "CW:Line/State"
+                                }
+                              },
+                              "operator": "===",
+                              "right": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "layout": {
+                      "direction": "row",
+                      "gap": "0px",
+                      "wrap": false,
+                      "align": "stretch",
+                      "justify": "flex-start",
+                      "radius": "0",
+                      "paddingTop": "4px",
+                      "paddingRight": "0px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "0px",
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    },
+                    "children": [
+                      {
+                        "id": "hm-chip",
+                        "type": "Container",
+                        "name": "Result chip",
+                        "properties": {
+                          "showWhenEmpty": true,
+                          "background": "transparent",
+                          "border": {
+                            "$switch": {
+                              "value": {
+                                "$var": {
+                                  "path": "CW:Last/Res"
+                                }
+                              },
+                              "cases": [
+                                {
+                                  "when": 0,
+                                  "then": "1.6px solid var(--hmi-ok)"
+                                },
+                                {
+                                  "when": 1,
+                                  "then": "1.6px solid var(--hmi-warn)"
+                                },
+                                {
+                                  "when": 2,
+                                  "then": "1.6px solid var(--hmi-warn)"
+                                },
+                                {
+                                  "when": 3,
+                                  "then": "1.6px solid var(--hmi-fault)"
+                                },
+                                {
+                                  "when": 4,
+                                  "then": "1.6px solid var(--hmi-fault)"
+                                }
+                              ],
+                              "default": "1.6px solid var(--hmi-text-muted)"
+                            }
+                          }
+                        },
+                        "layout": {
+                          "direction": "row",
+                          "gap": "0px",
+                          "wrap": false,
+                          "align": "center",
+                          "justify": "flex-start",
+                          "radius": "15px",
+                          "paddingTop": "0px",
+                          "paddingRight": "14px",
+                          "paddingBottom": "0px",
+                          "paddingLeft": "14px",
+                          "widthMode": "hug",
+                          "heightMode": "fixed",
+                          "height": "30px"
+                        },
+                        "children": [
+                          {
+                            "id": "hm-chip-t",
+                            "type": "Label",
+                            "name": "hm-chip-t",
+                            "properties": {
+                              "typography": "label",
+                              "text": {
+                                "$switch": {
+                                  "value": {
+                                    "$var": {
+                                      "path": "CW:Last/Res"
+                                    }
+                                  },
+                                  "cases": [
+                                    {
+                                      "when": 3,
+                                      "then": {
+                                        "$loc": "TOO LOW"
+                                      }
+                                    },
+                                    {
+                                      "when": 4,
+                                      "then": {
+                                        "$loc": "TOO HIGH"
+                                      }
+                                    }
+                                  ],
+                                  "default": {
+                                    "$loc": "OK"
+                                  }
+                                }
+                              },
+                              "size": "14px",
+                              "weight": 700,
+                              "color": {
+                                "$switch": {
+                                  "value": {
+                                    "$var": {
+                                      "path": "CW:Last/Res"
+                                    }
+                                  },
+                                  "cases": [
+                                    {
+                                      "when": 0,
+                                      "then": "var(--hmi-ok)"
+                                    },
+                                    {
+                                      "when": 1,
+                                      "then": "var(--hmi-warn)"
+                                    },
+                                    {
+                                      "when": 2,
+                                      "then": "var(--hmi-warn)"
+                                    },
+                                    {
+                                      "when": 3,
+                                      "then": "var(--hmi-fault)"
+                                    },
+                                    {
+                                      "when": 4,
+                                      "then": "var(--hmi-fault)"
+                                    }
+                                  ],
+                                  "default": "var(--hmi-text-muted)"
+                                }
+                              },
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "hm-hero-r",
+                "type": "Container",
+                "name": "Reading",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "6px",
+                  "wrap": false,
+                  "align": "flex-end",
+                  "justify": "flex-start",
+                  "radius": "0",
+                  "paddingTop": "0px",
+                  "paddingRight": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                },
+                "children": [
+                  {
+                    "id": "hm-dev",
+                    "type": "Label",
+                    "name": "Deviation",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$if": {
+                          "condition": {
+                            "$var": {
+                              "path": "CW:Last/Has"
+                            }
+                          },
+                          "true": {
+                            "$stringExpr": {
+                              "template": "{Signed(Thousands(Round(1)))} g",
+                              "wildcards": {
+                                "1": {
+                                  "$var": {
+                                    "path": "CW:Last/Dev"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "false": "—"
+                        }
+                      },
+                      "size": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$var": {
+                                  "path": "CW:Line/State"
+                                }
+                              },
+                              "operator": "===",
+                              "right": 2
+                            }
+                          },
+                          "true": "60px",
+                          "false": "116px"
+                        }
+                      },
+                      "weight": 700,
+                      "wrap": "truncate",
+                      "color": {
+                        "$switch": {
+                          "value": {
+                            "$var": {
+                              "path": "CW:Last/Res"
+                            }
+                          },
+                          "cases": [
+                            {
+                              "when": 0,
+                              "then": "var(--hmi-ok)"
+                            },
+                            {
+                              "when": 1,
+                              "then": "var(--hmi-warn)"
+                            },
+                            {
+                              "when": 2,
+                              "then": "var(--hmi-warn)"
+                            },
+                            {
+                              "when": 3,
+                              "then": "var(--hmi-fault)"
+                            },
+                            {
+                              "when": 4,
+                              "then": "var(--hmi-fault)"
+                            }
+                          ],
+                          "default": "var(--hmi-text-muted)"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "hm-aw",
+                    "type": "Container",
+                    "name": "Actual / target",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "transparent"
+                    },
+                    "layout": {
+                      "direction": "row",
+                      "gap": "18px",
+                      "wrap": false,
+                      "align": "stretch",
+                      "justify": "flex-start",
+                      "radius": "0",
+                      "paddingTop": "0px",
+                      "paddingRight": "0px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "0px",
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    },
+                    "children": [
+                      {
+                        "id": "hm-act",
+                        "type": "Container",
+                        "name": "hm-act",
+                        "properties": {
+                          "showWhenEmpty": true,
+                          "background": "transparent"
+                        },
+                        "layout": {
+                          "direction": "row",
+                          "gap": "6px",
+                          "wrap": false,
+                          "align": "center",
+                          "justify": "flex-start",
+                          "radius": "0",
+                          "paddingTop": "0px",
+                          "paddingRight": "0px",
+                          "paddingBottom": "0px",
+                          "paddingLeft": "0px",
+                          "widthMode": "hug",
+                          "heightMode": "hug"
+                        },
+                        "children": [
+                          {
+                            "id": "hm-act-c",
+                            "type": "Label",
+                            "name": "hm-act-c",
+                            "properties": {
+                              "typography": "body",
+                              "text": {
+                                "$loc": "ACTUAL"
+                              },
+                              "color": "var(--hmi-text-muted)",
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          },
+                          {
+                            "id": "hm-act-v",
+                            "type": "Label",
+                            "name": "hm-act-v",
+                            "properties": {
+                              "typography": "body",
+                              "text": {
+                                "$if": {
+                                  "condition": {
+                                    "$var": {
+                                      "path": "CW:Last/Has"
+                                    }
+                                  },
+                                  "true": {
+                                    "$stringExpr": {
+                                      "template": "{Thousands(Round(1))} g",
+                                      "wildcards": {
+                                        "1": {
+                                          "$var": {
+                                            "path": "CW:Last/Weight"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "false": "—"
+                                }
+                              },
+                              "size": "15px",
+                              "weight": 600,
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "id": "hm-tgt",
+                        "type": "Container",
+                        "name": "hm-tgt",
+                        "properties": {
+                          "showWhenEmpty": true,
+                          "background": "transparent"
+                        },
+                        "layout": {
+                          "direction": "row",
+                          "gap": "6px",
+                          "wrap": false,
+                          "align": "center",
+                          "justify": "flex-start",
+                          "radius": "0",
+                          "paddingTop": "0px",
+                          "paddingRight": "0px",
+                          "paddingBottom": "0px",
+                          "paddingLeft": "0px",
+                          "widthMode": "hug",
+                          "heightMode": "hug"
+                        },
+                        "children": [
+                          {
+                            "id": "hm-tgt-c",
+                            "type": "Label",
+                            "name": "hm-tgt-c",
+                            "properties": {
+                              "typography": "body",
+                              "text": {
+                                "$loc": "TARGET"
+                              },
+                              "color": "var(--hmi-text-muted)",
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          },
+                          {
+                            "id": "hm-tgt-v",
+                            "type": "Label",
+                            "name": "hm-tgt-v",
+                            "properties": {
+                              "typography": "body",
+                              "text": {
+                                "$stringExpr": {
+                                  "template": "{Thousands(Round(1))} g",
+                                  "wildcards": {
+                                    "1": {
+                                      "$var": {
+                                        "path": "CW:Product/Target"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "size": "15px",
+                              "weight": 600,
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hm-bottom",
+            "type": "Container",
+            "name": "Bottom",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "16px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fill"
+            },
+            "children": [
+              {
+                "id": "hm-left",
+                "type": "Container",
+                "name": "Left column",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "16px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "radius": "0",
+                  "paddingTop": "0px",
+                  "paddingRight": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "widthMode": "fixed",
+                  "heightMode": "fill",
+                  "width": "320px"
+                },
+                "children": [
+                  {
+                    "id": "hm-tol",
+                    "type": "CwToleranceBar",
+                    "name": "Tolerance",
+                    "properties": {
+                      "title": {
+                        "$loc": "TOLERANCE"
+                      },
+                      "value": {
+                        "$var": {
+                          "path": "CW:Last/Dev"
+                        }
+                      },
+                      "hasValue": {
+                        "$var": {
+                          "path": "CW:Last/Has"
+                        }
+                      },
+                      "lower": {
+                        "$var": {
+                          "path": "CW:Params/Lower"
+                        }
+                      },
+                      "upper": {
+                        "$var": {
+                          "path": "CW:Params/Upper"
+                        }
+                      },
+                      "band": {
+                        "$var": {
+                          "path": "CW:Params/Band"
+                        }
+                      },
+                      "span": 60
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fill"
+                    }
+                  },
+                  {
+                    "id": "hm-io",
+                    "type": "Container",
+                    "name": "Infeed / outfeed",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "var(--hmi-surface)"
+                    },
+                    "layout": {
+                      "direction": "column",
+                      "gap": "0px",
+                      "wrap": false,
+                      "align": "stretch",
+                      "justify": "space-around",
+                      "radius": "12px",
+                      "paddingTop": "6px",
+                      "paddingRight": "14px",
+                      "paddingBottom": "6px",
+                      "paddingLeft": "14px",
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "100px"
+                    },
+                    "children": [
+                      {
+                        "id": "hm-in",
+                        "type": "Container",
+                        "name": "hm-in",
+                        "properties": {
+                          "showWhenEmpty": true,
+                          "background": "transparent"
+                        },
+                        "layout": {
+                          "direction": "row",
+                          "gap": "10px",
+                          "wrap": false,
+                          "align": "center",
+                          "justify": "flex-start",
+                          "radius": "0",
+                          "paddingTop": "0px",
+                          "paddingRight": "0px",
+                          "paddingBottom": "0px",
+                          "paddingLeft": "0px",
+                          "widthMode": "fill",
+                          "heightMode": "fixed",
+                          "height": "40px"
+                        },
+                        "children": [
+                          {
+                            "id": "hm-in-c",
+                            "type": "Label",
+                            "name": "hm-in-c",
+                            "properties": {
+                              "typography": "label",
+                              "text": {
+                                "$loc": "INFEED"
+                              },
+                              "color": "var(--hmi-text-muted)",
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "fixed",
+                              "heightMode": "hug",
+                              "width": "72px"
+                            }
+                          },
+                          {
+                            "id": "hm-in-d",
+                            "type": "Container",
+                            "name": "Dot",
+                            "properties": {
+                              "showWhenEmpty": true,
+                              "background": {
+                                "$switch": {
+                                  "value": {
+                                    "$var": {
+                                      "path": "CW:Line/State"
+                                    }
+                                  },
+                                  "cases": [
+                                    {
+                                      "when": 1,
+                                      "then": "var(--hmi-ok)"
+                                    },
+                                    {
+                                      "when": 2,
+                                      "then": "var(--hmi-fault)"
+                                    }
+                                  ],
+                                  "default": "var(--hmi-text-muted)"
+                                }
+                              }
+                            },
+                            "layout": {
+                              "direction": "column",
+                              "gap": "0px",
+                              "wrap": false,
+                              "align": "stretch",
+                              "justify": "flex-start",
+                              "radius": "50%",
+                              "paddingTop": "0px",
+                              "paddingRight": "0px",
+                              "paddingBottom": "0px",
+                              "paddingLeft": "0px",
+                              "widthMode": "fixed",
+                              "heightMode": "fixed",
+                              "width": "12px",
+                              "height": "12px"
+                            },
+                            "children": []
+                          },
+                          {
+                            "id": "hm-in-v",
+                            "type": "Label",
+                            "name": "hm-in-v",
+                            "properties": {
+                              "typography": "body",
+                              "text": {
+                                "$switch": {
+                                  "value": {
+                                    "$var": {
+                                      "path": "CW:Line/State"
+                                    }
+                                  },
+                                  "cases": [
+                                    {
+                                      "when": 1,
+                                      "then": {
+                                        "$loc": "REQUEST"
+                                      }
+                                    }
+                                  ],
+                                  "default": {
+                                    "$loc": "BLOCKED"
+                                  }
+                                }
+                              },
+                              "size": "16px",
+                              "weight": 600,
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "id": "hm-out",
+                        "type": "Container",
+                        "name": "hm-out",
+                        "properties": {
+                          "showWhenEmpty": true,
+                          "background": "transparent"
+                        },
+                        "layout": {
+                          "direction": "row",
+                          "gap": "10px",
+                          "wrap": false,
+                          "align": "center",
+                          "justify": "flex-start",
+                          "radius": "0",
+                          "paddingTop": "0px",
+                          "paddingRight": "0px",
+                          "paddingBottom": "0px",
+                          "paddingLeft": "0px",
+                          "widthMode": "fill",
+                          "heightMode": "fixed",
+                          "height": "40px"
+                        },
+                        "children": [
+                          {
+                            "id": "hm-out-c",
+                            "type": "Label",
+                            "name": "hm-out-c",
+                            "properties": {
+                              "typography": "label",
+                              "text": {
+                                "$loc": "OUTFEED"
+                              },
+                              "color": "var(--hmi-text-muted)",
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "fixed",
+                              "heightMode": "hug",
+                              "width": "72px"
+                            }
+                          },
+                          {
+                            "id": "hm-out-d",
+                            "type": "Container",
+                            "name": "Dot",
+                            "properties": {
+                              "showWhenEmpty": true,
+                              "background": "var(--hmi-ok)"
+                            },
+                            "layout": {
+                              "direction": "column",
+                              "gap": "0px",
+                              "wrap": false,
+                              "align": "stretch",
+                              "justify": "flex-start",
+                              "radius": "50%",
+                              "paddingTop": "0px",
+                              "paddingRight": "0px",
+                              "paddingBottom": "0px",
+                              "paddingLeft": "0px",
+                              "widthMode": "fixed",
+                              "heightMode": "fixed",
+                              "width": "12px",
+                              "height": "12px"
+                            },
+                            "children": []
+                          },
+                          {
+                            "id": "hm-out-v",
+                            "type": "Label",
+                            "name": "hm-out-v",
+                            "properties": {
+                              "typography": "body",
+                              "text": {
+                                "$loc": "READY"
+                              },
+                              "size": "16px",
+                              "weight": 600,
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "hm-check",
+                "type": "Container",
+                "name": "Check result",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "0px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "radius": "12px",
+                  "paddingTop": "6px",
+                  "paddingRight": "6px",
+                  "paddingBottom": "10px",
+                  "paddingLeft": "14px",
+                  "widthMode": "fill",
+                  "heightMode": "fill",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "hm-check-h",
+                    "type": "Container",
+                    "name": "hm-check-h",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "transparent"
+                    },
+                    "layout": {
+                      "direction": "row",
+                      "gap": "0px",
+                      "wrap": false,
+                      "align": "center",
+                      "justify": "flex-start",
+                      "radius": "0",
+                      "paddingTop": "0px",
+                      "paddingRight": "0px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "0px",
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "48px"
+                    },
+                    "children": [
+                      {
+                        "id": "hm-check-t",
+                        "type": "Label",
+                        "name": "hm-check-t",
+                        "properties": {
+                          "typography": "subheading",
+                          "text": {
+                            "$loc": "CHECK RESULT"
+                          },
+                          "wrap": "truncate"
+                        },
+                        "layout": {
+                          "widthMode": "fill",
+                          "heightMode": "hug"
+                        }
+                      },
+                      {
+                        "id": "hm-check-b",
+                        "type": "Button",
+                        "name": "Expand",
+                        "properties": {
+                          "label": "",
+                          "variant": "outline",
+                          "fill": "var(--hmi-surface-raised)",
+                          "color": "var(--hmi-text)",
+                          "radius": "10px",
+                          "iconName": {
+                            "$static": {
+                              "type": "custom",
+                              "path": "icons/cw-expand.svg"
+                            }
+                          },
+                          "iconSize": 22,
+                          "borderWidth": 0,
+                          "actions": {
+                            "onPress": [
+                              {
+                                "type": "navigateToPage",
+                                "pageId": "stats"
+                              }
+                            ]
+                          }
+                        },
+                        "layout": {
+                          "widthMode": "fixed",
+                          "heightMode": "fixed",
+                          "width": "48px",
+                          "height": "48px"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hm-check-s",
+                    "type": "Container",
+                    "name": "Summary",
+                    "properties": {
+                      "showWhenEmpty": true,
+                      "background": "transparent"
+                    },
+                    "layout": {
+                      "direction": "row",
+                      "gap": "4px",
+                      "wrap": false,
+                      "align": "center",
+                      "justify": "flex-start",
+                      "radius": "0",
+                      "paddingTop": "0px",
+                      "paddingRight": "0px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "0px",
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "22px"
+                    },
+                    "children": [
+                      {
+                        "id": "hm-check-r",
+                        "type": "Label",
+                        "name": "hm-check-r",
+                        "properties": {
+                          "typography": "body",
+                          "text": {
+                            "$loc": {
+                              "key": "{1} rejected",
+                              "wildcards": {
+                                "1": {
+                                  "$var": {
+                                    "path": "CW:Home/Rej6"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "weight": 600,
+                          "color": {
+                            "$if": {
+                              "condition": {
+                                "$compare": {
+                                  "left": {
+                                    "$var": {
+                                      "path": "CW:Home/Rej6"
+                                    }
+                                  },
+                                  "operator": ">",
+                                  "right": 0
+                                }
+                              },
+                              "true": "var(--hmi-fault)",
+                              "false": "var(--hmi-text-muted)"
+                            }
+                          },
+                          "wrap": "truncate"
+                        },
+                        "layout": {
+                          "widthMode": "hug",
+                          "heightMode": "hug"
+                        }
+                      },
+                      {
+                        "id": "hm-check-o",
+                        "type": "Label",
+                        "name": "hm-check-o",
+                        "properties": {
+                          "typography": "body",
+                          "text": {
+                            "$loc": {
+                              "key": "· {1} correct",
+                              "wildcards": {
+                                "1": {
+                                  "$var": {
+                                    "path": "CW:Home/Ok6"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "color": "var(--hmi-text-muted)",
+                          "wrap": "truncate"
+                        },
+                        "layout": {
+                          "widthMode": "hug",
+                          "heightMode": "hug"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hm-rep",
+                    "type": "Repeater",
+                    "name": "Last six",
+                    "properties": {
+                      "items": {
+                        "$var": {
+                          "path": "CW:Home/Last6Res"
+                        }
+                      },
+                      "startOffset": 0,
+                      "maxItems": 6,
+                      "emptyText": ""
+                    },
+                    "layout": {
+                      "direction": "column",
+                      "gap": "0px",
+                      "widthMode": "fill",
+                      "heightMode": "hug",
+                      "paddingTop": "0",
+                      "paddingRight": "8px",
+                      "paddingBottom": "0",
+                      "paddingLeft": "0"
+                    },
+                    "children": [
+                      {
+                        "id": "hm-row",
+                        "type": "Container",
+                        "name": "Check row",
+                        "properties": {
+                          "showWhenEmpty": true,
+                          "background": "transparent"
+                        },
+                        "layout": {
+                          "direction": "row",
+                          "gap": "10px",
+                          "wrap": false,
+                          "align": "center",
+                          "justify": "flex-start",
+                          "radius": "0",
+                          "paddingTop": "0px",
+                          "paddingRight": "0px",
+                          "paddingBottom": "0px",
+                          "paddingLeft": "0px",
+                          "widthMode": "fill",
+                          "heightMode": "fixed",
+                          "height": "30px"
+                        },
+                        "children": [
+                          {
+                            "id": "hm-row-i",
+                            "type": "Icon",
+                            "name": "Icon",
+                            "properties": {
+                              "iconName": {
+                                "$switch": {
+                                  "value": {
+                                    "$repeatItem": {
+                                      "field": "value"
+                                    }
+                                  },
+                                  "cases": [
+                                    {
+                                      "when": 0,
+                                      "then": "/assets/icons/cw-check.svg"
+                                    },
+                                    {
+                                      "when": 1,
+                                      "then": "/assets/icons/cw-warn.svg"
+                                    },
+                                    {
+                                      "when": 2,
+                                      "then": "/assets/icons/cw-warn.svg"
+                                    },
+                                    {
+                                      "when": 3,
+                                      "then": "/assets/icons/cw-down.svg"
+                                    },
+                                    {
+                                      "when": 4,
+                                      "then": "/assets/icons/cw-up.svg"
+                                    }
+                                  ],
+                                  "default": "/assets/icons/cw-check.svg"
+                                }
+                              },
+                              "size": 18,
+                              "color": {
+                                "$switch": {
+                                  "value": {
+                                    "$repeatItem": {
+                                      "field": "value"
+                                    }
+                                  },
+                                  "cases": [
+                                    {
+                                      "when": 0,
+                                      "then": "var(--hmi-ok)"
+                                    },
+                                    {
+                                      "when": 1,
+                                      "then": "var(--hmi-warn)"
+                                    },
+                                    {
+                                      "when": 2,
+                                      "then": "var(--hmi-warn)"
+                                    },
+                                    {
+                                      "when": 3,
+                                      "then": "var(--hmi-fault)"
+                                    },
+                                    {
+                                      "when": 4,
+                                      "then": "var(--hmi-fault)"
+                                    }
+                                  ],
+                                  "default": "var(--hmi-text-muted)"
+                                }
+                              },
+                              "chrome": false
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          },
+                          {
+                            "id": "hm-row-l",
+                            "type": "Label",
+                            "name": "hm-row-l",
+                            "properties": {
+                              "typography": "body",
+                              "text": {
+                                "$switch": {
+                                  "value": {
+                                    "$repeatItem": {
+                                      "field": "value"
+                                    }
+                                  },
+                                  "cases": [
+                                    {
+                                      "when": 0,
+                                      "then": {
+                                        "$loc": "Correct"
+                                      }
+                                    },
+                                    {
+                                      "when": 1,
+                                      "then": {
+                                        "$loc": "Near lower limit"
+                                      }
+                                    },
+                                    {
+                                      "when": 2,
+                                      "then": {
+                                        "$loc": "Near upper limit"
+                                      }
+                                    },
+                                    {
+                                      "when": 3,
+                                      "then": {
+                                        "$loc": "Weight is too low"
+                                      }
+                                    },
+                                    {
+                                      "when": 4,
+                                      "then": {
+                                        "$loc": "Weight is too high"
+                                      }
+                                    }
+                                  ],
+                                  "default": ""
+                                }
+                              },
+                              "wrap": "truncate"
+                            },
+                            "layout": {
+                              "widthMode": "fill",
+                              "heightMode": "hug"
+                            }
+                          },
+                          {
+                            "id": "hm-row-v",
+                            "type": "Label",
+                            "name": "Deviation",
+                            "properties": {
+                              "typography": "body",
+                              "text": {
+                                "$stringExpr": {
+                                  "template": "{Signed(Thousands(Round(1)))} g",
+                                  "wildcards": {
+                                    "1": {
+                                      "$var": {
+                                        "path": "CW:Home/Last6Dev",
+                                        "repeatIndex": true
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "size": "15px",
+                              "weight": 600,
+                              "wrap": "truncate",
+                              "color": {
+                                "$switch": {
+                                  "value": {
+                                    "$repeatItem": {
+                                      "field": "value"
+                                    }
+                                  },
+                                  "cases": [
+                                    {
+                                      "when": 0,
+                                      "then": "var(--hmi-ok)"
+                                    },
+                                    {
+                                      "when": 1,
+                                      "then": "var(--hmi-warn)"
+                                    },
+                                    {
+                                      "when": 2,
+                                      "then": "var(--hmi-warn)"
+                                    },
+                                    {
+                                      "when": 3,
+                                      "then": "var(--hmi-fault)"
+                                    },
+                                    {
+                                      "when": 4,
+                                      "then": "var(--hmi-fault)"
+                                    }
+                                  ],
+                                  "default": "var(--hmi-text-muted)"
+                                }
+                              }
+                            },
+                            "layout": {
+                              "widthMode": "hug",
+                              "heightMode": "hug"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "icon": "house"
+}

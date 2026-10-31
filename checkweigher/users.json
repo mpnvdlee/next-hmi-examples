@@ -1,0 +1,41 @@
+{
+  "settings": {
+    "autoLoginName": "guest"
+  },
+  "groups": [
+    {
+      "id": "operator",
+      "label": "Operators"
+    },
+    {
+      "id": "admin",
+      "label": "Administrators"
+    }
+  ],
+  "users": [
+    {
+      "id": "guest",
+      "username": "guest",
+      "password": "",
+      "groups": [
+        "operator"
+      ]
+    },
+    {
+      "id": "admin",
+      "username": "admin",
+      "password": "",
+      "passwordHash": {
+        "version": 1,
+        "algorithm": "pbkdf2-sha256",
+        "iterations": 200000,
+        "salt": "8e46bc62711e4ce2d50f07a4716764d6",
+        "digest": "6ceb34b62b5ac41a1be09db401e1f7a53cae6f47a836e8c889f29d28b166376e"
+      },
+      "groups": [
+        "admin",
+        "operator"
+      ]
+    }
+  ]
+}

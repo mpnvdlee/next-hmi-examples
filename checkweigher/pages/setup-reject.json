@@ -1,0 +1,463 @@
+{
+  "id": "setup-reject",
+  "title": {
+    "$loc": "Reject Unit"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "surej",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "row",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "surej-nav",
+            "type": "$component:setup-nav",
+            "name": "Sections",
+            "properties": {
+              "calSub": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": {
+                    "$loc": "Zero needed"
+                  },
+                  "false": {
+                    "$loc": "OK"
+                  }
+                }
+              },
+              "rejectSub": {
+                "$loc": {
+                  "key": "Bin {1}/{2}",
+                  "wildcards": {
+                    "1": {
+                      "$var": {
+                        "path": "CW:IO/BinLevel"
+                      }
+                    },
+                    "2": {
+                      "$var": {
+                        "path": "CW:Params/BinCap"
+                      }
+                    }
+                  }
+                }
+              },
+              "calSubColor": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              },
+              "rejectSubColor": {
+                "$if": {
+                  "condition": {
+                    "$var": {
+                      "path": "CW:Alarms/BinFull"
+                    }
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              }
+            },
+            "layout": {
+              "widthMode": "fixed",
+              "heightMode": "hug",
+              "width": "156px"
+            }
+          },
+          {
+            "id": "surej-body",
+            "type": "Container",
+            "name": "Section",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent",
+              "overflow": "scroll"
+            },
+            "layout": {
+              "direction": "column",
+              "gap": "8px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fill",
+              "minWidth": "0"
+            },
+            "children": [
+              {
+                "id": "surej-bh",
+                "type": "$component:section-header",
+                "name": "Section header",
+                "properties": {
+                  "title": {
+                    "$loc": "REJECT UNIT"
+                  },
+                  "subtitle": {
+                    "$loc": "Pusher Y1"
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "32px"
+                }
+              },
+              {
+                "id": "sur-delay",
+                "type": "$component:param-row",
+                "name": "Reject delay",
+                "properties": {
+                  "label": {
+                    "$loc": "Reject delay"
+                  },
+                  "hint": {
+                    "$loc": "Load cell to pusher"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/RejDelay"
+                    }
+                  },
+                  "unit": "ms",
+                  "decimals": 0,
+                  "min": 50,
+                  "max": 2000,
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "rejDelay"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "sur-pulse",
+                "type": "$component:param-row",
+                "name": "Pusher pulse",
+                "properties": {
+                  "label": {
+                    "$loc": "Pusher pulse"
+                  },
+                  "hint": {
+                    "$loc": "Cylinder on-time"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/RejPulse"
+                    }
+                  },
+                  "unit": "ms",
+                  "decimals": 0,
+                  "min": 20,
+                  "max": 500,
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "rejPulse"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "sur-cap",
+                "type": "$component:param-row",
+                "name": "Reject bin capacity",
+                "properties": {
+                  "label": {
+                    "$loc": "Reject bin capacity"
+                  },
+                  "hint": {
+                    "$loc": "Cases until bin-full alarm"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/BinCap"
+                    }
+                  },
+                  "unit": {
+                    "$loc": "cases"
+                  },
+                  "decimals": 0,
+                  "min": 5,
+                  "max": 200,
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "binCap"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "sur-level",
+                "type": "$component:param-info",
+                "name": "Bin level",
+                "properties": {
+                  "label": {
+                    "$loc": "Bin level"
+                  },
+                  "hint": {
+                    "$loc": "Rejected cases since emptied"
+                  },
+                  "valueText": {
+                    "$stringExpr": {
+                      "template": "{1} / {2}",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:IO/BinLevel"
+                          }
+                        },
+                        "2": {
+                          "$var": {
+                            "path": "CW:Params/BinCap"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "unit": "",
+                  "locked": false
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "sur-act",
+                "type": "Container",
+                "name": "Actions",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "row",
+                  "gap": "12px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "radius": "0",
+                  "paddingTop": "4px",
+                  "paddingRight": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "widthMode": "fill",
+                  "heightMode": "hug"
+                },
+                "children": [
+                  {
+                    "id": "sur-empty",
+                    "type": "Button",
+                    "name": "Bin Emptied",
+                    "properties": {
+                      "label": {
+                        "$loc": "BIN EMPTIED"
+                      },
+                      "variant": "outline",
+                      "fill": "var(--hmi-accent)",
+                      "color": "#111316",
+                      "radius": "10px",
+                      "borderWidth": 0,
+                      "actions": {
+                        "onPress": [
+                          {
+                            "type": "writeDataVariable",
+                            "target": {
+                              "$var": {
+                                "path": "CW:IO/BinLevel"
+                              }
+                            },
+                            "value": 0
+                          },
+                          {
+                            "type": "writeDataVariable",
+                            "target": {
+                              "$var": {
+                                "path": "CW:Alarms/BinValue"
+                              }
+                            },
+                            "value": "0 / 30"
+                          },
+                          {
+                            "type": "writeDataVariable",
+                            "target": {
+                              "$var": {
+                                "path": "CW:Alarms/BinFull"
+                              }
+                            },
+                            "value": false
+                          },
+                          {
+                            "type": "showToast",
+                            "message": {
+                              "$loc": "Reject bin confirmed empty"
+                            },
+                            "severity": "success",
+                            "discard": "auto",
+                            "duration": 2600
+                          }
+                        ]
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "56px"
+                    }
+                  },
+                  {
+                    "id": "sur-test",
+                    "type": "Button",
+                    "name": "Test Pusher",
+                    "properties": {
+                      "label": {
+                        "$loc": "TEST PUSHER"
+                      },
+                      "variant": "outline",
+                      "fill": "var(--hmi-surface-raised)",
+                      "color": "var(--hmi-text)",
+                      "radius": "10px",
+                      "borderWidth": 0,
+                      "actions": {
+                        "onPress": [
+                          {
+                            "type": "writeDataVariable",
+                            "target": {
+                              "$var": {
+                                "path": "CW:IO/PusherTest"
+                              }
+                            },
+                            "value": true
+                          },
+                          {
+                            "type": "showToast",
+                            "message": {
+                              "$loc": "Pusher test requested"
+                            },
+                            "severity": "info",
+                            "discard": "auto",
+                            "duration": 2600
+                          }
+                        ]
+                      },
+                      "interactable": {
+                        "$compare": {
+                          "left": {
+                            "$var": {
+                              "path": "CW:Line/State"
+                            }
+                          },
+                          "operator": "!==",
+                          "right": 1
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "56px"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

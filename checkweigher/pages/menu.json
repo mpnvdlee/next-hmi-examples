@@ -1,0 +1,452 @@
+{
+  "id": "menu",
+  "title": {
+    "$loc": "Menu"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "mn",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "column",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "mn-head",
+            "type": "Container",
+            "name": "Header",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "14px",
+              "wrap": false,
+              "align": "center",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "48px"
+            },
+            "children": [
+              {
+                "id": "mn-t",
+                "type": "Label",
+                "name": "mn-t",
+                "properties": {
+                  "typography": "subheading",
+                  "text": {
+                    "$loc": "MENU"
+                  },
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "mn-sp",
+                "type": "StretchSpacer",
+                "name": "Spacer",
+                "properties": {
+                  "mode": "ratio",
+                  "ratio": 1
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "grow": 1,
+                  "minWidth": "auto"
+                }
+              },
+              {
+                "id": "mn-u",
+                "type": "Label",
+                "name": "mn-u",
+                "properties": {
+                  "typography": "caption",
+                  "text": {
+                    "$loc": {
+                      "key": "Logged in as {1}",
+                      "wildcards": {
+                        "1": {
+                          "$if": {
+                            "condition": {
+                              "$userGroups": {
+                                "groups": [
+                                  "admin"
+                                ]
+                              }
+                            },
+                            "true": {
+                              "$loc": "ADMIN"
+                            },
+                            "false": {
+                              "$loc": "OPERATOR"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "color": "var(--hmi-text-muted)",
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              }
+            ]
+          },
+          {
+            "id": "mn-r1",
+            "type": "Container",
+            "name": "Row 1",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "16px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fill"
+            },
+            "children": [
+              {
+                "id": "mn-home",
+                "type": "$component:menu-tile",
+                "name": "Home",
+                "properties": {
+                  "icon": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-home.svg"
+                    }
+                  },
+                  "label": {
+                    "$loc": "HOME"
+                  },
+                  "detail": {
+                    "$loc": "Run screen"
+                  },
+                  "iconColor": "var(--hmi-accent)",
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "home"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fill"
+                }
+              },
+              {
+                "id": "mn-recipes",
+                "type": "$component:menu-tile",
+                "name": "Recipes",
+                "properties": {
+                  "icon": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-orders.svg"
+                    }
+                  },
+                  "label": {
+                    "$loc": "RECIPES"
+                  },
+                  "detail": {
+                    "$loc": {
+                      "key": "Active {1}",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:Product/RecipeId"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "iconColor": "var(--hmi-accent)",
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "recipes"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fill"
+                }
+              },
+              {
+                "id": "mn-setup",
+                "type": "$component:menu-tile",
+                "name": "Setup",
+                "properties": {
+                  "icon": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-setup.svg"
+                    }
+                  },
+                  "label": {
+                    "$loc": "SETUP"
+                  },
+                  "detail": {
+                    "$if": {
+                      "condition": {
+                        "$userGroups": {
+                          "groups": [
+                            "admin"
+                          ]
+                        }
+                      },
+                      "true": {
+                        "$loc": "Parameters"
+                      },
+                      "false": {
+                        "$loc": "Login required"
+                      }
+                    }
+                  },
+                  "iconColor": {
+                    "$if": {
+                      "condition": {
+                        "$userGroups": {
+                          "groups": [
+                            "admin"
+                          ]
+                        }
+                      },
+                      "true": "var(--hmi-accent)",
+                      "false": "var(--hmi-text-muted)"
+                    }
+                  },
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "if",
+                        "condition": {
+                          "$userGroups": {
+                            "groups": [
+                              "admin"
+                            ]
+                          }
+                        },
+                        "then": [
+                          {
+                            "type": "navigateToPage",
+                            "pageId": "setup"
+                          }
+                        ],
+                        "else": [
+                          {
+                            "type": "openDialog",
+                            "pageId": "access",
+                            "componentProperties": {
+                              "next": "setup"
+                            },
+                            "size": "auto",
+                            "placement": "center",
+                            "backdrop": "dim"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fill"
+                }
+              }
+            ]
+          },
+          {
+            "id": "mn-r2",
+            "type": "Container",
+            "name": "Row 2",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "16px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fill"
+            },
+            "children": [
+              {
+                "id": "mn-io",
+                "type": "$component:menu-tile",
+                "name": "I/O",
+                "properties": {
+                  "icon": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-io.svg"
+                    }
+                  },
+                  "label": {
+                    "$loc": "I/O"
+                  },
+                  "detail": {
+                    "$loc": "Diagnostics"
+                  },
+                  "iconColor": "var(--hmi-accent)",
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "io"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fill"
+                }
+              },
+              {
+                "id": "mn-stats",
+                "type": "$component:menu-tile",
+                "name": "Statistics & Trends",
+                "properties": {
+                  "icon": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-stats.svg"
+                    }
+                  },
+                  "label": {
+                    "$loc": "STATISTICS & TRENDS"
+                  },
+                  "detail": {
+                    "$loc": {
+                      "key": "{Thousands(1)} cases",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:Stats/Total"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "iconColor": "var(--hmi-accent)",
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "stats"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fill"
+                }
+              },
+              {
+                "id": "mn-alarms",
+                "type": "$component:menu-tile",
+                "name": "Alarms",
+                "properties": {
+                  "icon": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-bell.svg"
+                    }
+                  },
+                  "label": {
+                    "$loc": "ALARMS"
+                  },
+                  "detail": {
+                    "$loc": {
+                      "key": "{1} active",
+                      "wildcards": {
+                        "1": {
+                          "$alarmCount": {
+                            "filter": "all"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "iconColor": "var(--hmi-accent)",
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "alarms"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fill"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "icon": "squares-four"
+}

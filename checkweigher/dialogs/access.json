@@ -1,0 +1,598 @@
+{
+  "id": "access",
+  "title": {
+    "$loc": "Access level"
+  },
+  "showModalHeader": false,
+  "closeOnBackgroundPress": true,
+  "componentProperties": {
+    "next": {
+      "type": "string",
+      "format": "page",
+      "label": "Page after login",
+      "description": "Where an ADMIN login goes next; empty stays put.",
+      "defaultValue": ""
+    }
+  },
+  "sections": {
+    "content": [
+      {
+        "id": "ac",
+        "type": "Container",
+        "name": "ac",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "column",
+          "gap": "16px",
+          "align": "stretch",
+          "justify": "flex-start",
+          "widthMode": "fixed",
+          "heightMode": "hug",
+          "width": "520px"
+        },
+        "children": [
+          {
+            "id": "ac-head",
+            "type": "Container",
+            "name": "ac-head",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "12px",
+              "align": "flex-start",
+              "justify": "flex-start",
+              "widthMode": "fill",
+              "heightMode": "hug"
+            },
+            "children": [
+              {
+                "id": "ac-titles",
+                "type": "Container",
+                "name": "ac-titles",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "2px",
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "ac-title",
+                    "type": "Label",
+                    "name": "ac-title",
+                    "properties": {
+                      "typography": "subheading",
+                      "text": {
+                        "$loc": "ACCESS LEVEL"
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "ac-hint",
+                    "type": "Label",
+                    "name": "ac-hint",
+                    "properties": {
+                      "typography": "caption",
+                      "text": {
+                        "$if": {
+                          "condition": {
+                            "$userGroups": {
+                              "groups": [
+                                "admin"
+                              ]
+                            }
+                          },
+                          "true": {
+                            "$loc": "Logged in as ADMIN"
+                          },
+                          "false": {
+                            "$if": {
+                              "condition": {
+                                "$compare": {
+                                  "left": {
+                                    "$componentProp": "next"
+                                  },
+                                  "operator": "!==",
+                                  "right": ""
+                                }
+                              },
+                              "true": {
+                                "$loc": "Setup is protected · log in as ADMIN"
+                              },
+                              "false": {
+                                "$loc": "Logged in as OPERATOR"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "color": "var(--hmi-text-muted)"
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ac-close",
+                "type": "Button",
+                "name": "Close",
+                "properties": {
+                  "label": "",
+                  "iconName": {
+                    "$static": {
+                      "type": "builtin",
+                      "name": "x"
+                    }
+                  },
+                  "variant": "outline",
+                  "borderWidth": 0,
+                  "fill": "transparent",
+                  "color": "var(--hmi-text)",
+                  "iconSize": 22,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "closePageOverlay",
+                        "pageId": "access"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fixed",
+                  "heightMode": "fixed",
+                  "width": "44px",
+                  "height": "44px"
+                }
+              }
+            ]
+          },
+          {
+            "id": "ac-choices",
+            "type": "Container",
+            "name": "ac-choices",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "12px",
+              "align": "center",
+              "justify": "flex-start",
+              "widthMode": "fill",
+              "heightMode": "hug"
+            },
+            "children": [
+              {
+                "id": "ac-operator",
+                "type": "ButtonContainer",
+                "name": "ac-operator",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)",
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "closePageOverlay",
+                        "pageId": "access"
+                      },
+                      {
+                        "type": "if",
+                        "condition": {
+                          "$userGroups": {
+                            "groups": [
+                              "admin"
+                            ]
+                          }
+                        },
+                        "then": [
+                          {
+                            "type": "logoutUser"
+                          },
+                          {
+                            "type": "showToast",
+                            "message": {
+                              "$loc": "Logged out · OPERATOR level"
+                            },
+                            "severity": "info",
+                            "discard": "auto",
+                            "duration": 2600
+                          },
+                          {
+                            "type": "if",
+                            "condition": {
+                              "$or": [
+                                {
+                                  "$pageIsActive": {
+                                    "page": "setup-product"
+                                  }
+                                },
+                                {
+                                  "$pageIsActive": {
+                                    "page": "setup-cal"
+                                  }
+                                },
+                                {
+                                  "$pageIsActive": {
+                                    "page": "setup-reject"
+                                  }
+                                },
+                                {
+                                  "$pageIsActive": {
+                                    "page": "setup-conveyor"
+                                  }
+                                },
+                                {
+                                  "$pageIsActive": {
+                                    "page": "setup-save"
+                                  }
+                                }
+                              ]
+                            },
+                            "then": [
+                              {
+                                "type": "navigateToPage",
+                                "pageId": "home"
+                              }
+                            ],
+                            "else": []
+                          }
+                        ],
+                        "else": [
+                          {
+                            "type": "showToast",
+                            "message": {
+                              "$loc": "OPERATOR level active"
+                            },
+                            "severity": "info",
+                            "discard": "auto",
+                            "duration": 2600
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "border": {
+                    "$if": {
+                      "condition": {
+                        "$not": {
+                          "value": {
+                            "$userGroups": {
+                              "groups": [
+                                "admin"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "true": "2px solid var(--hmi-accent)",
+                      "false": "2px solid transparent"
+                    }
+                  }
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "6px",
+                  "wrap": false,
+                  "align": "center",
+                  "justify": "center",
+                  "radius": "12px",
+                  "paddingTop": "0px",
+                  "paddingRight": "8px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "8px",
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "150px"
+                },
+                "children": [
+                  {
+                    "id": "ac-operator-i",
+                    "type": "Icon",
+                    "name": "ac-operator icon",
+                    "properties": {
+                      "iconName": {
+                        "$static": {
+                          "type": "custom",
+                          "path": "icons/cw-user.svg"
+                        }
+                      },
+                      "size": 40,
+                      "color": {
+                        "$if": {
+                          "condition": {
+                            "$not": {
+                              "value": {
+                                "$userGroups": {
+                                  "groups": [
+                                    "admin"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "true": "var(--hmi-accent)",
+                          "false": "var(--hmi-text)"
+                        }
+                      },
+                      "chrome": false
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "ac-operator-l",
+                    "type": "Label",
+                    "name": "ac-operator title",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$loc": "OPERATOR"
+                      },
+                      "color": {
+                        "$if": {
+                          "condition": {
+                            "$not": {
+                              "value": {
+                                "$userGroups": {
+                                  "groups": [
+                                    "admin"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "true": "var(--hmi-accent)",
+                          "false": "var(--hmi-text)"
+                        }
+                      },
+                      "weight": 700,
+                      "align": "center",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "ac-operator-s",
+                    "type": "Label",
+                    "name": "ac-operator detail",
+                    "properties": {
+                      "typography": "caption",
+                      "text": {
+                        "$loc": "Run, monitor, acknowledge"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "align": "center",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ac-admin",
+                "type": "ButtonContainer",
+                "name": "ac-admin",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)",
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "closePageOverlay",
+                        "pageId": "access"
+                      },
+                      {
+                        "type": "if",
+                        "condition": {
+                          "$userGroups": {
+                            "groups": [
+                              "admin"
+                            ]
+                          }
+                        },
+                        "then": [
+                          {
+                            "type": "if",
+                            "condition": {
+                              "$compare": {
+                                "left": {
+                                  "$componentProp": "next"
+                                },
+                                "operator": "!==",
+                                "right": ""
+                              }
+                            },
+                            "then": [
+                              {
+                                "type": "navigateToPage",
+                                "pageId": {
+                                  "$componentProp": "next"
+                                }
+                              }
+                            ],
+                            "else": []
+                          }
+                        ],
+                        "else": [
+                          {
+                            "type": "openDialog",
+                            "pageId": "pin",
+                            "componentProperties": {
+                              "next": {
+                                "$componentProp": "next"
+                              }
+                            },
+                            "size": "auto",
+                            "placement": "center",
+                            "backdrop": "dim"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "border": {
+                    "$if": {
+                      "condition": {
+                        "$userGroups": {
+                          "groups": [
+                            "admin"
+                          ]
+                        }
+                      },
+                      "true": "2px solid var(--hmi-accent)",
+                      "false": "2px solid transparent"
+                    }
+                  }
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "6px",
+                  "wrap": false,
+                  "align": "center",
+                  "justify": "center",
+                  "radius": "12px",
+                  "paddingTop": "0px",
+                  "paddingRight": "8px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "8px",
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "150px"
+                },
+                "children": [
+                  {
+                    "id": "ac-admin-i",
+                    "type": "Icon",
+                    "name": "ac-admin icon",
+                    "properties": {
+                      "iconName": {
+                        "$static": {
+                          "type": "custom",
+                          "path": "icons/cw-lock.svg"
+                        }
+                      },
+                      "size": 40,
+                      "color": {
+                        "$if": {
+                          "condition": {
+                            "$userGroups": {
+                              "groups": [
+                                "admin"
+                              ]
+                            }
+                          },
+                          "true": "var(--hmi-accent)",
+                          "false": "var(--hmi-text)"
+                        }
+                      },
+                      "chrome": false
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "ac-admin-l",
+                    "type": "Label",
+                    "name": "ac-admin title",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$loc": "ADMIN"
+                      },
+                      "color": {
+                        "$if": {
+                          "condition": {
+                            "$userGroups": {
+                              "groups": [
+                                "admin"
+                              ]
+                            }
+                          },
+                          "true": "var(--hmi-accent)",
+                          "false": "var(--hmi-text)"
+                        }
+                      },
+                      "weight": 700,
+                      "align": "center",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "ac-admin-s",
+                    "type": "Label",
+                    "name": "ac-admin detail",
+                    "properties": {
+                      "typography": "caption",
+                      "text": {
+                        "$loc": "Setup & parameters · PIN"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "align": "center",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "ac-foot",
+            "type": "Label",
+            "name": "ac-foot",
+            "properties": {
+              "typography": "caption",
+              "text": {
+                "$loc": "Prototype PIN for ADMIN: 1234"
+              },
+              "color": "var(--hmi-text-muted)"
+            },
+            "layout": {
+              "widthMode": "fill",
+              "heightMode": "hug"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "id": "setup-conveyor",
+  "title": {
+    "$loc": "Conveyor"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "sucon",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "row",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "sucon-nav",
+            "type": "$component:setup-nav",
+            "name": "Sections",
+            "properties": {
+              "calSub": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": {
+                    "$loc": "Zero needed"
+                  },
+                  "false": {
+                    "$loc": "OK"
+                  }
+                }
+              },
+              "rejectSub": {
+                "$loc": {
+                  "key": "Bin {1}/{2}",
+                  "wildcards": {
+                    "1": {
+                      "$var": {
+                        "path": "CW:IO/BinLevel"
+                      }
+                    },
+                    "2": {
+                      "$var": {
+                        "path": "CW:Params/BinCap"
+                      }
+                    }
+                  }
+                }
+              },
+              "calSubColor": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              },
+              "rejectSubColor": {
+                "$if": {
+                  "condition": {
+                    "$var": {
+                      "path": "CW:Alarms/BinFull"
+                    }
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              }
+            },
+            "layout": {
+              "widthMode": "fixed",
+              "heightMode": "hug",
+              "width": "156px"
+            }
+          },
+          {
+            "id": "sucon-body",
+            "type": "Container",
+            "name": "Section",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent",
+              "overflow": "scroll"
+            },
+            "layout": {
+              "direction": "column",
+              "gap": "8px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fill",
+              "minWidth": "0"
+            },
+            "children": [
+              {
+                "id": "sucon-bh",
+                "type": "$component:section-header",
+                "name": "Section header",
+                "properties": {
+                  "title": {
+                    "$loc": "CONVEYOR"
+                  },
+                  "subtitle": {
+                    "$loc": "Weigh belt M1"
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "32px"
+                }
+              },
+              {
+                "id": "suv-speed",
+                "type": "$component:param-row",
+                "name": "Belt speed",
+                "properties": {
+                  "label": {
+                    "$loc": "Belt speed"
+                  },
+                  "hint": {
+                    "$loc": "Weigh conveyor"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/Speed"
+                    }
+                  },
+                  "unit": "m/s",
+                  "decimals": 2,
+                  "min": 0.2,
+                  "max": 2,
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "speed"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "suv-gap",
+                "type": "$component:param-row",
+                "name": "Minimum case gap",
+                "properties": {
+                  "label": {
+                    "$loc": "Minimum case gap"
+                  },
+                  "hint": {
+                    "$loc": "Required spacing at infeed"
+                  },
+                  "value": {
+                    "$var": {
+                      "path": "CW:Params/Gap"
+                    }
+                  },
+                  "unit": "mm",
+                  "decimals": 0,
+                  "min": 50,
+                  "max": 1000,
+                  "valueColor": {
+                    "$if": {
+                      "condition": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "gap"
+                        }
+                      },
+                      "true": "var(--hmi-warn)",
+                      "false": "var(--hmi-text)"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "suv-dir",
+                "type": "$component:param-info",
+                "name": "Direction",
+                "properties": {
+                  "label": {
+                    "$loc": "Direction"
+                  },
+                  "hint": {
+                    "$loc": "Set at commissioning"
+                  },
+                  "valueText": "L → R",
+                  "unit": "",
+                  "locked": true
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              },
+              {
+                "id": "suv-motor",
+                "type": "$component:param-info",
+                "name": "Motor current",
+                "properties": {
+                  "label": {
+                    "$loc": "Motor current"
+                  },
+                  "hint": {
+                    "$loc": "Live"
+                  },
+                  "valueText": {
+                    "$stringExpr": {
+                      "template": "{Round2(1)}",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:IO/MotorCurrent"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "unit": "A",
+                  "locked": false
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "58px"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

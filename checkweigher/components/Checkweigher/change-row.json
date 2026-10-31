@@ -1,0 +1,116 @@
+{
+  "name": "Change row",
+  "description": "One unsaved setting: its name, the saved value and the live one.",
+  "category": "Checkweigher",
+  "icon": {
+    "type": "builtin",
+    "name": "arrow-right"
+  },
+  "componentProperties": {
+    "label": {
+      "type": "string",
+      "label": "Setting"
+    },
+    "saved": {
+      "type": "string",
+      "label": "Saved value, formatted"
+    },
+    "live": {
+      "type": "string",
+      "label": "Live value, formatted"
+    }
+  },
+  "children": [
+    {
+      "id": "cr",
+      "type": "Container",
+      "name": "Change row",
+      "properties": {
+        "showWhenEmpty": true,
+        "background": "transparent"
+      },
+      "layout": {
+        "direction": "row",
+        "gap": "8px",
+        "wrap": false,
+        "align": "center",
+        "justify": "flex-start",
+        "radius": "0",
+        "paddingTop": "6px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "widthMode": "fill",
+        "heightMode": "hug"
+      },
+      "children": [
+        {
+          "id": "cr-l",
+          "type": "Label",
+          "name": "Setting",
+          "properties": {
+            "typography": "body",
+            "text": {
+              "$componentProp": "label"
+            },
+            "wrap": "truncate"
+          },
+          "layout": {
+            "widthMode": "fill",
+            "heightMode": "hug"
+          }
+        },
+        {
+          "id": "cr-s",
+          "type": "Label",
+          "name": "Saved",
+          "properties": {
+            "typography": "body",
+            "text": {
+              "$componentProp": "saved"
+            },
+            "wrap": "truncate",
+            "color": "var(--hmi-text-muted)"
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        },
+        {
+          "id": "cr-a",
+          "type": "Label",
+          "name": "Arrow",
+          "properties": {
+            "typography": "body",
+            "text": "→",
+            "wrap": "truncate",
+            "color": "var(--hmi-text-muted)"
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        },
+        {
+          "id": "cr-v",
+          "type": "Label",
+          "name": "Live",
+          "properties": {
+            "typography": "body",
+            "text": {
+              "$componentProp": "live"
+            },
+            "wrap": "truncate",
+            "color": "var(--hmi-warn)",
+            "weight": 600
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        }
+      ]
+    }
+  ]
+}

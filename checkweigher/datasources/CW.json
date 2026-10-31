@@ -1,0 +1,624 @@
+{
+  "type": "static",
+  "name": "CW",
+  "settings": {},
+  "variables": [
+    {
+      "kind": "folder",
+      "name": "Line",
+      "children": [
+        {
+          "kind": "variable",
+          "display_name": "Initialized",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "State",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true,
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "kind": "folder",
+      "name": "Product",
+      "children": [
+        {
+          "kind": "variable",
+          "display_name": "RecipeId",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Name",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Target",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 100,
+          "max": 20000
+        },
+        {
+          "kind": "variable",
+          "display_name": "Planned",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true,
+          "min": 0,
+          "max": 1000000
+        }
+      ]
+    },
+    {
+      "kind": "folder",
+      "name": "Params",
+      "children": [
+        {
+          "kind": "variable",
+          "display_name": "Lower",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": -500,
+          "max": -1
+        },
+        {
+          "kind": "variable",
+          "display_name": "Upper",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 1,
+          "max": 500
+        },
+        {
+          "kind": "variable",
+          "display_name": "Band",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 0,
+          "max": 100
+        },
+        {
+          "kind": "variable",
+          "display_name": "Tare",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 0,
+          "max": 5000
+        },
+        {
+          "kind": "variable",
+          "display_name": "Filter",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 50,
+          "max": 1000
+        },
+        {
+          "kind": "variable",
+          "display_name": "ZeroInt",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 0,
+          "max": 240
+        },
+        {
+          "kind": "variable",
+          "display_name": "RejDelay",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 50,
+          "max": 2000
+        },
+        {
+          "kind": "variable",
+          "display_name": "RejPulse",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 20,
+          "max": 500
+        },
+        {
+          "kind": "variable",
+          "display_name": "BinCap",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 5,
+          "max": 200
+        },
+        {
+          "kind": "variable",
+          "display_name": "Speed",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 0.2,
+          "max": 2
+        },
+        {
+          "kind": "variable",
+          "display_name": "Gap",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "min": 50,
+          "max": 1000
+        }
+      ]
+    },
+    {
+      "kind": "folder",
+      "name": "Last",
+      "children": [
+        {
+          "kind": "variable",
+          "display_name": "Has",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "N",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Dev",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Weight",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Res",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Time",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "kind": "folder",
+      "name": "Home",
+      "children": [
+        {
+          "kind": "variable",
+          "display_name": "Last6Res",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Last6Dev",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Rej6",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Ok6",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "kind": "folder",
+      "name": "Stats",
+      "children": [
+        {
+          "kind": "variable",
+          "display_name": "Total",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Accepted",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Rejected",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "AccPct",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "RejPct",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Mean",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "MeanDev",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "StdDev",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Min",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Max",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Throughput",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Last20Dev",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Last20Res",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Hist",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        }
+      ]
+    },
+    {
+      "kind": "folder",
+      "name": "Trend",
+      "children": [
+        {
+          "kind": "variable",
+          "display_name": "Last20Rej",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "MeanLast20",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "RejLast20",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "HourDev",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "HourRej",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "MeanHour",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "RejHour",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "ShiftDev",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "ShiftRej",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true,
+          "is_array": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "MeanShift",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "RejShift",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "ShiftX0",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "ShiftX1",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "kind": "folder",
+      "name": "IO",
+      "children": [
+        {
+          "kind": "variable",
+          "display_name": "Conveyor",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "PE1",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "PE2",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "PE3",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Pusher",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "PusherTest",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "BinLevel",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "BeltSpeed",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "MotorCurrent",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "LoadRaw",
+          "data_type": "Int32",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "LoadSignal",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "ZeroOffset",
+          "data_type": "Double",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "LastZero",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        }
+      ]
+    },
+    {
+      "kind": "folder",
+      "name": "Alarms",
+      "children": [
+        {
+          "kind": "variable",
+          "display_name": "Halt",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "HaltValue",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "BinFull",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "BinValue",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "Drift",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "DriftValue",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "ZeroDue",
+          "data_type": "Boolean",
+          "enabled": true,
+          "writable": true
+        },
+        {
+          "kind": "variable",
+          "display_name": "ZeroValue",
+          "data_type": "String",
+          "enabled": true,
+          "writable": true
+        }
+      ]
+    }
+  ]
+}

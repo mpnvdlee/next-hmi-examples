@@ -1,0 +1,1023 @@
+{
+  "id": "stats",
+  "title": {
+    "$loc": "Statistics"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "st",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "column",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "st-head",
+            "type": "Container",
+            "name": "Header",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "14px",
+              "wrap": false,
+              "align": "center",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "48px"
+            },
+            "children": [
+              {
+                "id": "st-home",
+                "type": "Button",
+                "name": "Home",
+                "properties": {
+                  "label": "",
+                  "variant": "outline",
+                  "fill": "var(--hmi-surface)",
+                  "color": "var(--hmi-text)",
+                  "radius": "10px",
+                  "iconName": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-home.svg"
+                    }
+                  },
+                  "iconSize": 24,
+                  "borderWidth": 0,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "home"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fixed",
+                  "heightMode": "fixed",
+                  "width": "48px",
+                  "height": "48px"
+                }
+              },
+              {
+                "id": "st-t",
+                "type": "Label",
+                "name": "st-t",
+                "properties": {
+                  "typography": "subheading",
+                  "text": {
+                    "$loc": "STATISTICS"
+                  },
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "st-r",
+                "type": "Label",
+                "name": "st-r",
+                "properties": {
+                  "typography": "caption",
+                  "text": {
+                    "$loc": {
+                      "key": "Recipe {1}",
+                      "wildcards": {
+                        "1": {
+                          "$var": {
+                            "path": "CW:Product/RecipeId"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "color": "var(--hmi-text-muted)",
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "st-sp",
+                "type": "StretchSpacer",
+                "name": "Spacer",
+                "properties": {
+                  "mode": "ratio",
+                  "ratio": 1
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "grow": 1,
+                  "minWidth": "auto"
+                }
+              },
+              {
+                "id": "st-tab-s",
+                "type": "Button",
+                "name": "Statistics",
+                "properties": {
+                  "label": {
+                    "$loc": "STATISTICS"
+                  },
+                  "variant": "outline",
+                  "fill": "var(--hmi-accent)",
+                  "color": "#111316",
+                  "radius": "10px",
+                  "borderWidth": 0,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "stats"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "fixed",
+                  "height": "48px"
+                }
+              },
+              {
+                "id": "st-tab-t",
+                "type": "Button",
+                "name": "Trends",
+                "properties": {
+                  "label": {
+                    "$loc": "TRENDS"
+                  },
+                  "variant": "outline",
+                  "fill": "var(--hmi-surface)",
+                  "color": "var(--hmi-text)",
+                  "radius": "10px",
+                  "borderWidth": 0,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "trends"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "fixed",
+                  "height": "48px"
+                }
+              }
+            ]
+          },
+          {
+            "id": "st-row1",
+            "type": "Container",
+            "name": "Tiles 1",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "16px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "hug"
+            },
+            "children": [
+              {
+                "id": "st-total",
+                "type": "Container",
+                "name": "Total Cases",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "0px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "space-between",
+                  "radius": "12px",
+                  "paddingTop": "8px",
+                  "paddingRight": "14px",
+                  "paddingBottom": "8px",
+                  "paddingLeft": "14px",
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "78px",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "st-total-c",
+                    "type": "Label",
+                    "name": "st-total-c",
+                    "properties": {
+                      "typography": "label",
+                      "text": {
+                        "$loc": "TOTAL CASES"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-total-v",
+                    "type": "Label",
+                    "name": "st-total-v",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$stringExpr": {
+                          "template": "{Thousands(Round(1))}",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Stats/Total"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "size": "28px",
+                      "weight": 700,
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-total-s",
+                    "type": "Label",
+                    "name": "st-total-s",
+                    "properties": {
+                      "typography": "caption",
+                      "text": {
+                        "$loc": {
+                          "key": "of {Thousands(1)} planned",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Product/Planned"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "st-acc",
+                "type": "Container",
+                "name": "Accepted",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "0px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "space-between",
+                  "radius": "12px",
+                  "paddingTop": "8px",
+                  "paddingRight": "14px",
+                  "paddingBottom": "8px",
+                  "paddingLeft": "14px",
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "78px",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "st-acc-c",
+                    "type": "Label",
+                    "name": "st-acc-c",
+                    "properties": {
+                      "typography": "label",
+                      "text": {
+                        "$loc": "ACCEPTED"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-acc-v",
+                    "type": "Label",
+                    "name": "st-acc-v",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$stringExpr": {
+                          "template": "{Thousands(Round(1))}",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Stats/Accepted"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "size": "28px",
+                      "weight": 700,
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-acc-s",
+                    "type": "Label",
+                    "name": "st-acc-s",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$loc": {
+                          "key": "{Thousands(Round2(1))} % of total",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Stats/AccPct"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "size": "13px",
+                      "weight": 400,
+                      "wrap": "truncate",
+                      "color": "var(--hmi-ok)"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "st-rej",
+                "type": "Container",
+                "name": "Rejected",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "0px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "space-between",
+                  "radius": "12px",
+                  "paddingTop": "8px",
+                  "paddingRight": "14px",
+                  "paddingBottom": "8px",
+                  "paddingLeft": "14px",
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "78px",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "st-rej-c",
+                    "type": "Label",
+                    "name": "st-rej-c",
+                    "properties": {
+                      "typography": "label",
+                      "text": {
+                        "$loc": "REJECTED"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-rej-v",
+                    "type": "Label",
+                    "name": "st-rej-v",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$stringExpr": {
+                          "template": "{Thousands(Round(1))}",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Stats/Rejected"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "size": "28px",
+                      "weight": 700,
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-rej-s",
+                    "type": "Label",
+                    "name": "st-rej-s",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$loc": {
+                          "key": "{Thousands(Round2(1))} % reject rate",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Stats/RejPct"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "size": "13px",
+                      "weight": 400,
+                      "wrap": "truncate",
+                      "color": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$var": {
+                                  "path": "CW:Stats/RejPct"
+                                }
+                              },
+                              "operator": ">",
+                              "right": 2
+                            }
+                          },
+                          "true": "var(--hmi-fault)",
+                          "false": {
+                            "$if": {
+                              "condition": {
+                                "$compare": {
+                                  "left": {
+                                    "$var": {
+                                      "path": "CW:Stats/RejPct"
+                                    }
+                                  },
+                                  "operator": ">",
+                                  "right": 1
+                                }
+                              },
+                              "true": "var(--hmi-warn)",
+                              "false": "var(--hmi-text-muted)"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "st-row2",
+            "type": "Container",
+            "name": "Tiles 2",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "16px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "hug"
+            },
+            "children": [
+              {
+                "id": "st-mean",
+                "type": "Container",
+                "name": "Mean Weight",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "0px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "space-between",
+                  "radius": "12px",
+                  "paddingTop": "8px",
+                  "paddingRight": "14px",
+                  "paddingBottom": "8px",
+                  "paddingLeft": "14px",
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "78px",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "st-mean-c",
+                    "type": "Label",
+                    "name": "st-mean-c",
+                    "properties": {
+                      "typography": "label",
+                      "text": {
+                        "$loc": "MEAN WEIGHT"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-mean-v",
+                    "type": "Label",
+                    "name": "st-mean-v",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$var": {
+                                  "path": "CW:Stats/Total"
+                                }
+                              },
+                              "operator": ">",
+                              "right": 0
+                            }
+                          },
+                          "true": {
+                            "$stringExpr": {
+                              "template": "{Thousands(Round1(1))} g",
+                              "wildcards": {
+                                "1": {
+                                  "$var": {
+                                    "path": "CW:Stats/Mean"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "false": "—"
+                        }
+                      },
+                      "size": "28px",
+                      "weight": 700,
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-mean-s",
+                    "type": "Label",
+                    "name": "st-mean-s",
+                    "properties": {
+                      "typography": "caption",
+                      "text": {
+                        "$loc": {
+                          "key": "{Signed(Round1(1))} g vs target",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Stats/MeanDev"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "st-sd",
+                "type": "Container",
+                "name": "Std Deviation",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "0px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "space-between",
+                  "radius": "12px",
+                  "paddingTop": "8px",
+                  "paddingRight": "14px",
+                  "paddingBottom": "8px",
+                  "paddingLeft": "14px",
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "78px",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "st-sd-c",
+                    "type": "Label",
+                    "name": "st-sd-c",
+                    "properties": {
+                      "typography": "label",
+                      "text": {
+                        "$loc": "STD DEVIATION"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-sd-v",
+                    "type": "Label",
+                    "name": "st-sd-v",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$stringExpr": {
+                          "template": "{Thousands(Round1(1))} g",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Stats/StdDev"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "size": "28px",
+                      "weight": 700,
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-sd-s",
+                    "type": "Label",
+                    "name": "st-sd-s",
+                    "properties": {
+                      "typography": "caption",
+                      "text": {
+                        "$loc": {
+                          "key": "Min {Thousands(1)} · Max {Thousands(2)}",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Stats/Min"
+                              }
+                            },
+                            "2": {
+                              "$var": {
+                                "path": "CW:Stats/Max"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "st-tp",
+                "type": "Container",
+                "name": "Throughput",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "0px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "space-between",
+                  "radius": "12px",
+                  "paddingTop": "8px",
+                  "paddingRight": "14px",
+                  "paddingBottom": "8px",
+                  "paddingLeft": "14px",
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "78px",
+                  "minWidth": "0"
+                },
+                "children": [
+                  {
+                    "id": "st-tp-c",
+                    "type": "Label",
+                    "name": "st-tp-c",
+                    "properties": {
+                      "typography": "label",
+                      "text": {
+                        "$loc": "THROUGHPUT"
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-tp-v",
+                    "type": "Label",
+                    "name": "st-tp-v",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$loc": {
+                          "key": "{Thousands(Round1(1))} cases/min",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Stats/Throughput"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "size": "28px",
+                      "weight": 700,
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "st-tp-s",
+                    "type": "Label",
+                    "name": "st-tp-s",
+                    "properties": {
+                      "typography": "caption",
+                      "text": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$var": {
+                                  "path": "CW:Line/State"
+                                }
+                              },
+                              "operator": "===",
+                              "right": 1
+                            }
+                          },
+                          "true": {
+                            "$loc": "Last 20 cases"
+                          },
+                          "false": {
+                            "$loc": "Line not running"
+                          }
+                        }
+                      },
+                      "color": "var(--hmi-text-muted)",
+                      "wrap": "truncate"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "st-charts",
+            "type": "Container",
+            "name": "Charts",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "var(--hmi-surface)"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "18px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "12px",
+              "paddingTop": "12px",
+              "paddingRight": "14px",
+              "paddingBottom": "12px",
+              "paddingLeft": "14px",
+              "widthMode": "fill",
+              "heightMode": "fill"
+            },
+            "children": [
+              {
+                "id": "st-dev",
+                "type": "CwDevBars",
+                "name": "Deviation bars",
+                "properties": {
+                  "title": {
+                    "$loc": "DEVIATION TREND · LAST 20"
+                  },
+                  "deviations": {
+                    "$var": {
+                      "path": "CW:Stats/Last20Dev"
+                    }
+                  },
+                  "results": {
+                    "$var": {
+                      "path": "CW:Stats/Last20Res"
+                    }
+                  },
+                  "lower": {
+                    "$var": {
+                      "path": "CW:Params/Lower"
+                    }
+                  },
+                  "upper": {
+                    "$var": {
+                      "path": "CW:Params/Upper"
+                    }
+                  },
+                  "span": 60,
+                  "count": 20
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "grow": 1.6,
+                  "minWidth": "0"
+                }
+              },
+              {
+                "id": "st-div",
+                "type": "Separator",
+                "name": "Divider",
+                "properties": {
+                  "orientation": "vertical",
+                  "thickness": 1,
+                  "color": "var(--hmi-surface-raised)",
+                  "inset": 0
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "fill"
+                }
+              },
+              {
+                "id": "st-hist",
+                "type": "CwHistogram",
+                "name": "Distribution",
+                "properties": {
+                  "title": {
+                    "$loc": "DISTRIBUTION"
+                  },
+                  "counts": {
+                    "$var": {
+                      "path": "CW:Stats/Hist"
+                    }
+                  },
+                  "lower": {
+                    "$var": {
+                      "path": "CW:Params/Lower"
+                    }
+                  },
+                  "upper": {
+                    "$var": {
+                      "path": "CW:Params/Upper"
+                    }
+                  },
+                  "band": {
+                    "$var": {
+                      "path": "CW:Params/Band"
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "grow": 1,
+                  "minWidth": "0"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "icon": "chart-bar"
+}

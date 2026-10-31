@@ -1,0 +1,37 @@
+name: Release example projects
+
+# Run by hand only. Zips each project folder and attaches the zips to a GitHub
+# Release, ready for the app's Import. Name the tag after the NEXT HMI version
+# the examples target (v1.1.0); the release creates it on the chosen branch.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag, e.g. v1.1.0
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Zip each project
+        run: |
+          mkdir dist
+          for dir in */; do
+            name="${dir%/}"
+            [ -f "$name/config.json" ] || continue
+            # certs/ holds an OPC-UA private key; the app's own export leaves it out too.
+            (cd "$name" && zip -qr "../dist/$name.zip" . -x 'certs/*')
+          done
+          ls -l dist
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: gh release create "$TAG" dist/*.zip --target "$GITHUB_SHA" --title "Example projects $TAG" --notes "Import a zip in NEXT HMI ${TAG#v} or later."

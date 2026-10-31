@@ -1,0 +1,111 @@
+{
+  "name": "I/O row",
+  "description": "One I/O signal: a state dot, the signal name and its value.",
+  "category": "Checkweigher",
+  "icon": {
+    "type": "builtin",
+    "name": "list"
+  },
+  "componentProperties": {
+    "label": {
+      "type": "string",
+      "label": "Signal"
+    },
+    "value": {
+      "type": "string",
+      "label": "Value text"
+    },
+    "dot": {
+      "type": "color",
+      "label": "Dot colour"
+    }
+  },
+  "children": [
+    {
+      "id": "ior",
+      "type": "Container",
+      "name": "I/O row",
+      "properties": {
+        "showWhenEmpty": true,
+        "background": "var(--hmi-surface)"
+      },
+      "layout": {
+        "direction": "row",
+        "gap": "12px",
+        "wrap": false,
+        "align": "center",
+        "justify": "flex-start",
+        "radius": "10px",
+        "paddingTop": "0px",
+        "paddingRight": "14px",
+        "paddingBottom": "0px",
+        "paddingLeft": "14px",
+        "widthMode": "fill",
+        "heightMode": "fill"
+      },
+      "children": [
+        {
+          "id": "ior-d",
+          "type": "Container",
+          "name": "Dot",
+          "properties": {
+            "showWhenEmpty": true,
+            "background": {
+              "$componentProp": "dot"
+            }
+          },
+          "layout": {
+            "direction": "column",
+            "gap": "0px",
+            "wrap": false,
+            "align": "stretch",
+            "justify": "flex-start",
+            "radius": "50%",
+            "paddingTop": "0px",
+            "paddingRight": "0px",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "widthMode": "fixed",
+            "heightMode": "fixed",
+            "width": "12px",
+            "height": "12px"
+          },
+          "children": []
+        },
+        {
+          "id": "ior-l",
+          "type": "Label",
+          "name": "Signal",
+          "properties": {
+            "typography": "body",
+            "text": {
+              "$componentProp": "label"
+            },
+            "wrap": "truncate"
+          },
+          "layout": {
+            "widthMode": "fill",
+            "heightMode": "hug"
+          }
+        },
+        {
+          "id": "ior-v",
+          "type": "Label",
+          "name": "State",
+          "properties": {
+            "typography": "body",
+            "text": {
+              "$componentProp": "value"
+            },
+            "weight": 600,
+            "wrap": "truncate"
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        }
+      ]
+    }
+  ]
+}

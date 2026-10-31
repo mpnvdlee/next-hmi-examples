@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "datasetTypes": [
+    {
+      "id": "product",
+      "name": "Product",
+      "parameters": [
+        {
+          "id": "recipeId",
+          "label": "Recipe",
+          "binding": {
+            "$var": {
+              "path": "CW:Product/RecipeId"
+            }
+          },
+          "dataType": "string"
+        },
+        {
+          "id": "product",
+          "label": "Product",
+          "binding": {
+            "$var": {
+              "path": "CW:Product/Name"
+            }
+          },
+          "dataType": "string"
+        },
+        {
+          "id": "target",
+          "label": "Target weight",
+          "binding": {
+            "$var": {
+              "path": "CW:Product/Target"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "qty",
+          "label": "Planned cases",
+          "binding": {
+            "$var": {
+              "path": "CW:Product/Planned"
+            }
+          },
+          "dataType": "integer"
+        }
+      ],
+      "datasets": [
+        {
+          "id": "4303604",
+          "name": "4303604",
+          "description": "Pascal Jubes 14 × 300 g",
+          "values": {
+            "recipeId": "4303604",
+            "product": "Pascal Jubes 14 × 300 g",
+            "target": 4920,
+            "qty": 2000
+          },
+          "updatedAt": "",
+          "updatedBy": "",
+          "loadedAt": ""
+        },
+        {
+          "id": "4303612",
+          "name": "4303612",
+          "description": "Pascal Jubes 10 × 300 g",
+          "values": {
+            "recipeId": "4303612",
+            "product": "Pascal Jubes 10 × 300 g",
+            "target": 3520,
+            "qty": 1500
+          },
+          "updatedAt": "",
+          "updatedBy": "",
+          "loadedAt": ""
+        },
+        {
+          "id": "4303619",
+          "name": "4303619",
+          "description": "Mini Jubes 24 × 150 g",
+          "values": {
+            "recipeId": "4303619",
+            "product": "Mini Jubes 24 × 150 g",
+            "target": 3790,
+            "qty": 800
+          },
+          "updatedAt": "",
+          "updatedBy": "",
+          "loadedAt": ""
+        },
+        {
+          "id": "4303627",
+          "name": "4303627",
+          "description": "Fruit Duo 12 × 200 g",
+          "values": {
+            "recipeId": "4303627",
+            "product": "Fruit Duo 12 × 200 g",
+            "target": 2560,
+            "qty": 2400
+          },
+          "updatedAt": "",
+          "updatedBy": "",
+          "loadedAt": ""
+        }
+      ]
+    },
+    {
+      "id": "machine",
+      "name": "Machine parameters",
+      "parameters": [
+        {
+          "id": "lower",
+          "label": "Lower limit",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/Lower"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "upper",
+          "label": "Upper limit",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/Upper"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "band",
+          "label": "Near-limit band",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/Band"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "tare",
+          "label": "Tare",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/Tare"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "filter",
+          "label": "Weighing filter",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/Filter"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "zeroInt",
+          "label": "Auto-zero interval",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/ZeroInt"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "rejDelay",
+          "label": "Reject delay",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/RejDelay"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "rejPulse",
+          "label": "Pusher pulse",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/RejPulse"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "binCap",
+          "label": "Reject bin capacity",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/BinCap"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "speed",
+          "label": "Belt speed",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/Speed"
+            }
+          },
+          "dataType": "float"
+        },
+        {
+          "id": "gap",
+          "label": "Minimum case gap",
+          "binding": {
+            "$var": {
+              "path": "CW:Params/Gap"
+            }
+          },
+          "dataType": "float"
+        }
+      ],
+      "datasets": [
+        {
+          "id": "saved",
+          "name": "Saved",
+          "description": "Parameters stored with SAVE in Setup › Save & Reset.",
+          "values": {
+            "lower": -30,
+            "upper": 30,
+            "band": 10,
+            "tare": 180,
+            "filter": 250,
+            "zeroInt": 60,
+            "rejDelay": 350,
+            "rejPulse": 120,
+            "binCap": 30,
+            "speed": 0.8,
+            "gap": 180
+          },
+          "updatedAt": "2026-09-29T06:45:00Z",
+          "updatedBy": "admin",
+          "loadedAt": ""
+        }
+      ]
+    }
+  ]
+}

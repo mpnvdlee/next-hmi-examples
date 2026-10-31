@@ -1,0 +1,1333 @@
+{
+  "id": "setup-save",
+  "title": {
+    "$loc": "Save & Reset"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "susav",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "row",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "susav-nav",
+            "type": "$component:setup-nav",
+            "name": "Sections",
+            "properties": {
+              "calSub": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": {
+                    "$loc": "Zero needed"
+                  },
+                  "false": {
+                    "$loc": "OK"
+                  }
+                }
+              },
+              "rejectSub": {
+                "$loc": {
+                  "key": "Bin {1}/{2}",
+                  "wildcards": {
+                    "1": {
+                      "$var": {
+                        "path": "CW:IO/BinLevel"
+                      }
+                    },
+                    "2": {
+                      "$var": {
+                        "path": "CW:Params/BinCap"
+                      }
+                    }
+                  }
+                }
+              },
+              "calSubColor": {
+                "$if": {
+                  "condition": {
+                    "$or": [
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/ZeroDue"
+                        }
+                      },
+                      {
+                        "$var": {
+                          "path": "CW:Alarms/Drift"
+                        }
+                      }
+                    ]
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              },
+              "rejectSubColor": {
+                "$if": {
+                  "condition": {
+                    "$var": {
+                      "path": "CW:Alarms/BinFull"
+                    }
+                  },
+                  "true": "var(--hmi-warn)",
+                  "false": "var(--hmi-text-muted)"
+                }
+              }
+            },
+            "layout": {
+              "widthMode": "fixed",
+              "heightMode": "hug",
+              "width": "156px"
+            }
+          },
+          {
+            "id": "susav-body",
+            "type": "Container",
+            "name": "Section",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent",
+              "overflow": "scroll"
+            },
+            "layout": {
+              "direction": "column",
+              "gap": "8px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fill",
+              "minWidth": "0"
+            },
+            "children": [
+              {
+                "id": "susav-bh",
+                "type": "$component:section-header",
+                "name": "Section header",
+                "properties": {
+                  "title": {
+                    "$loc": "SAVE & RESET"
+                  },
+                  "subtitle": {
+                    "$if": {
+                      "condition": {
+                        "$or": [
+                          {
+                            "$recipe": {
+                              "type": "machine",
+                              "field": "parametersChanged"
+                            }
+                          },
+                          {
+                            "$recipe": {
+                              "type": "product",
+                              "field": "parametersChanged"
+                            }
+                          }
+                        ]
+                      },
+                      "true": {
+                        "$loc": "Unsaved changes"
+                      },
+                      "false": {
+                        "$loc": "All saved"
+                      }
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "32px"
+                }
+              },
+              {
+                "id": "sus-changes",
+                "type": "Container",
+                "name": "Changes",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "var(--hmi-surface)"
+                },
+                "layout": {
+                  "direction": "column",
+                  "gap": "6px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "radius": "10px",
+                  "paddingTop": "14px",
+                  "paddingRight": "16px",
+                  "paddingBottom": "14px",
+                  "paddingLeft": "16px",
+                  "widthMode": "fill",
+                  "heightMode": "hug"
+                },
+                "children": [
+                  {
+                    "id": "sus-ch-s",
+                    "type": "Label",
+                    "name": "Status",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$formula": {
+                                  "expression": "{1} + {2}",
+                                  "wildcards": {
+                                    "1": {
+                                      "$recipe": {
+                                        "type": "product",
+                                        "field": "changedCount"
+                                      }
+                                    },
+                                    "2": {
+                                      "$recipe": {
+                                        "type": "machine",
+                                        "field": "changedCount"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "operator": ">",
+                              "right": 0
+                            }
+                          },
+                          "true": {
+                            "$if": {
+                              "condition": {
+                                "$compare": {
+                                  "left": {
+                                    "$formula": {
+                                      "expression": "{1} + {2}",
+                                      "wildcards": {
+                                        "1": {
+                                          "$recipe": {
+                                            "type": "product",
+                                            "field": "changedCount"
+                                          }
+                                        },
+                                        "2": {
+                                          "$recipe": {
+                                            "type": "machine",
+                                            "field": "changedCount"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "operator": "===",
+                                  "right": 1
+                                }
+                              },
+                              "true": {
+                                "$loc": "1 unsaved change"
+                              },
+                              "false": {
+                                "$loc": {
+                                  "key": "{1} unsaved changes",
+                                  "wildcards": {
+                                    "1": {
+                                      "$formula": {
+                                        "expression": "{1} + {2}",
+                                        "wildcards": {
+                                          "1": {
+                                            "$recipe": {
+                                              "type": "product",
+                                              "field": "changedCount"
+                                            }
+                                          },
+                                          "2": {
+                                            "$recipe": {
+                                              "type": "machine",
+                                              "field": "changedCount"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "false": {
+                            "$loc": "All parameters saved"
+                          }
+                        }
+                      },
+                      "wrap": "truncate",
+                      "color": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$formula": {
+                                  "expression": "{1} + {2}",
+                                  "wildcards": {
+                                    "1": {
+                                      "$recipe": {
+                                        "type": "product",
+                                        "field": "changedCount"
+                                      }
+                                    },
+                                    "2": {
+                                      "$recipe": {
+                                        "type": "machine",
+                                        "field": "changedCount"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "operator": ">",
+                              "right": 0
+                            }
+                          },
+                          "true": "var(--hmi-warn)",
+                          "false": "var(--hmi-ok)"
+                        }
+                      },
+                      "size": "17px",
+                      "weight": 600
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-i",
+                    "type": "Label",
+                    "name": "Info",
+                    "properties": {
+                      "typography": "body",
+                      "text": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$recipe": {
+                                  "type": "machine",
+                                  "field": "savedAt",
+                                  "format": "HH:mm"
+                                }
+                              },
+                              "operator": "===",
+                              "right": ""
+                            }
+                          },
+                          "true": {
+                            "$loc": "Not saved yet · changes apply immediately, SAVE stores them permanently"
+                          },
+                          "false": {
+                            "$loc": {
+                              "key": "Last saved {1} · changes apply immediately, SAVE stores them permanently",
+                              "wildcards": {
+                                "1": {
+                                  "$recipe": {
+                                    "type": "machine",
+                                    "field": "savedAt",
+                                    "format": "HH:mm"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "wrap": "truncate",
+                      "color": "var(--hmi-text-muted)",
+                      "size": "13px"
+                    },
+                    "layout": {
+                      "widthMode": "hug",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-target",
+                    "type": "$component:change-row",
+                    "name": "Target weight",
+                    "properties": {
+                      "label": {
+                        "$loc": "Target weight"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "product",
+                                "field": "parameterValue",
+                                "parameter": "target"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Product/Target"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "product",
+                          "field": "parameterChanged",
+                          "parameter": "target"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-lower",
+                    "type": "$component:change-row",
+                    "name": "Lower limit",
+                    "properties": {
+                      "label": {
+                        "$loc": "Lower limit"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "lower"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/Lower"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "lower"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-upper",
+                    "type": "$component:change-row",
+                    "name": "Upper limit",
+                    "properties": {
+                      "label": {
+                        "$loc": "Upper limit"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "upper"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/Upper"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "upper"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-band",
+                    "type": "$component:change-row",
+                    "name": "Near-limit band",
+                    "properties": {
+                      "label": {
+                        "$loc": "Near-limit band"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "band"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/Band"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "band"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-tare",
+                    "type": "$component:change-row",
+                    "name": "Tare",
+                    "properties": {
+                      "label": {
+                        "$loc": "Tare"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "tare"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} g",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/Tare"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "tare"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-filter",
+                    "type": "$component:change-row",
+                    "name": "Weighing filter",
+                    "properties": {
+                      "label": {
+                        "$loc": "Weighing filter"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} ms",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "filter"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} ms",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/Filter"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "filter"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-zeroInt",
+                    "type": "$component:change-row",
+                    "name": "Auto-zero interval",
+                    "properties": {
+                      "label": {
+                        "$loc": "Auto-zero interval"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} min",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "zeroInt"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} min",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/ZeroInt"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "zeroInt"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-rejDelay",
+                    "type": "$component:change-row",
+                    "name": "Reject delay",
+                    "properties": {
+                      "label": {
+                        "$loc": "Reject delay"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} ms",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "rejDelay"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} ms",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/RejDelay"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "rejDelay"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-rejPulse",
+                    "type": "$component:change-row",
+                    "name": "Pusher pulse",
+                    "properties": {
+                      "label": {
+                        "$loc": "Pusher pulse"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} ms",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "rejPulse"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} ms",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/RejPulse"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "rejPulse"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-binCap",
+                    "type": "$component:change-row",
+                    "name": "Reject bin capacity",
+                    "properties": {
+                      "label": {
+                        "$loc": "Reject bin capacity"
+                      },
+                      "saved": {
+                        "$loc": {
+                          "key": "{Round(1)} cases",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "binCap"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$loc": {
+                          "key": "{Round(1)} cases",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/BinCap"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "binCap"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-speed",
+                    "type": "$component:change-row",
+                    "name": "Belt speed",
+                    "properties": {
+                      "label": {
+                        "$loc": "Belt speed"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round2(1)} m/s",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "speed"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round2(1)} m/s",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/Speed"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "speed"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  },
+                  {
+                    "id": "sus-ch-gap",
+                    "type": "$component:change-row",
+                    "name": "Minimum case gap",
+                    "properties": {
+                      "label": {
+                        "$loc": "Minimum case gap"
+                      },
+                      "saved": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} mm",
+                          "wildcards": {
+                            "1": {
+                              "$recipe": {
+                                "type": "machine",
+                                "field": "parameterValue",
+                                "parameter": "gap"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "live": {
+                        "$stringExpr": {
+                          "template": "{Round(1)} mm",
+                          "wildcards": {
+                            "1": {
+                              "$var": {
+                                "path": "CW:Params/Gap"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "visible": {
+                        "$recipe": {
+                          "type": "machine",
+                          "field": "parameterChanged",
+                          "parameter": "gap"
+                        }
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "hug"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sus-act",
+                "type": "Container",
+                "name": "Save / discard",
+                "properties": {
+                  "showWhenEmpty": true,
+                  "background": "transparent"
+                },
+                "layout": {
+                  "direction": "row",
+                  "gap": "12px",
+                  "wrap": false,
+                  "align": "stretch",
+                  "justify": "flex-start",
+                  "radius": "0",
+                  "paddingTop": "0px",
+                  "paddingRight": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "widthMode": "fill",
+                  "heightMode": "hug"
+                },
+                "children": [
+                  {
+                    "id": "sus-save",
+                    "type": "Button",
+                    "name": "Save",
+                    "properties": {
+                      "label": {
+                        "$loc": "SAVE"
+                      },
+                      "variant": "outline",
+                      "fill": {
+                        "$if": {
+                          "condition": {
+                            "$or": [
+                              {
+                                "$recipe": {
+                                  "type": "machine",
+                                  "field": "parametersChanged"
+                                }
+                              },
+                              {
+                                "$recipe": {
+                                  "type": "product",
+                                  "field": "parametersChanged"
+                                }
+                              }
+                            ]
+                          },
+                          "true": "var(--hmi-accent)",
+                          "false": "var(--hmi-surface-raised)"
+                        }
+                      },
+                      "color": {
+                        "$if": {
+                          "condition": {
+                            "$or": [
+                              {
+                                "$recipe": {
+                                  "type": "machine",
+                                  "field": "parametersChanged"
+                                }
+                              },
+                              {
+                                "$recipe": {
+                                  "type": "product",
+                                  "field": "parametersChanged"
+                                }
+                              }
+                            ]
+                          },
+                          "true": "#111316",
+                          "false": "var(--hmi-text-muted)"
+                        }
+                      },
+                      "radius": "10px",
+                      "borderWidth": 0,
+                      "actions": {
+                        "onPress": [
+                          {
+                            "type": "if",
+                            "condition": {
+                              "$or": [
+                                {
+                                  "$recipe": {
+                                    "type": "machine",
+                                    "field": "parametersChanged"
+                                  }
+                                },
+                                {
+                                  "$recipe": {
+                                    "type": "product",
+                                    "field": "parametersChanged"
+                                  }
+                                }
+                              ]
+                            },
+                            "then": [
+                              {
+                                "type": "recipeSave",
+                                "datasetId": "saved",
+                                "onSuccess": [
+                                  {
+                                    "type": "recipeLoad",
+                                    "datasetId": "saved",
+                                    "verify": false
+                                  },
+                                  {
+                                    "type": "recipeSave",
+                                    "datasetId": {
+                                      "$recipe": {
+                                        "type": "product",
+                                        "field": "activeName"
+                                      }
+                                    },
+                                    "onSuccess": [
+                                      {
+                                        "type": "showToast",
+                                        "message": {
+                                          "$loc": "Parameters saved"
+                                        },
+                                        "severity": "success",
+                                        "discard": "auto",
+                                        "duration": 2600
+                                      }
+                                    ],
+                                    "onFailed": [
+                                      {
+                                        "type": "showToast",
+                                        "message": {
+                                          "$loc": {
+                                            "key": "Save failed: {1}",
+                                            "wildcards": {
+                                              "1": {
+                                                "$result": "reason"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "severity": "error",
+                                        "discard": "auto",
+                                        "duration": 2600
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "onFailed": [
+                                  {
+                                    "type": "showToast",
+                                    "message": {
+                                      "$loc": {
+                                        "key": "Save failed: {1}",
+                                        "wildcards": {
+                                          "1": {
+                                            "$result": "reason"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "severity": "error",
+                                    "discard": "auto",
+                                    "duration": 2600
+                                  }
+                                ]
+                              }
+                            ],
+                            "else": [
+                              {
+                                "type": "showToast",
+                                "message": {
+                                  "$loc": "No changes to save"
+                                },
+                                "severity": "info",
+                                "discard": "auto",
+                                "duration": 2600
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "56px"
+                    }
+                  },
+                  {
+                    "id": "sus-discard",
+                    "type": "Button",
+                    "name": "Discard",
+                    "properties": {
+                      "label": {
+                        "$loc": "DISCARD"
+                      },
+                      "variant": "outline",
+                      "fill": "var(--hmi-surface-raised)",
+                      "color": "var(--hmi-text)",
+                      "radius": "10px",
+                      "borderWidth": 0,
+                      "actions": {
+                        "onPress": [
+                          {
+                            "type": "recipeLoad",
+                            "datasetId": "saved",
+                            "verify": false
+                          },
+                          {
+                            "type": "recipeLoad",
+                            "datasetId": {
+                              "$recipe": {
+                                "type": "product",
+                                "field": "activeName"
+                              }
+                            },
+                            "verify": false
+                          },
+                          {
+                            "type": "showToast",
+                            "message": {
+                              "$loc": "Changes discarded"
+                            },
+                            "severity": "info",
+                            "discard": "auto",
+                            "duration": 2600
+                          }
+                        ]
+                      }
+                    },
+                    "layout": {
+                      "widthMode": "fill",
+                      "heightMode": "fixed",
+                      "height": "56px"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sus-factory",
+                "type": "Button",
+                "name": "Factory reset",
+                "properties": {
+                  "label": {
+                    "$loc": "RESET TO FACTORY DEFAULTS"
+                  },
+                  "variant": "outline",
+                  "fill": "transparent",
+                  "color": "var(--hmi-fault)",
+                  "radius": "10px",
+                  "borderWidth": 2,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/Lower"
+                          }
+                        },
+                        "value": -30
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/Upper"
+                          }
+                        },
+                        "value": 30
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/Band"
+                          }
+                        },
+                        "value": 10
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/Tare"
+                          }
+                        },
+                        "value": 180
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/Filter"
+                          }
+                        },
+                        "value": 250
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/ZeroInt"
+                          }
+                        },
+                        "value": 60
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/RejDelay"
+                          }
+                        },
+                        "value": 350
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/RejPulse"
+                          }
+                        },
+                        "value": 120
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/BinCap"
+                          }
+                        },
+                        "value": 30
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/Speed"
+                          }
+                        },
+                        "value": 0.8
+                      },
+                      {
+                        "type": "writeDataVariable",
+                        "target": {
+                          "$var": {
+                            "path": "CW:Params/Gap"
+                          }
+                        },
+                        "value": 180
+                      },
+                      {
+                        "type": "showToast",
+                        "message": {
+                          "$loc": "Factory defaults loaded · save to apply permanently"
+                        },
+                        "severity": "warning",
+                        "discard": "auto",
+                        "duration": 2600
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fixed",
+                  "height": "56px"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

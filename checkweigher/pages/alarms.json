@@ -1,0 +1,173 @@
+{
+  "id": "alarms",
+  "title": {
+    "$loc": "Alarms & Events"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "al",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "column",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "al-head",
+            "type": "Container",
+            "name": "Header",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "14px",
+              "wrap": false,
+              "align": "center",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "48px"
+            },
+            "children": [
+              {
+                "id": "al-home",
+                "type": "Button",
+                "name": "Home",
+                "properties": {
+                  "label": "",
+                  "variant": "outline",
+                  "fill": "var(--hmi-surface)",
+                  "color": "var(--hmi-text)",
+                  "radius": "10px",
+                  "iconName": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-home.svg"
+                    }
+                  },
+                  "iconSize": 24,
+                  "borderWidth": 0,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "home"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fixed",
+                  "heightMode": "fixed",
+                  "width": "48px",
+                  "height": "48px"
+                }
+              },
+              {
+                "id": "al-t",
+                "type": "Label",
+                "name": "al-t",
+                "properties": {
+                  "typography": "subheading",
+                  "text": {
+                    "$loc": "ALARMS & EVENTS"
+                  },
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              }
+            ]
+          },
+          {
+            "id": "al-list",
+            "type": "AlarmListManaged",
+            "name": "Alarm list",
+            "properties": {
+              "title": "",
+              "rowSize": "touch",
+              "showFilter": true,
+              "ackMode": "off",
+              "secondLine": "description",
+              "show": "all",
+              "mark": "stripe"
+            },
+            "layout": {
+              "widthMode": "fill",
+              "heightMode": "fill"
+            }
+          },
+          {
+            "id": "al-ack",
+            "type": "Button",
+            "name": "Acknowledge",
+            "properties": {
+              "label": {
+                "$loc": "ACKNOWLEDGE"
+              },
+              "iconName": {
+                "$static": {
+                  "type": "builtin",
+                  "name": "check"
+                }
+              },
+              "color": "var(--hmi-accent)",
+              "radius": "12px",
+              "interactable": {
+                "$compare": {
+                  "left": {
+                    "$alarmCount": {
+                      "filter": "unacked"
+                    }
+                  },
+                  "operator": ">",
+                  "right": 0
+                }
+              },
+              "actions": {
+                "onPress": [
+                  {
+                    "type": "acknowledgeAllAlarms"
+                  }
+                ]
+              }
+            },
+            "layout": {
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "60px"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "icon": "bell"
+}

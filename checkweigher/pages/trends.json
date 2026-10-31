@@ -1,0 +1,774 @@
+{
+  "id": "trends",
+  "title": {
+    "$loc": "Trends"
+  },
+  "mainBackground": "var(--hmi-bg)",
+  "mainPadding": "16px",
+  "sections": {
+    "content": [
+      {
+        "id": "tr",
+        "type": "Container",
+        "name": "Page",
+        "properties": {
+          "showWhenEmpty": true,
+          "background": "transparent"
+        },
+        "layout": {
+          "direction": "column",
+          "gap": "16px",
+          "wrap": false,
+          "align": "stretch",
+          "justify": "flex-start",
+          "radius": "0",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "widthMode": "fill",
+          "heightMode": "fill"
+        },
+        "children": [
+          {
+            "id": "tr-head",
+            "type": "Container",
+            "name": "Header",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "14px",
+              "wrap": false,
+              "align": "center",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "48px"
+            },
+            "children": [
+              {
+                "id": "tr-home",
+                "type": "Button",
+                "name": "Home",
+                "properties": {
+                  "label": "",
+                  "variant": "outline",
+                  "fill": "var(--hmi-surface)",
+                  "color": "var(--hmi-text)",
+                  "radius": "10px",
+                  "iconName": {
+                    "$static": {
+                      "type": "custom",
+                      "path": "icons/cw-home.svg"
+                    }
+                  },
+                  "iconSize": 24,
+                  "borderWidth": 0,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "home"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "fixed",
+                  "heightMode": "fixed",
+                  "width": "48px",
+                  "height": "48px"
+                }
+              },
+              {
+                "id": "tr-t",
+                "type": "Label",
+                "name": "tr-t",
+                "properties": {
+                  "typography": "subheading",
+                  "text": {
+                    "$loc": "TRENDS"
+                  },
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "tr-sp",
+                "type": "StretchSpacer",
+                "name": "Spacer",
+                "properties": {
+                  "mode": "ratio",
+                  "ratio": 1
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "grow": 1,
+                  "minWidth": "auto"
+                }
+              },
+              {
+                "id": "tr-tab-s",
+                "type": "Button",
+                "name": "Statistics",
+                "properties": {
+                  "label": {
+                    "$loc": "STATISTICS"
+                  },
+                  "variant": "outline",
+                  "fill": "var(--hmi-surface)",
+                  "color": "var(--hmi-text)",
+                  "radius": "10px",
+                  "borderWidth": 0,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "stats"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "fixed",
+                  "height": "48px"
+                }
+              },
+              {
+                "id": "tr-tab-t",
+                "type": "Button",
+                "name": "Trends",
+                "properties": {
+                  "label": {
+                    "$loc": "TRENDS"
+                  },
+                  "variant": "outline",
+                  "fill": "var(--hmi-accent)",
+                  "color": "#111316",
+                  "radius": "10px",
+                  "borderWidth": 0,
+                  "actions": {
+                    "onPress": [
+                      {
+                        "type": "navigateToPage",
+                        "pageId": "trends"
+                      }
+                    ]
+                  }
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "fixed",
+                  "height": "48px"
+                }
+              }
+            ]
+          },
+          {
+            "id": "tr-bar",
+            "type": "Container",
+            "name": "Range bar",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "transparent"
+            },
+            "layout": {
+              "direction": "row",
+              "gap": "8px",
+              "wrap": false,
+              "align": "center",
+              "justify": "flex-start",
+              "radius": "0",
+              "paddingTop": "0px",
+              "paddingRight": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "48px"
+            },
+            "children": [
+              {
+                "id": "tr-range",
+                "type": "ButtonRow",
+                "name": "Range",
+                "properties": {
+                  "options": [
+                    {
+                      "label": {
+                        "$loc": "LAST 20"
+                      },
+                      "value": "last20"
+                    },
+                    {
+                      "label": {
+                        "$loc": "1 H"
+                      },
+                      "value": "hour"
+                    },
+                    {
+                      "label": {
+                        "$loc": "SHIFT"
+                      },
+                      "value": "shift"
+                    }
+                  ],
+                  "selectedValue": "last20"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "tr-sp2",
+                "type": "StretchSpacer",
+                "name": "Spacer",
+                "properties": {
+                  "mode": "ratio",
+                  "ratio": 1
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug",
+                  "grow": 1,
+                  "minWidth": "auto"
+                }
+              },
+              {
+                "id": "tr-mean-c",
+                "type": "Label",
+                "name": "tr-mean-c",
+                "properties": {
+                  "typography": "body",
+                  "text": {
+                    "$loc": "Mean"
+                  },
+                  "color": "var(--hmi-text-muted)",
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "tr-mean-v",
+                "type": "Label",
+                "name": "tr-mean-v",
+                "properties": {
+                  "typography": "body",
+                  "text": {
+                    "$stringExpr": {
+                      "template": "{Signed(Round1(1))} g",
+                      "wildcards": {
+                        "1": {
+                          "$switch": {
+                            "value": {
+                              "$widgetProp": {
+                                "componentId": "tr-range",
+                                "property": "selectedValue"
+                              }
+                            },
+                            "cases": [
+                              {
+                                "when": "hour",
+                                "then": {
+                                  "$var": {
+                                    "path": "CW:Trend/MeanHour"
+                                  }
+                                }
+                              },
+                              {
+                                "when": "shift",
+                                "then": {
+                                  "$var": {
+                                    "path": "CW:Trend/MeanShift"
+                                  }
+                                }
+                              }
+                            ],
+                            "default": {
+                              "$var": {
+                                "path": "CW:Trend/MeanLast20"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "weight": 600,
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "tr-rej-c",
+                "type": "Label",
+                "name": "tr-rej-c",
+                "properties": {
+                  "typography": "body",
+                  "text": {
+                    "$loc": "· Reject"
+                  },
+                  "color": "var(--hmi-text-muted)",
+                  "wrap": "truncate"
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              },
+              {
+                "id": "tr-rej-v",
+                "type": "Label",
+                "name": "tr-rej-v",
+                "properties": {
+                  "typography": "body",
+                  "text": {
+                    "$stringExpr": {
+                      "template": "{Round2(1)} %",
+                      "wildcards": {
+                        "1": {
+                          "$switch": {
+                            "value": {
+                              "$widgetProp": {
+                                "componentId": "tr-range",
+                                "property": "selectedValue"
+                              }
+                            },
+                            "cases": [
+                              {
+                                "when": "hour",
+                                "then": {
+                                  "$var": {
+                                    "path": "CW:Trend/RejHour"
+                                  }
+                                }
+                              },
+                              {
+                                "when": "shift",
+                                "then": {
+                                  "$var": {
+                                    "path": "CW:Trend/RejShift"
+                                  }
+                                }
+                              }
+                            ],
+                            "default": {
+                              "$var": {
+                                "path": "CW:Trend/RejLast20"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "size": "15px",
+                  "weight": 600,
+                  "wrap": "truncate",
+                  "color": {
+                    "$if": {
+                      "condition": {
+                        "$compare": {
+                          "left": {
+                            "$switch": {
+                              "value": {
+                                "$widgetProp": {
+                                  "componentId": "tr-range",
+                                  "property": "selectedValue"
+                                }
+                              },
+                              "cases": [
+                                {
+                                  "when": "hour",
+                                  "then": {
+                                    "$var": {
+                                      "path": "CW:Trend/RejHour"
+                                    }
+                                  }
+                                },
+                                {
+                                  "when": "shift",
+                                  "then": {
+                                    "$var": {
+                                      "path": "CW:Trend/RejShift"
+                                    }
+                                  }
+                                }
+                              ],
+                              "default": {
+                                "$var": {
+                                  "path": "CW:Trend/RejLast20"
+                                }
+                              }
+                            }
+                          },
+                          "operator": ">",
+                          "right": 2
+                        }
+                      },
+                      "true": "var(--hmi-fault)",
+                      "false": {
+                        "$if": {
+                          "condition": {
+                            "$compare": {
+                              "left": {
+                                "$switch": {
+                                  "value": {
+                                    "$widgetProp": {
+                                      "componentId": "tr-range",
+                                      "property": "selectedValue"
+                                    }
+                                  },
+                                  "cases": [
+                                    {
+                                      "when": "hour",
+                                      "then": {
+                                        "$var": {
+                                          "path": "CW:Trend/RejHour"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "when": "shift",
+                                      "then": {
+                                        "$var": {
+                                          "path": "CW:Trend/RejShift"
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "default": {
+                                    "$var": {
+                                      "path": "CW:Trend/RejLast20"
+                                    }
+                                  }
+                                }
+                              },
+                              "operator": ">",
+                              "right": 1
+                            }
+                          },
+                          "true": "var(--hmi-warn)",
+                          "false": "var(--hmi-ok)"
+                        }
+                      }
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "hug",
+                  "heightMode": "hug"
+                }
+              }
+            ]
+          },
+          {
+            "id": "tr-line",
+            "type": "Container",
+            "name": "Deviation card",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "var(--hmi-surface)"
+            },
+            "layout": {
+              "direction": "column",
+              "gap": "0px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "12px",
+              "paddingTop": "12px",
+              "paddingRight": "14px",
+              "paddingBottom": "12px",
+              "paddingLeft": "14px",
+              "widthMode": "fill",
+              "heightMode": "fixed",
+              "height": "176px"
+            },
+            "children": [
+              {
+                "id": "tr-chart",
+                "type": "CwLineChart",
+                "name": "Deviation line",
+                "properties": {
+                  "title": {
+                    "$switch": {
+                      "value": {
+                        "$widgetProp": {
+                          "componentId": "tr-range",
+                          "property": "selectedValue"
+                        }
+                      },
+                      "cases": [
+                        {
+                          "when": "hour",
+                          "then": {
+                            "$loc": "DEVIATION · MEAN PER MINUTE"
+                          }
+                        },
+                        {
+                          "when": "shift",
+                          "then": {
+                            "$loc": "DEVIATION · MEAN PER 10 MIN"
+                          }
+                        }
+                      ],
+                      "default": {
+                        "$loc": "DEVIATION · PER CASE"
+                      }
+                    }
+                  },
+                  "values": {
+                    "$switch": {
+                      "value": {
+                        "$widgetProp": {
+                          "componentId": "tr-range",
+                          "property": "selectedValue"
+                        }
+                      },
+                      "cases": [
+                        {
+                          "when": "hour",
+                          "then": {
+                            "$var": {
+                              "path": "CW:Trend/HourDev"
+                            }
+                          }
+                        },
+                        {
+                          "when": "shift",
+                          "then": {
+                            "$var": {
+                              "path": "CW:Trend/ShiftDev"
+                            }
+                          }
+                        }
+                      ],
+                      "default": {
+                        "$var": {
+                          "path": "CW:Stats/Last20Dev"
+                        }
+                      }
+                    }
+                  },
+                  "lower": {
+                    "$var": {
+                      "path": "CW:Params/Lower"
+                    }
+                  },
+                  "upper": {
+                    "$var": {
+                      "path": "CW:Params/Upper"
+                    }
+                  },
+                  "band": {
+                    "$var": {
+                      "path": "CW:Params/Band"
+                    }
+                  },
+                  "span": {
+                    "$switch": {
+                      "value": {
+                        "$widgetProp": {
+                          "componentId": "tr-range",
+                          "property": "selectedValue"
+                        }
+                      },
+                      "cases": [
+                        {
+                          "when": "hour",
+                          "then": 40
+                        },
+                        {
+                          "when": "shift",
+                          "then": 40
+                        }
+                      ],
+                      "default": 60
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "hug"
+                }
+              }
+            ]
+          },
+          {
+            "id": "tr-rate",
+            "type": "Container",
+            "name": "Reject card",
+            "properties": {
+              "showWhenEmpty": true,
+              "background": "var(--hmi-surface)"
+            },
+            "layout": {
+              "direction": "column",
+              "gap": "0px",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "flex-start",
+              "radius": "12px",
+              "paddingTop": "12px",
+              "paddingRight": "14px",
+              "paddingBottom": "12px",
+              "paddingLeft": "14px",
+              "widthMode": "fill",
+              "heightMode": "fill"
+            },
+            "children": [
+              {
+                "id": "tr-bars",
+                "type": "CwRateBars",
+                "name": "Reject rate",
+                "properties": {
+                  "title": {
+                    "$loc": "REJECT RATE"
+                  },
+                  "values": {
+                    "$switch": {
+                      "value": {
+                        "$widgetProp": {
+                          "componentId": "tr-range",
+                          "property": "selectedValue"
+                        }
+                      },
+                      "cases": [
+                        {
+                          "when": "hour",
+                          "then": {
+                            "$var": {
+                              "path": "CW:Trend/HourRej"
+                            }
+                          }
+                        },
+                        {
+                          "when": "shift",
+                          "then": {
+                            "$var": {
+                              "path": "CW:Trend/ShiftRej"
+                            }
+                          }
+                        }
+                      ],
+                      "default": {
+                        "$var": {
+                          "path": "CW:Trend/Last20Rej"
+                        }
+                      }
+                    }
+                  },
+                  "xStart": {
+                    "$switch": {
+                      "value": {
+                        "$widgetProp": {
+                          "componentId": "tr-range",
+                          "property": "selectedValue"
+                        }
+                      },
+                      "cases": [
+                        {
+                          "when": "hour",
+                          "then": "−60 min"
+                        },
+                        {
+                          "when": "shift",
+                          "then": {
+                            "$var": {
+                              "path": "CW:Trend/ShiftX0"
+                            }
+                          }
+                        }
+                      ],
+                      "default": {
+                        "$loc": "−20 cases"
+                      }
+                    }
+                  },
+                  "xMid": {
+                    "$switch": {
+                      "value": {
+                        "$widgetProp": {
+                          "componentId": "tr-range",
+                          "property": "selectedValue"
+                        }
+                      },
+                      "cases": [
+                        {
+                          "when": "hour",
+                          "then": "−30 min"
+                        },
+                        {
+                          "when": "shift",
+                          "then": {
+                            "$var": {
+                              "path": "CW:Trend/ShiftX1"
+                            }
+                          }
+                        }
+                      ],
+                      "default": "−10"
+                    }
+                  },
+                  "xEnd": {
+                    "$switch": {
+                      "value": {
+                        "$widgetProp": {
+                          "componentId": "tr-range",
+                          "property": "selectedValue"
+                        }
+                      },
+                      "cases": [
+                        {
+                          "when": "hour",
+                          "then": {
+                            "$loc": "Now"
+                          }
+                        },
+                        {
+                          "when": "shift",
+                          "then": {
+                            "$loc": "Now"
+                          }
+                        }
+                      ],
+                      "default": {
+                        "$loc": "Latest"
+                      }
+                    }
+                  }
+                },
+                "layout": {
+                  "widthMode": "fill",
+                  "heightMode": "fill"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "icon": "chart-line"
+}

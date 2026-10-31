@@ -1,0 +1,181 @@
+{
+  "name": "Menu tile",
+  "description": "A tile of the menu page: an icon over its name and a line of detail.",
+  "category": "Checkweigher",
+  "icon": {
+    "type": "builtin",
+    "name": "squares-four"
+  },
+  "componentProperties": {
+    "icon": {
+      "type": "icon",
+      "label": "Icon",
+      "description": null,
+      "defaultValue": null,
+      "structSchema": [],
+      "write": false,
+      "options": [],
+      "display": null,
+      "optionType": null,
+      "placeholder": null,
+      "min": null,
+      "max": null,
+      "step": null
+    },
+    "label": {
+      "type": "string",
+      "label": "Name",
+      "description": null,
+      "defaultValue": null,
+      "structSchema": [],
+      "write": false,
+      "options": [],
+      "display": null,
+      "optionType": null,
+      "placeholder": null,
+      "min": null,
+      "max": null,
+      "step": null
+    },
+    "detail": {
+      "type": "string",
+      "label": "Detail",
+      "description": "The smaller line under the name.",
+      "defaultValue": null,
+      "structSchema": [],
+      "write": false,
+      "options": [],
+      "display": null,
+      "optionType": null,
+      "placeholder": null,
+      "min": null,
+      "max": null,
+      "step": null
+    },
+    "iconColor": {
+      "type": "color",
+      "label": "Icon colour",
+      "description": null,
+      "defaultValue": "var(--hmi-accent)",
+      "structSchema": [],
+      "write": false,
+      "options": [],
+      "display": null,
+      "optionType": null,
+      "placeholder": null,
+      "min": null,
+      "max": null,
+      "step": null
+    },
+    "actions": {
+      "type": "actions",
+      "label": "On press",
+      "description": null,
+      "defaultValue": null,
+      "structSchema": [],
+      "write": false,
+      "options": [],
+      "display": null,
+      "optionType": null,
+      "placeholder": null,
+      "min": null,
+      "max": null,
+      "step": null
+    }
+  },
+  "children": [
+    {
+      "id": "mt",
+      "type": "ButtonContainer",
+      "name": "Menu tile",
+      "properties": {
+        "showWhenEmpty": true,
+        "background": "var(--hmi-surface)",
+        "actions": {
+          "$componentProp": "actions",
+          "onPress": [
+            {
+              "type": "runComponentActions",
+              "property": "actions"
+            }
+          ]
+        },
+        "onRelease": {
+          "onRelease": []
+        }
+      },
+      "layout": {
+        "direction": "column",
+        "gap": "6px",
+        "wrap": false,
+        "align": "center",
+        "justify": "center",
+        "radius": "12px",
+        "paddingTop": "0px",
+        "paddingRight": "8px",
+        "paddingBottom": "0px",
+        "paddingLeft": "8px",
+        "widthMode": "fill",
+        "heightMode": "fill"
+      },
+      "children": [
+        {
+          "id": "mt-i",
+          "type": "Icon",
+          "name": "Icon",
+          "properties": {
+            "iconName": {
+              "$componentProp": "icon"
+            },
+            "size": 46,
+            "color": {
+              "$componentProp": "iconColor"
+            },
+            "chrome": false
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        },
+        {
+          "id": "mt-l",
+          "type": "Label",
+          "name": "Title",
+          "properties": {
+            "typography": "body",
+            "text": {
+              "$componentProp": "label"
+            },
+            "color": "var(--hmi-text)",
+            "weight": 700,
+            "align": "center",
+            "wrap": "truncate"
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        },
+        {
+          "id": "mt-s",
+          "type": "Label",
+          "name": "Detail",
+          "properties": {
+            "typography": "caption",
+            "text": {
+              "$componentProp": "detail"
+            },
+            "color": "var(--hmi-text-muted)",
+            "align": "center",
+            "wrap": "truncate"
+          },
+          "layout": {
+            "widthMode": "hug",
+            "heightMode": "hug"
+          }
+        }
+      ]
+    }
+  ]
+}

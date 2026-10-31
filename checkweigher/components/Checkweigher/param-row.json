@@ -1,0 +1,203 @@
+{
+  "name": "Parameter row",
+  "description": "A setup parameter: label, hint and a value that opens the numpad.",
+  "category": "Checkweigher",
+  "icon": {
+    "type": "builtin",
+    "name": "sliders-horizontal"
+  },
+  "componentProperties": {
+    "label": {
+      "type": "string",
+      "label": "Label"
+    },
+    "hint": {
+      "type": "string",
+      "label": "Hint"
+    },
+    "value": {
+      "type": "float",
+      "label": "Value",
+      "write": true
+    },
+    "unit": {
+      "type": "string",
+      "label": "Unit"
+    },
+    "decimals": {
+      "type": "integer",
+      "label": "Decimals",
+      "defaultValue": 0
+    },
+    "min": {
+      "type": "float",
+      "label": "Minimum",
+      "description": "May be bound, for a limit that depends on another setting."
+    },
+    "max": {
+      "type": "float",
+      "label": "Maximum",
+      "description": "May be bound, for a limit that depends on another setting."
+    },
+    "rangeMessage": {
+      "type": "string",
+      "label": "Out-of-range message",
+      "description": "Says why an entry is refused, such as a limit that depends on another setting."
+    },
+    "valueColor": {
+      "type": "color",
+      "label": "Value colour",
+      "description": "Bind it to mark a value that differs from the saved recipe."
+    }
+  },
+  "children": [
+    {
+      "id": "pr",
+      "type": "Container",
+      "name": "Parameter row",
+      "properties": {
+        "showWhenEmpty": true,
+        "background": "var(--hmi-surface)"
+      },
+      "layout": {
+        "direction": "row",
+        "gap": "12px",
+        "wrap": false,
+        "align": "center",
+        "justify": "flex-start",
+        "radius": "10px",
+        "paddingTop": "0px",
+        "paddingRight": "4px",
+        "paddingBottom": "0px",
+        "paddingLeft": "14px",
+        "widthMode": "fill",
+        "heightMode": "fill"
+      },
+      "children": [
+        {
+          "id": "pr-t",
+          "type": "Container",
+          "name": "Text",
+          "properties": {
+            "showWhenEmpty": true,
+            "background": "transparent"
+          },
+          "layout": {
+            "direction": "column",
+            "gap": "0px",
+            "wrap": false,
+            "align": "stretch",
+            "justify": "flex-start",
+            "radius": "0",
+            "paddingTop": "0px",
+            "paddingRight": "0px",
+            "paddingBottom": "0px",
+            "paddingLeft": "0px",
+            "widthMode": "fill",
+            "heightMode": "hug"
+          },
+          "children": [
+            {
+              "id": "pr-l",
+              "type": "Label",
+              "name": "Label",
+              "properties": {
+                "typography": "body",
+                "text": {
+                  "$componentProp": "label"
+                },
+                "wrap": "truncate",
+                "weight": 600
+              },
+              "layout": {
+                "widthMode": "fill",
+                "heightMode": "hug"
+              }
+            },
+            {
+              "id": "pr-h",
+              "type": "Label",
+              "name": "Hint",
+              "properties": {
+                "typography": "caption",
+                "text": {
+                  "$componentProp": "hint"
+                },
+                "wrap": "truncate",
+                "color": "var(--hmi-text-muted)"
+              },
+              "layout": {
+                "widthMode": "fill",
+                "heightMode": "hug"
+              }
+            }
+          ]
+        },
+        {
+          "id": "pr-v",
+          "type": "NumberInput",
+          "name": "Value",
+          "properties": {
+            "variable": {
+              "$componentProp": "value"
+            },
+            "unit": {
+              "$componentProp": "unit"
+            },
+            "min": {
+              "$componentProp": "min"
+            },
+            "max": {
+              "$componentProp": "max"
+            },
+            "decimals": {
+              "$componentProp": "decimals"
+            },
+            "numpadPosition": "center",
+            "rangeMessage": {
+              "$componentProp": "rangeMessage"
+            },
+            "onChange": {
+              "onChange": [
+                {
+                  "type": "delay",
+                  "duration": 600
+                },
+                {
+                  "type": "showToast",
+                  "message": {
+                    "$loc": {
+                      "key": "{1} set to {2} {3} · not saved yet",
+                      "wildcards": {
+                        "1": {
+                          "$componentProp": "label"
+                        },
+                        "2": {
+                          "$componentProp": "value"
+                        },
+                        "3": {
+                          "$componentProp": "unit"
+                        }
+                      }
+                    }
+                  },
+                  "severity": "info",
+                  "discard": "auto",
+                  "duration": 2600
+                }
+              ]
+            },
+            "color": {
+              "$componentProp": "valueColor"
+            }
+          },
+          "layout": {
+            "widthMode": "fixed",
+            "width": "172px",
+            "heightMode": "hug"
+          }
+        }
+      ]
+    }
+  ]
+}

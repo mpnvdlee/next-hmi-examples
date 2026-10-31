@@ -1,0 +1,684 @@
+{
+  "name": "Setup nav",
+  "description": "The setup section's side menu; the entry of the open page lights up.",
+  "category": "Checkweigher",
+  "icon": {
+    "type": "builtin",
+    "name": "list"
+  },
+  "componentProperties": {
+    "calSub": {
+      "type": "string",
+      "label": "Calibration status line"
+    },
+    "rejectSub": {
+      "type": "string",
+      "label": "Reject Unit status line"
+    },
+    "calSubColor": {
+      "type": "color",
+      "label": "Calibration status colour"
+    },
+    "rejectSubColor": {
+      "type": "color",
+      "label": "Reject Unit status colour"
+    }
+  },
+  "children": [
+    {
+      "id": "sn",
+      "type": "Container",
+      "name": "Setup nav",
+      "properties": {
+        "showWhenEmpty": true,
+        "background": "transparent"
+      },
+      "layout": {
+        "direction": "column",
+        "gap": "8px",
+        "wrap": false,
+        "align": "stretch",
+        "justify": "flex-start",
+        "radius": "0",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "widthMode": "fill",
+        "heightMode": "hug"
+      },
+      "children": [
+        {
+          "id": "sn-h",
+          "type": "Container",
+          "name": "Title",
+          "properties": {
+            "showWhenEmpty": true,
+            "background": "transparent"
+          },
+          "layout": {
+            "direction": "row",
+            "gap": "10px",
+            "wrap": false,
+            "align": "center",
+            "justify": "flex-start",
+            "radius": "0",
+            "paddingTop": "0px",
+            "paddingRight": "0px",
+            "paddingBottom": "4px",
+            "paddingLeft": "0px",
+            "widthMode": "fill",
+            "heightMode": "fixed",
+            "height": "48px"
+          },
+          "children": [
+            {
+              "id": "sn-home",
+              "type": "Button",
+              "name": "Home",
+              "properties": {
+                "label": "",
+                "variant": "outline",
+                "fill": "var(--hmi-surface)",
+                "color": "var(--hmi-text)",
+                "radius": "10px",
+                "iconName": {
+                  "$static": {
+                    "type": "custom",
+                    "path": "icons/cw-home.svg"
+                  }
+                },
+                "iconSize": 24,
+                "borderWidth": 0,
+                "actions": {
+                  "onPress": [
+                    {
+                      "type": "navigateToPage",
+                      "pageId": "home"
+                    }
+                  ]
+                }
+              },
+              "layout": {
+                "widthMode": "fixed",
+                "heightMode": "fixed",
+                "width": "48px",
+                "height": "48px"
+              }
+            },
+            {
+              "id": "sn-t",
+              "type": "Label",
+              "name": "sn-t",
+              "properties": {
+                "typography": "subheading",
+                "text": {
+                  "$loc": "SETUP"
+                },
+                "wrap": "truncate"
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            }
+          ]
+        },
+        {
+          "id": "sn-product",
+          "type": "ButtonContainer",
+          "name": "Product / Tolerances",
+          "properties": {
+            "showWhenEmpty": true,
+            "background": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-product"
+                  }
+                },
+                "true": "var(--hmi-surface)",
+                "false": "transparent"
+              }
+            },
+            "actions": {
+              "onPress": [
+                {
+                  "type": "navigateToPage",
+                  "pageId": "setup-product"
+                }
+              ]
+            },
+            "border": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-product"
+                  }
+                },
+                "true": "2px solid var(--hmi-accent)",
+                "false": "2px solid transparent"
+              }
+            }
+          },
+          "layout": {
+            "direction": "column",
+            "gap": "2px",
+            "wrap": false,
+            "align": "flex-start",
+            "justify": "center",
+            "radius": "10px",
+            "paddingTop": "0px",
+            "paddingRight": "12px",
+            "paddingBottom": "0px",
+            "paddingLeft": "12px",
+            "widthMode": "fill",
+            "heightMode": "fixed",
+            "height": "62px"
+          },
+          "children": [
+            {
+              "id": "sn-product-l",
+              "type": "Label",
+              "name": "sn-product-l",
+              "properties": {
+                "typography": "body",
+                "text": {
+                  "$loc": "Product / Tolerances"
+                },
+                "size": "15px",
+                "weight": 600,
+                "color": {
+                  "$if": {
+                    "condition": {
+                      "$pageIsActive": {
+                        "page": "setup-product"
+                      }
+                    },
+                    "true": "var(--hmi-accent)",
+                    "false": "var(--hmi-text)"
+                  }
+                },
+                "wrap": "truncate"
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            },
+            {
+              "id": "sn-product-s",
+              "type": "Label",
+              "name": "sn-product-s",
+              "properties": {
+                "typography": "caption",
+                "text": "",
+                "color": "var(--hmi-text-muted)",
+                "wrap": "truncate",
+                "visible": false
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            }
+          ]
+        },
+        {
+          "id": "sn-cal",
+          "type": "ButtonContainer",
+          "name": "Calibration / Zero",
+          "properties": {
+            "showWhenEmpty": true,
+            "background": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-cal"
+                  }
+                },
+                "true": "var(--hmi-surface)",
+                "false": "transparent"
+              }
+            },
+            "actions": {
+              "onPress": [
+                {
+                  "type": "navigateToPage",
+                  "pageId": "setup-cal"
+                }
+              ]
+            },
+            "border": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-cal"
+                  }
+                },
+                "true": "2px solid var(--hmi-accent)",
+                "false": "2px solid transparent"
+              }
+            }
+          },
+          "layout": {
+            "direction": "column",
+            "gap": "2px",
+            "wrap": false,
+            "align": "flex-start",
+            "justify": "center",
+            "radius": "10px",
+            "paddingTop": "0px",
+            "paddingRight": "12px",
+            "paddingBottom": "0px",
+            "paddingLeft": "12px",
+            "widthMode": "fill",
+            "heightMode": "fixed",
+            "height": "62px"
+          },
+          "children": [
+            {
+              "id": "sn-cal-l",
+              "type": "Label",
+              "name": "sn-cal-l",
+              "properties": {
+                "typography": "body",
+                "text": {
+                  "$loc": "Calibration / Zero"
+                },
+                "size": "15px",
+                "weight": 600,
+                "color": {
+                  "$if": {
+                    "condition": {
+                      "$pageIsActive": {
+                        "page": "setup-cal"
+                      }
+                    },
+                    "true": "var(--hmi-accent)",
+                    "false": "var(--hmi-text)"
+                  }
+                },
+                "wrap": "truncate"
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            },
+            {
+              "id": "sn-cal-s",
+              "type": "Label",
+              "name": "sn-cal-s",
+              "properties": {
+                "typography": "caption",
+                "text": {
+                  "$componentProp": "calSub"
+                },
+                "color": {
+                  "$componentProp": "calSubColor"
+                },
+                "wrap": "truncate",
+                "visible": true
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            }
+          ]
+        },
+        {
+          "id": "sn-reject",
+          "type": "ButtonContainer",
+          "name": "Reject Unit",
+          "properties": {
+            "showWhenEmpty": true,
+            "background": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-reject"
+                  }
+                },
+                "true": "var(--hmi-surface)",
+                "false": "transparent"
+              }
+            },
+            "actions": {
+              "onPress": [
+                {
+                  "type": "navigateToPage",
+                  "pageId": "setup-reject"
+                }
+              ]
+            },
+            "border": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-reject"
+                  }
+                },
+                "true": "2px solid var(--hmi-accent)",
+                "false": "2px solid transparent"
+              }
+            }
+          },
+          "layout": {
+            "direction": "column",
+            "gap": "2px",
+            "wrap": false,
+            "align": "flex-start",
+            "justify": "center",
+            "radius": "10px",
+            "paddingTop": "0px",
+            "paddingRight": "12px",
+            "paddingBottom": "0px",
+            "paddingLeft": "12px",
+            "widthMode": "fill",
+            "heightMode": "fixed",
+            "height": "62px"
+          },
+          "children": [
+            {
+              "id": "sn-reject-l",
+              "type": "Label",
+              "name": "sn-reject-l",
+              "properties": {
+                "typography": "body",
+                "text": {
+                  "$loc": "Reject Unit"
+                },
+                "size": "15px",
+                "weight": 600,
+                "color": {
+                  "$if": {
+                    "condition": {
+                      "$pageIsActive": {
+                        "page": "setup-reject"
+                      }
+                    },
+                    "true": "var(--hmi-accent)",
+                    "false": "var(--hmi-text)"
+                  }
+                },
+                "wrap": "truncate"
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            },
+            {
+              "id": "sn-reject-s",
+              "type": "Label",
+              "name": "sn-reject-s",
+              "properties": {
+                "typography": "caption",
+                "text": {
+                  "$componentProp": "rejectSub"
+                },
+                "color": {
+                  "$componentProp": "rejectSubColor"
+                },
+                "wrap": "truncate",
+                "visible": true
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            }
+          ]
+        },
+        {
+          "id": "sn-conveyor",
+          "type": "ButtonContainer",
+          "name": "Conveyor",
+          "properties": {
+            "showWhenEmpty": true,
+            "background": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-conveyor"
+                  }
+                },
+                "true": "var(--hmi-surface)",
+                "false": "transparent"
+              }
+            },
+            "actions": {
+              "onPress": [
+                {
+                  "type": "navigateToPage",
+                  "pageId": "setup-conveyor"
+                }
+              ]
+            },
+            "border": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-conveyor"
+                  }
+                },
+                "true": "2px solid var(--hmi-accent)",
+                "false": "2px solid transparent"
+              }
+            }
+          },
+          "layout": {
+            "direction": "column",
+            "gap": "2px",
+            "wrap": false,
+            "align": "flex-start",
+            "justify": "center",
+            "radius": "10px",
+            "paddingTop": "0px",
+            "paddingRight": "12px",
+            "paddingBottom": "0px",
+            "paddingLeft": "12px",
+            "widthMode": "fill",
+            "heightMode": "fixed",
+            "height": "62px"
+          },
+          "children": [
+            {
+              "id": "sn-conveyor-l",
+              "type": "Label",
+              "name": "sn-conveyor-l",
+              "properties": {
+                "typography": "body",
+                "text": {
+                  "$loc": "Conveyor"
+                },
+                "size": "15px",
+                "weight": 600,
+                "color": {
+                  "$if": {
+                    "condition": {
+                      "$pageIsActive": {
+                        "page": "setup-conveyor"
+                      }
+                    },
+                    "true": "var(--hmi-accent)",
+                    "false": "var(--hmi-text)"
+                  }
+                },
+                "wrap": "truncate"
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            },
+            {
+              "id": "sn-conveyor-s",
+              "type": "Label",
+              "name": "sn-conveyor-s",
+              "properties": {
+                "typography": "caption",
+                "text": "",
+                "color": "var(--hmi-text-muted)",
+                "wrap": "truncate",
+                "visible": false
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            }
+          ]
+        },
+        {
+          "id": "sn-save",
+          "type": "ButtonContainer",
+          "name": "Save & Reset",
+          "properties": {
+            "showWhenEmpty": true,
+            "background": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-save"
+                  }
+                },
+                "true": "var(--hmi-surface)",
+                "false": "transparent"
+              }
+            },
+            "actions": {
+              "onPress": [
+                {
+                  "type": "navigateToPage",
+                  "pageId": "setup-save"
+                }
+              ]
+            },
+            "border": {
+              "$if": {
+                "condition": {
+                  "$pageIsActive": {
+                    "page": "setup-save"
+                  }
+                },
+                "true": "2px solid var(--hmi-accent)",
+                "false": "2px solid transparent"
+              }
+            }
+          },
+          "layout": {
+            "direction": "column",
+            "gap": "2px",
+            "wrap": false,
+            "align": "flex-start",
+            "justify": "center",
+            "radius": "10px",
+            "paddingTop": "0px",
+            "paddingRight": "12px",
+            "paddingBottom": "0px",
+            "paddingLeft": "12px",
+            "widthMode": "fill",
+            "heightMode": "fixed",
+            "height": "62px"
+          },
+          "children": [
+            {
+              "id": "sn-save-l",
+              "type": "Label",
+              "name": "sn-save-l",
+              "properties": {
+                "typography": "body",
+                "text": {
+                  "$loc": "Save & Reset"
+                },
+                "size": "15px",
+                "weight": 600,
+                "color": {
+                  "$if": {
+                    "condition": {
+                      "$pageIsActive": {
+                        "page": "setup-save"
+                      }
+                    },
+                    "true": "var(--hmi-accent)",
+                    "false": "var(--hmi-text)"
+                  }
+                },
+                "wrap": "truncate"
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            },
+            {
+              "id": "sn-save-s",
+              "type": "Label",
+              "name": "sn-save-s",
+              "properties": {
+                "typography": "caption",
+                "text": {
+                  "$if": {
+                    "condition": {
+                      "$or": [
+                        {
+                          "$recipe": {
+                            "type": "machine",
+                            "field": "parametersChanged"
+                          }
+                        },
+                        {
+                          "$recipe": {
+                            "type": "product",
+                            "field": "parametersChanged"
+                          }
+                        }
+                      ]
+                    },
+                    "true": {
+                      "$loc": "Unsaved changes"
+                    },
+                    "false": {
+                      "$loc": "All saved"
+                    }
+                  }
+                },
+                "color": {
+                  "$if": {
+                    "condition": {
+                      "$or": [
+                        {
+                          "$recipe": {
+                            "type": "machine",
+                            "field": "parametersChanged"
+                          }
+                        },
+                        {
+                          "$recipe": {
+                            "type": "product",
+                            "field": "parametersChanged"
+                          }
+                        }
+                      ]
+                    },
+                    "true": "var(--hmi-warn)",
+                    "false": "var(--hmi-text-muted)"
+                  }
+                },
+                "wrap": "truncate",
+                "visible": true
+              },
+              "layout": {
+                "widthMode": "hug",
+                "heightMode": "hug"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

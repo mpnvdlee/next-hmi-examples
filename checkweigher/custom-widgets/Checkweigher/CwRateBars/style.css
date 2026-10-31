@@ -1,0 +1,68 @@
+.hmi-component.cw-rate {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  min-height: 0;
+  font-family: var(--hmi-type-body-font);
+  font-variant-numeric: tabular-nums;
+  color: var(--hmi-text);
+}
+
+.cw-rate__head {
+  height: 26px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cw-rate__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.cw-rate__scale {
+  font-size: 13px;
+  color: var(--hmi-text-muted);
+  white-space: nowrap;
+}
+
+.cw-rate__plot {
+  flex: 1 1 auto;
+  min-height: 40px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  margin-left: 42px;
+  border-bottom: 1px solid var(--cw-grid, #4a525b);
+}
+
+.cw-rate__bar {
+  flex: 1 1 0;
+  height: var(--cw-h, 0);
+  border-radius: 1px 1px 0 0;
+}
+
+.cw-rate__bar--ok {
+  background: var(--hmi-ok);
+}
+
+.cw-rate__bar--warn {
+  background: var(--hmi-warn);
+}
+
+.cw-rate__bar--fault {
+  background: var(--hmi-fault);
+}
+
+.cw-rate__x {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 42px;
+  font-size: 13px;
+  color: var(--hmi-text-muted);
+}
